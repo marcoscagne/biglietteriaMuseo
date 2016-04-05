@@ -1,4 +1,4 @@
-package biglietteria;
+package biglietteria_config;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

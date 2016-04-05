@@ -1,4 +1,4 @@
-package biglietteria;
+package biglietteria_config;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 
 //tutte le risorse si trovano in com.sito
-@ComponentScan("biglietteria")
+@ComponentScan("biglietteria_config")
 @EnableWebMvc
 public class Config extends WebMvcConfigurerAdapter{
     
