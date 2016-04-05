@@ -5,6 +5,7 @@
  */
 package biglietteria_config;
 
+import biglietteria.*;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -22,7 +23,7 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = new AnnotationConfiguration().configure().addPackage("biglietteria_config").addPackage("biglietteria").addAnnotatedClass(Artisti.class).buildSessionFactory();
+            sessionFactory = new AnnotationConfiguration().configure().addPackage("biglietteria_config").addPackage("biglietteria").addAnnotatedClass(Attivita.class).buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);

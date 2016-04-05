@@ -1,3 +1,5 @@
+package biglietteria;
+
 
 import java.io.Serializable;
 import javax.persistence.Column;
