@@ -26,4 +26,9 @@ public class MainController {
         return "index";
     }
     
+    @RequestMapping(value="/login")
+    public String login(ModelMap map){
+        return "login";
+    }
+    
 }
