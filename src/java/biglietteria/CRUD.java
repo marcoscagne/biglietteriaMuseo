@@ -34,9 +34,9 @@ public class CRUD {
         }
         return employeeID;
     }
+    
     /* Method to
      READ all the employees */
-
     public void listEmployees() {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -59,8 +59,8 @@ public class CRUD {
             session.close();
         }
     }
+    
     /* Method to UPDATE salary for an employee */
-
     public void updateEmployee(Integer EmployeeID, int salary) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -80,8 +80,8 @@ public class CRUD {
             session.close();
         }
     }
+    
     /* Method to DELETE an employee from the records */
-
     public void deleteEmployee(Integer EmployeeID) {
         Session session = factory.openSession();
         Transaction tx = null;

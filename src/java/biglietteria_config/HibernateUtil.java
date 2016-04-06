@@ -23,9 +23,9 @@ public class HibernateUtil {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = new AnnotationConfiguration().configure().addPackage("biglietteria_config").addPackage("biglietteria").addAnnotatedClass(Attivita.class).buildSessionFactory();
+            sessionFactory = new AnnotationConfiguration().configure().addPackage("biglietteria_config").addPackage("biglietteria").addAnnotatedClass(Attivita.class).addAnnotatedClass(Biglietti.class).addAnnotatedClass(Categorie.class).addAnnotatedClass(Clienti.class).addAnnotatedClass(Servizi.class).buildSessionFactory();
         } catch (Throwable ex) {
-            // Log the exception. 
+            // Log the exception.
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
