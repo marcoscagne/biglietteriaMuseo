@@ -2,6 +2,7 @@ package biglietteria;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Biglietti implements  Serializable {
     private long Codice;
     
     @Column(name="DataValidita")
-    private String DataValidita;
+    private Date DataValidita;
     
     @Column(name="Username",length=25)
     private String Titolo;
@@ -44,11 +45,11 @@ public class Biglietti implements  Serializable {
     public Biglietti() {
     }
 
-    public String getDataValidita() {
+    public Date getDataValidita() {
         return DataValidita;
     }
 
-    public void setDataValidita(String DataValidita) {
+    public void setDataValidita(Date DataValidita) {
         this.DataValidita = DataValidita;
     }
 

@@ -32,7 +32,7 @@ public class Categorie implements Serializable{
     private String TipoDoc;
     
     @Column(name="PercSconto")
-    private String percSconto;
+    private float percSconto;
      
     @Column(name="Descrizione",length=150)
     private String Descrizione;
@@ -60,11 +60,11 @@ public class Categorie implements Serializable{
         this.TipoDoc = TipoDoc;
     }
 
-    public String getPercSconto() {
+    public float getPercSconto() {
         return percSconto;
     }
 
-    public void setPercSconto(String percSconto) {
+    public void setPercSconto(float percSconto) {
         this.percSconto = percSconto;
     }
 

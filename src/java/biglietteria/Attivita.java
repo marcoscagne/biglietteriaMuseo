@@ -34,7 +34,7 @@ public class Attivita implements Serializable {
     private String Titolo;
     
      @Column(name="TariffaOrdinaria",length=4)
-    private String TariffaOrdinaria;
+    private float TariffaOrdinaria;
      
       @Column(name="CodiceBiglietto",length=8)
     private String CodiceBiglietto;
@@ -54,11 +54,11 @@ public class Attivita implements Serializable {
         this.Titolo = Titolo;
     }
 
-    public String getTariffaOrdinaria() {
+    public float getTariffaOrdinaria() {
         return TariffaOrdinaria;
     }
 
-    public void setTariffaOrdinaria(String TariffaOrdinaria) {
+    public void setTariffaOrdinaria(float TariffaOrdinaria) {
         this.TariffaOrdinaria = TariffaOrdinaria;
     }
 

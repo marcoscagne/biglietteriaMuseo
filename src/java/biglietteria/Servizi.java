@@ -35,7 +35,7 @@ public class Servizi implements Serializable{
     
     
     @Column(name="Prezzo",length=4)
-    private String Prezzo;
+    private float Prezzo;
     
     @ManyToMany
     @JoinTable(
@@ -64,11 +64,11 @@ public class Servizi implements Serializable{
         this.Descrizione = Descrizione;
     }
 
-    public String getPrezzo() {
+    public float getPrezzo() {
         return Prezzo;
     }
 
-    public void setPrezzo(String Prezzo) {
+    public void setPrezzo(float Prezzo) {
         this.Prezzo = Prezzo;
     }
 
