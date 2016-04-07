@@ -38,7 +38,11 @@ public class Clienti implements Serializable {
      
     @Column(name="Cognome",length=35)
     private String Cognome;
-      
+    
+    @Column(name="email",length=100)
+    private String email;
+    
+    
     @ManyToOne
     @JoinColumn(name="username")
       private Biglietti biglietto;  
@@ -88,6 +92,16 @@ public class Clienti implements Serializable {
     public void setBiglietto(Biglietti biglietto) {
         this.biglietto = biglietto;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+   
     
     
 }
