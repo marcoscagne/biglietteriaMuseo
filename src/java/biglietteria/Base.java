@@ -25,5 +25,34 @@ public class Base implements Serializable{
     private Date data;
      
     @Column(name="DataFine")
-    private Date data;
+    private Date dataFine;
+
+    public Base() {
+    }
+
+    public String getCodice() {
+        return Codice;
+    }
+
+    public void setCodice(String Codice) {
+        this.Codice = Codice;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Date getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
+    }
+    
+    
 }
