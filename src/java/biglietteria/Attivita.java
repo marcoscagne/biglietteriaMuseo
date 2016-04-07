@@ -27,8 +27,8 @@ import javax.persistence.Table;
 
 public class Attivita implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Codice")
-    private long Codice;
+    @Column(name="Codice",length=8)
+    private String Codice;
     
     @Column(name="Titolo",length=35)
     private String Titolo;
