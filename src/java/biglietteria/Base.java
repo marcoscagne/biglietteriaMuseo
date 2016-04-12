@@ -21,22 +21,16 @@ public class Base implements Serializable{
     @Column(name="Codice",length=8)
     private String Codice;
     
-   @Column(name="DataInizio")
+   @Column(name="Data")
     private Date data;
      
-    @Column(name="DataFine")
-    private Date dataFine;
-
-    public Base() {
+     public Base() {
     }
 
     public String getCodice() {
         return Codice;
     }
 
-    public void setCodice(String Codice) {
-        this.Codice = Codice;
-    }
 
     public Date getData() {
         return data;
@@ -46,13 +40,5 @@ public class Base implements Serializable{
         this.data = data;
     }
 
-    public Date getDataFine() {
-        return dataFine;
-    }
-
-    public void setDataFine(Date dataFine) {
-        this.dataFine = dataFine;
-    }
-    
     
 }
