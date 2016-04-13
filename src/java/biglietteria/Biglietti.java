@@ -36,10 +36,7 @@ public class Biglietti implements  Serializable {
     private Date DataValidita;
     
     @Column(name="Username",length=25)
-    private String Titolo;
-    
-     @Column(name="CodiceAtt",length=8)
-    private String TariffaOrdinaria;
+    private String Username;
      
     @ManyToOne
     @JoinColumn(name="attivitaBiglietto")
@@ -62,21 +59,12 @@ public class Biglietti implements  Serializable {
         this.DataValidita = DataValidita;
     }
 
-    public String getTitolo() {
-        return Titolo;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setTitolo(String Titolo) {
-        this.Titolo = Titolo;
-    }
-
-    public String getTariffaOrdinaria() {
-        return TariffaOrdinaria;
-    }
-
-    public void setTariffaOrdinaria(String TariffaOrdinaria) {
-        this.TariffaOrdinaria = TariffaOrdinaria;
-    }
-    
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }    
     
 }
