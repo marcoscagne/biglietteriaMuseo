@@ -36,14 +36,17 @@ public class Attivita implements Serializable {
      @Column(name="TariffaOrdinaria",length=4)
     private float TariffaOrdinaria;
      
-      @Column(name="CodiceBiglietto",length=8)
-    private String CodiceBiglietto;
+    
       
       @ManyToOne
       @JoinColumn(name="CodiceAttivita")
       private Biglietti biglietto;
 
     public Attivita() {
+    }
+
+    public String getCodice() {
+        return Codice;
     }
 
     public String getTitolo() {
@@ -62,13 +65,7 @@ public class Attivita implements Serializable {
         this.TariffaOrdinaria = TariffaOrdinaria;
     }
 
-    public String getCodiceBiglietto() {
-        return CodiceBiglietto;
-    }
-
-    public void setCodiceBiglietto(String CodiceBiglietto) {
-        this.CodiceBiglietto = CodiceBiglietto;
-    }
+    
 
     public Biglietti getBiglietto() {
         return biglietto;

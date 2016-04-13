@@ -28,7 +28,7 @@ import javax.persistence.Table;
 public class Clienti implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Username",length=25)
-    private long Username;
+    private String Username;
     
     @Column(name="Pswd",length=25)
     private String Pswd;
@@ -53,13 +53,11 @@ public class Clienti implements Serializable {
     public Clienti() {
     }
 
-    public long getUsername() {
+    public String getUsername() {
         return Username;
     }
 
-    public void setUsername(long Username) {
-        this.Username = Username;
-    }
+ 
 
     public String getPswd() {
         return Pswd;

@@ -21,8 +21,11 @@ public class Evento implements Serializable {
     @Column(name="Codice",length=8)
     private String Codice;
     
-    @Column(name="Data")
-    private Date data;
+    @Column(name="DataInizio")
+    private Date dataInizio;
+    
+    @Column(name="DataFine")
+    private Date dataFine;
 
     public Evento() {
     }
@@ -31,19 +34,21 @@ public class Evento implements Serializable {
         return Codice;
     }
 
-    public void setCodice(String Codice) {
-        this.Codice = Codice;
+    public Date getDataInizio() {
+        return dataInizio;
     }
 
-    public Date getData() {
-        return data;
+    public void setDataInizio(Date dataInizio) {
+        this.dataInizio = dataInizio;
+    }
+    
+    public Date getDataFine() {
+        return dataFine;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
     }
-    
-    
     
     
 }
