@@ -52,9 +52,6 @@ public class Servizi implements Serializable{
         return Codice;
     }
 
-    public void setCodice(long Codice) {
-        this.Codice = Codice;
-    }
 
     public String getDescrizione() {
         return Descrizione;
