@@ -1,0 +1,78 @@
+html,body{
+		margin: 0;
+		padding: 0;
+		font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+		background: white;
+		color: black;
+		min-width: 600px;
+	}
+	#menu{
+		position: fixed;
+		top: 0px;
+		width: 100%;
+		z-index: 16;
+	}
+	#news{
+		width: 80%;
+		margin-top: 20px;
+		color: black;
+	}
+	.img{
+		box-shadow: 0 0 5px grey;
+		margin-bottom: 20px;
+	}
+	.img-title{
+		display: block;
+		font-size: 2em;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.img-description{
+		text-align: justify;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-bottom: 10px;
+	}
+	.title-image{
+		width: 100%;
+		margin-top: 50px;
+	}
+	.title-div{
+		position: absolute;
+		top: 60px;
+		left: 3%;
+	}
+	.title{
+		color: white;
+		font-size: 5em;
+		text-transform: uppercase;
+		text-shadow: 0px 0px 10px black;
+	}
+	#footer{
+		width: 100%;
+		background: black;
+		color: white;
+		padding: 1%;
+	}
+	
+	/* fg */
+	
+	#login-dp{
+    	min-width: 250px;
+    	padding: 14px 14px 0;
+    	overflow:hidden;
+    	background-color:rgba(255,255,255,1);
+	}
+	#login-dp .help-block{
+    	font-size:12px    
+	}
+	#login-dp .bottom{
+    	background-color:rgba(233,233,233,.8);
+   	 border-top:1px solid #ddd;
+   	clear:both;
+   	 padding:14px;
+	 color: black;
+	}
+	#login-dp .form-group {
+  	  margin-bottom: 10px;
+	}
