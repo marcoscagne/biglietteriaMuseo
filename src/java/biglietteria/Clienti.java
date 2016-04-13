@@ -42,13 +42,30 @@ public class Clienti implements Serializable {
     @Column(name="email",length=100)
     private String email;
     
-    
     @ManyToOne
-    @JoinColumn(name="username")
-      private Biglietti biglietto;  
+    @JoinColumn(name="CodiceCat")
+      private Categorie categorie;
     
-    @OneToMany(mappedBy="CodiceCat")
-    private Set<Clienti>cliente;
+    @OneToMany(mappedBy="biglietto")
+    private Set<Biglietti>biglietto;  
+
+    public Set<Biglietti> getBiglietto() {
+        return biglietto;
+    }
+
+    public void setBiglietto(Set<Biglietti> biglietto) {
+        this.biglietto = biglietto;
+    }
+    
+    
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 
     public Clienti() {
     }
@@ -84,14 +101,6 @@ public class Clienti implements Serializable {
 
     public void setCognome(String Cognome) {
         this.Cognome = Cognome;
-    }
-
-    public Biglietti getBiglietto() {
-        return biglietto;
-    }
-
-    public void setBiglietto(Biglietti biglietto) {
-        this.biglietto = biglietto;
     }
 
     public String getEmail() {

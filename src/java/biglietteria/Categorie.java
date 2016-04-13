@@ -2,6 +2,7 @@ package biglietteria;
 
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /*
@@ -37,9 +39,12 @@ public class Categorie implements Serializable{
     @Column(name="Descrizione",length=150)
     private String Descrizione;
       
-    @ManyToOne
-    @JoinColumn(name="CodiceCat")
-      private Clienti cliente;
+    @OneToMany(mappedBy="CodiceCat")
+    private Set<Clienti>cliente;
+
+    public Set<Clienti> getCliente() {
+        return cliente;
+    }
 
     public Categorie() {
     }
@@ -72,14 +77,6 @@ public class Categorie implements Serializable{
 
     public void setDescrizione(String Descrizione) {
         this.Descrizione = Descrizione;
-    }
-
-    public Clienti getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Clienti cliente) {
-        this.cliente = cliente;
     }
     
 }

@@ -42,6 +42,25 @@ public class Biglietti implements  Serializable {
     @JoinColumn(name="attivitaBiglietto")
       private Attivita attivita;  
     
+    @ManyToOne
+    @JoinColumn(name="bigliettoCliente")
+      private Clienti cliente;     
+
+    public Attivita getAttivita() {
+        return attivita;
+    }
+
+    public void setAttivita(Attivita attivita) {
+        this.attivita = attivita;
+    }
+
+    public Clienti getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Clienti cliente) {
+        this.cliente = cliente;
+    }
 
     public Biglietti() {
     }
