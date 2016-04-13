@@ -11,18 +11,17 @@ public class CRUD {
 
     private static SessionFactory factory;
 
-    /* Method to CREATE an employee in the database */
-    public Integer addEmployee(String fname, String lname, int salary) {
+    /* Method to CREATE an activity in the database */
+    public Integer addAttivita(String titolo, float tariffa) {
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer employeeID = null;
+        Integer attivitaID = null;
         try {
             tx = session.beginTransaction();
-            Employee employee = new Employee();
-            employee.setFirstName(fname);
-            employee.setLastName(lname);
-            employee.setSalary(salary);
-            employeeID = (Integer) session.save(employee);
+            Attivita attivita = new Attivita();
+            attivita.setTitolo(titolo);
+            attivita.setTariffaOrdinaria(tariffa);
+            attivitaID = (Integer) session.save(attivita);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -32,22 +31,21 @@ public class CRUD {
         } finally {
             session.close();
         }
-        return employeeID;
+        return attivitaID;
     }
     
     /* Method to
-     READ all the employees */
-    public void listEmployees() {
+     READ all the activities */
+    public void listAttivita() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List employees = session.createQuery("FROM Employee").list();
-            for (Iterator iterator = employees.iterator(); iterator.hasNext();) {
-                Employee employee = (Employee) iterator.next();
-                System.out.print("First Name: " + employee.getFirstName());
-                System.out.print("Last Name: " + employee.getLastName());
-                System.out.println("Salary: " + employee.getSalary());
+            List attivita = session.createQuery("FROM Attivita").list();
+            for (Iterator iterator = attivita.iterator(); iterator.hasNext();) {
+                Attivita a = (Attivita) iterator.next();
+                System.out.print("Titolo: " + a.getTitolo());
+                System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -60,16 +58,17 @@ public class CRUD {
         }
     }
     
-    /* Method to UPDATE salary for an employee */
-    public void updateEmployee(Integer EmployeeID, int salary) {
+    /* Method to UPDATE activity for an employee */
+    public void updateAttivita(Integer AttivitaID, String titolo, float tariffa) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Employee employee
-                    = (Employee) session.get(Employee.class, EmployeeID);
-            employee.setSalary(salary);
-            session.update(employee);
+            Attivita attivita
+                    = (Attivita) session.get(Attivita.class, AttivitaID);
+            attivita.setTitolo(titolo);
+            attivita.setTariffaOrdinaria(tariffa);
+            session.update(attivita);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -81,15 +80,114 @@ public class CRUD {
         }
     }
     
-    /* Method to DELETE an employee from the records */
-    public void deleteEmployee(Integer EmployeeID) {
+    /* Method to DELETE an activity from the records */
+    public void deleteAttivita(Integer AttivitaID) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Employee employee
-                    = (Employee) session.get(Employee.class, EmployeeID);
-            session.delete(employee);
+            Attivita attivita
+                    = (Attivita) session.get(Attivita.class, AttivitaID);
+            session.delete(attivita);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    /*********************************************************************************************/
+    
+    /* Method to CREATE an client in the database */
+    public Integer addCliente(String username, String pass, String nome, String cognome, String email){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        Integer clienteID = null;
+        try {
+            tx = session.beginTransaction();
+            Clienti cliente = new Clienti();
+            cliente.setUsername(username);
+            cliente.setPswd(pass);
+            cliente.setNome(nome);
+            cliente.setCognome(cognome);
+            cliente.setEmail(email);
+            clienteID = (Integer) session.save(cliente);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return clienteID;
+    }
+    
+    /* Method to
+     READ all the activities */
+    public void listClienti() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            List cliente = session.createQuery("FROM Clienti").list();
+            for (Iterator iterator = cliente.iterator(); iterator.hasNext();) {
+                Clienti c = (Clienti) iterator.next();
+                System.out.print("Username: " + c.getUsername());
+                System.out.print("Nome: " + c.getNome());
+                System.out.print("Cognome: " + c.getCognome());
+                System.out.print("Email: " + c.getEmail());
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    /* Method to UPDATE activity for an employee */
+    public void updateCliente(Integer ClienteID,String username,String pass, String nome, String cognome, String email) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Clienti cliente
+                    = (Clienti) session.get(Clienti.class, ClienteID);
+            cliente.setUsername(username);
+            cliente.setPswd(pass);
+            cliente.setNome(nome);
+            cliente.setCognome(cognome);
+            cliente.setEmail(email);
+            session.update(cliente);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+    
+    /* Method to DELETE an activity from the records */
+    public void deleteCliente(Integer ClienteID) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Clienti cliente
+                    = (Clienti) session.get(Clienti.class, ClienteID);
+            session.delete(cliente);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
