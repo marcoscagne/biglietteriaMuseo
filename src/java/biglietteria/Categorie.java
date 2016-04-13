@@ -48,9 +48,7 @@ public class Categorie implements Serializable{
         return Codice;
     }
 
-    public void setCodice(long Codice) {
-        this.Codice = Codice;
-    }
+  
 
     public String getTipoDoc() {
         return TipoDoc;

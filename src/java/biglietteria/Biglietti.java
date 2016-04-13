@@ -45,6 +45,11 @@ public class Biglietti implements  Serializable {
     public Biglietti() {
     }
 
+    public long getCodice() {
+        return Codice;
+    }
+
+    
     public Date getDataValidita() {
         return DataValidita;
     }
