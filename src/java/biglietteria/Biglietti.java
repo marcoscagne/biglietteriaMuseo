@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,8 +41,10 @@ public class Biglietti implements  Serializable {
      @Column(name="CodiceAtt",length=8)
     private String TariffaOrdinaria;
      
-    @OneToMany(mappedBy="biglietto")
-    private Set<Biglietti>biglietto;
+    @ManyToOne
+    @JoinColumn(name="attivitaBiglietto")
+      private Attivita attivita;  
+    
 
     public Biglietti() {
     }
@@ -72,14 +76,6 @@ public class Biglietti implements  Serializable {
 
     public void setTariffaOrdinaria(String TariffaOrdinaria) {
         this.TariffaOrdinaria = TariffaOrdinaria;
-    }
-
-    public Set<Biglietti> getBiglietto() {
-        return biglietto;
-    }
-
-    public void setBiglietto(Set<Biglietti> biglietto) {
-        this.biglietto = biglietto;
     }
     
     

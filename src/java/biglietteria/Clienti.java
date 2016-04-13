@@ -57,7 +57,10 @@ public class Clienti implements Serializable {
         return Username;
     }
 
- 
+    
+    public void setUsername(String Username) {
+        this.Username = Username;
+    }
 
     public String getPswd() {
         return Pswd;
