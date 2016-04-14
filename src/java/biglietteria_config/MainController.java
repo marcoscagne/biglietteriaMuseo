@@ -9,6 +9,7 @@ package biglietteria_config;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -24,6 +25,17 @@ public class MainController {
     @RequestMapping(value="/")
     public String index(ModelMap map){
         return "index";
+    }
+    
+    @RequestMapping(value="/registrazione")
+    public String registrazione(ModelMap map){
+        return "registrazione";
+    }
+    
+    @RequestMapping(value="/controllaLogin")
+    public String login(ModelMap map, @RequestParam(value="nu",required=true) String nu, @RequestParam(value="pass",required=true) String pass){
+        map.put("nomeUtente",nu);
+        return "test";
     }
     
 }
