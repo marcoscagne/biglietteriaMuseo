@@ -14,8 +14,8 @@
     <body>
         <h1>Hello World!</h1>
         
-        NomeUtente: ${nomeUtente}
-        
+        NomeUtente: ${cliente.getUsername()}
+        Password: ${cliente.getPswd()}
         
     </body>
 </html>
