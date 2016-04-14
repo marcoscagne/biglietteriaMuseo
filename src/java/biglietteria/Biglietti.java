@@ -30,13 +30,16 @@ public class Biglietti implements  Serializable {
     
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Codice")
-    private long Codice;
+    private int Codice;
     
     @Column(name="DataValidita")
     private Date DataValidita;
     
     @Column(name="Username",length=25)
     private String Username;
+    
+    @Column(name="CodiceAtt")
+    private int CodiceAtt;
      
     @ManyToOne
     @JoinColumn(name="attivitaBiglietto")
@@ -46,30 +49,13 @@ public class Biglietti implements  Serializable {
     @JoinColumn(name="bigliettoCliente")
       private Clienti cliente;     
 
-    public Attivita getAttivita() {
-        return attivita;
-    }
-
-    public void setAttivita(Attivita attivita) {
-        this.attivita = attivita;
-    }
-
-    public Clienti getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Clienti cliente) {
-        this.cliente = cliente;
-    }
-
     public Biglietti() {
     }
 
-    public long getCodice() {
+    public int getCodice() {
         return Codice;
     }
 
-    
     public Date getDataValidita() {
         return DataValidita;
     }
@@ -84,6 +70,16 @@ public class Biglietti implements  Serializable {
 
     public void setUsername(String Username) {
         this.Username = Username;
-    }    
+    }
+
+    public Attivita getAttivita() {
+        return attivita;
+    }
+
+    public void setAttivita(Attivita attivita) {
+        this.attivita = attivita;
+    }
+
+       
     
 }

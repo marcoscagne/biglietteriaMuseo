@@ -30,7 +30,7 @@ import javax.persistence.Table;
 public class Attivita implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Codice",length=8)
-    private long Codice;
+    private int Codice;
     
     @Column(name="Titolo",length=35)
     private String Titolo;
@@ -38,7 +38,7 @@ public class Attivita implements Serializable {
      @Column(name="TariffaOrdinaria",length=4)
     private float TariffaOrdinaria;
      
-    @OneToMany(mappedBy="biglietto")
+    @OneToMany(mappedBy="biglietto") 
     private Set<Biglietti>biglietto;
       
     
@@ -46,7 +46,7 @@ public class Attivita implements Serializable {
     public Attivita() {
     }
 
-    public long getCodice() {
+    public int getCodice() {
         return Codice;
     }
 

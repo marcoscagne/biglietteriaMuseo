@@ -28,7 +28,7 @@ import javax.persistence.Table;
 public class Servizi implements Serializable{
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Codice",length=8)
-    private long Codice;
+    private int Codice;
      
     @Column(name="Descrizione",length=150)
     private String Descrizione;
@@ -48,7 +48,7 @@ public class Servizi implements Serializable{
     public Servizi() {
     }
 
-    public long getCodice() {
+    public int getCodice() {
         return Codice;
     }
 

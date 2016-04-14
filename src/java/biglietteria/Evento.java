@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class Evento implements Serializable {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Codice",length=8)
-    private String Codice;
+    private int Codice;
     
     @Column(name="DataInizio")
     private Date dataInizio;
@@ -30,7 +30,7 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    public String getCodice() {
+    public int getCodice() {
         return Codice;
     }
 
