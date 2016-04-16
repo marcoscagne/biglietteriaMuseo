@@ -41,9 +41,9 @@ public class Servizi implements Serializable{
     @JoinTable(
             name="Bigl_Serv",
             joinColumns={@JoinColumn(name="CodiceServizio")},
-            inverseJoinColumns={@JoinColumn(name="CodiceCodice")}
+            inverseJoinColumns={@JoinColumn(name="CodiceBiglietto")}
     )         
-    private Set<Biglietti>biglietto;
+    private Set<Biglietti>biglietti;
 
     public Servizi() {
     }
@@ -69,12 +69,12 @@ public class Servizi implements Serializable{
         this.Prezzo = Prezzo;
     }
 
-    public Set<Biglietti> getBiglietto() {
-        return biglietto;
+    public Set<Biglietti> getBiglietti() {
+        return biglietti;
     }
 
-    public void setBiglietto(Set<Biglietti> biglietto) {
-        this.biglietto = biglietto;
+    public void setBiglietti(Set<Biglietti> biglietti) {
+        this.biglietti = biglietti;
     }
     
     
