@@ -13,10 +13,10 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <%String nu=request.getParameter("nu");%>
-        <%String p=request.getParameter("pass");%>
-        NomeUtente: <%=nu%>
-        Password: <%=p%>
+        <%--String nu=request.getParameter("nu");%>
+        <%String p=request.getParameter("pass");--%>
+        NomeUtente: ${nomeUtente}<%--=nu--%>
+        Password: ${password}<%--=p--%>
         
     </body>
 </html>

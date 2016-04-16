@@ -46,7 +46,7 @@
                                                 
                                                 <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
                                                     <div class="form-group">
-                                                        <input type="email" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Indirizzo Email">
+                                                        <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputPassword2">Password</label>
