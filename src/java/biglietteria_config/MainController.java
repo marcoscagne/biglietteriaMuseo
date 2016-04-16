@@ -5,6 +5,7 @@ package biglietteria_config;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import biglietteria.Attivita;
 import biglietteria.Clienti;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String index(ModelMap map) {
-        map.put("eventi",);
+        //map.put("eventi",);
         return "index";
     }
 
@@ -36,10 +37,8 @@ public class MainController {
         return "registrazione";
     }
 
-    @RequestMapping(value = "/controllaLogin", method = RequestMethod.POST)
-    public String login(ModelMap map, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass) {
-        map.put("nomeUtente", nu);
-        map.put("password", pass);
+    @RequestMapping(value = "/controllaLogin")
+    public String login(ModelMap map) {
         return "test";
     }
 

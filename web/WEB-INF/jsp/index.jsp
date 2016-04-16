@@ -43,13 +43,14 @@
                                     <li>
                                         <div class="row">
                                             <div class="col-md-12">
+                                                
                                                 <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
                                                     <div class="form-group">
-                                                        <input type="email" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Indirizzo Email" required>
+                                                        <input type="email" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Indirizzo Email">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                        <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                                        <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
                                                         <div class="help-block text-right"><a href="">Password dimenticata?</div>
                                                     </div>
                                                     <div class="form-group">
@@ -57,34 +58,6 @@
                                                     </div>
                                                 </form>
                                                 
-                                                
-                                                
-                                                
-
-                                                <form:form method="POST" action="/biglietteriaMuseo/controllaLogin">
-                                                    <table>
-                                                        <tr>
-                                                            <td><form:label path="nu">Name</form:label></td>
-                                                        <td><form:input path="nu" /></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td><form:label path="pass">Age</form:label></td>
-                                                        <td><form:input path="pass" /></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">
-                                                                <input type="submit" value="Submit"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>  
-                                                </form:form>
-                                                
-                                                
-                                                
-                                                
-                                                
-                                                
-
                                             </div>
                                             <div class="bottom text-center">
                                                 Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>

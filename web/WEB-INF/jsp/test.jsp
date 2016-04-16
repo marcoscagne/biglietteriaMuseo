@@ -13,9 +13,10 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        
-        NomeUtente: ${cliente.getUsername()}
-        Password: ${cliente.getPswd()}
+        <%String nu=request.getParameter("nu");%>
+        <%String p=request.getParameter("pass");%>
+        NomeUtente: <%=nu%>
+        Password: <%=p%>
         
     </body>
 </html>
