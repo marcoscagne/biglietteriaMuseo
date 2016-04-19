@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
-    <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.0.1.252:3306/5ib32?zeroDateTimeBehavior=convertToNull [5ib32 on Default schema]</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.0.1.252:3306/5ib32?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">5ib32</property>
     <property name="hibernate.connection.password">5ib32</property>
   </session-factory>

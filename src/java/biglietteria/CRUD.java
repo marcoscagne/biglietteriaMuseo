@@ -136,20 +136,18 @@ public class CRUD {
     /* Method to
      READ all the client */
     public void listClienti() {
-        System.out.println("***********");
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            /*List cliente = session.createQuery("FROM Clienti").list();
-            System.out.println("*****"+cliente+"******");
+            List cliente = session.createSQLQuery("select * FROM Clienti").addEntity(Clienti.class).list();
             for (Iterator iterator = cliente.iterator(); iterator.hasNext();) {
                 Clienti c = (Clienti) iterator.next();
                 System.out.print("Username: " + c.getUsername());
                 System.out.print("Nome: " + c.getNome());
                 System.out.print("Cognome: " + c.getCognome());
                 System.out.print("Email: " + c.getEmail());
-            }*/
+            }
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {

@@ -6,32 +6,30 @@
 package biglietteria_config;
 
 import biglietteria.*;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 /**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
+ * Hibernate Utility class with convenient method to get Session Factory object.
  *
  * @author FSEVERI\scagnellato3082
  */
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
-    
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().addPackage("biglietteria_config").addPackage("biglietteria").addAnnotatedClass(Attivita.class).addAnnotatedClass(Biglietti.class).addAnnotatedClass(Categorie.class).addAnnotatedClass(Clienti.class).addAnnotatedClass(Servizi.class).buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception.
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    
+    private static SessionFactory sessionFactory;
+
     public static SessionFactory getSessionFactory() {
+        Configuration configuration = new Configuration()
+                .addAnnotatedClass(Attivita.class)
+                .addAnnotatedClass(Biglietti.class)
+                .addAnnotatedClass(Categorie.class)
+                .addAnnotatedClass(Clienti.class)
+                .addAnnotatedClass(Servizi.class)
+                .configure();
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
+                applySettings(configuration.getProperties());
+        sessionFactory = configuration.buildSessionFactory(builder.build());
         return sessionFactory;
     }
 }

@@ -16,19 +16,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>controllaLogin</title>
     </head>
-    <body>
-        
-        <% 
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            CRUD c = new CRUD(factory);
-            c.listClienti();
-        %>
-        
-        
-        
+    <body>        
         <h1>Hello World!</h1>
         NomeUtente: ${nomeUtente}
         Password: ${password}
+        
+        <%
+            CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+            c.listClienti();
+        %>
         
     </body>
 </html>
