@@ -50,8 +50,12 @@ public class Biglietti implements  Serializable {
     @JoinColumn(name="bigliettoCliente")
       private Clienti cliente;   
     
-    @ManyToMany(mappedBy = "biglietti")
+    @ManyToMany(mappedBy = "biglietto")
     private Set<Servizi> servizi;
+
+    public Set<Servizi> getServizi() {
+        return servizi;
+    }
 
     public Biglietti() {
     }
