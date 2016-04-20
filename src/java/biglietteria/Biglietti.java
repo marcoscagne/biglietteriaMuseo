@@ -1,93 +1,134 @@
-package biglietteria;
-
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package biglietteria;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
- * @author FSEVERI\sturza2870
+ * @author FSEVERI\scagnellato3082
  */
-@Entity 
-@Table(name="Biglietti")  
+@Entity
+@Table(name = "Biglietti")
 
-public class Biglietti implements  Serializable {
-    
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Codice")
-    private int Codice;
-    
-    @Column(name="DataValidita")
-    private Date DataValidita;
-    
-    @Column(name="Username",length=25)
-    private String Username;
-    
-    @Column(name="CodiceAtt")
-    private int CodiceAtt;
-     
-    @ManyToOne
-    @JoinColumn(name="attivitaBiglietto")
-      private Attivita attivita;  
-    
-    @ManyToOne
-    @JoinColumn(name="bigliettoCliente")
-      private Clienti cliente;   
-    
-    @ManyToMany(mappedBy = "biglietto")
-    private Set<Servizi> servizi;
-
-    public Set<Servizi> getServizi() {
-        return servizi;
-    }
+public class Biglietti implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "Codice")
+    private Integer codice;
+    @Basic(optional = false)
+    @Column(name = "DataValidita")
+    @Temporal(TemporalType.DATE)
+    private Date dataValidita;
+    @JoinTable(name = "Bigl_Serv", joinColumns = {
+        @JoinColumn(name = "CodiceBiglietto", referencedColumnName = "Codice")}, inverseJoinColumns = {
+        @JoinColumn(name = "CodiceServizio", referencedColumnName = "Codice")})
+    @ManyToMany
+    private Set<Servizi> serviziSet;
+    @JoinColumn(name = "Username", referencedColumnName = "Username")
+    @ManyToOne(optional = false)
+    private Clienti username;
+    @JoinColumn(name = "CodiceAtt", referencedColumnName = "Codice")
+    @ManyToOne(optional = false)
+    private Attivita codiceAtt;
 
     public Biglietti() {
     }
 
-    public int getCodice() {
-        return Codice;
+    public Biglietti(Integer codice) {
+        this.codice = codice;
+    }
+
+    public Biglietti(Integer codice, Date dataValidita) {
+        this.codice = codice;
+        this.dataValidita = dataValidita;
+    }
+
+    public Integer getCodice() {
+        return codice;
+    }
+
+    public void setCodice(Integer codice) {
+        this.codice = codice;
     }
 
     public Date getDataValidita() {
-        return DataValidita;
+        return dataValidita;
     }
 
-    public void setDataValidita(Date DataValidita) {
-        this.DataValidita = DataValidita;
+    public void setDataValidita(Date dataValidita) {
+        this.dataValidita = dataValidita;
     }
 
-    public String getUsername() {
-        return Username;
+    @XmlTransient
+    public Set<Servizi> getServiziSet() {
+        return serviziSet;
     }
 
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public void setServiziSet(Set<Servizi> serviziSet) {
+        this.serviziSet = serviziSet;
     }
 
-    public Attivita getAttivita() {
-        return attivita;
+    public Clienti getUsername() {
+        return username;
     }
 
-    public void setAttivita(Attivita attivita) {
-        this.attivita = attivita;
+    public void setUsername(Clienti username) {
+        this.username = username;
     }
 
-       
+    public Attivita getCodiceAtt() {
+        return codiceAtt;
+    }
+
+    public void setCodiceAtt(Attivita codiceAtt) {
+        this.codiceAtt = codiceAtt;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (codice != null ? codice.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Biglietti)) {
+            return false;
+        }
+        Biglietti other = (Biglietti) object;
+        if ((this.codice == null && other.codice != null) || (this.codice != null && !this.codice.equals(other.codice))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "biglietteria.Biglietti[ codice=" + codice + " ]";
+    }
     
 }

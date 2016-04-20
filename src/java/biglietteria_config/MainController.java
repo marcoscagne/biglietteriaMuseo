@@ -37,7 +37,7 @@ public class MainController {
         return "registrazione";
     }
 
-    @RequestMapping(value = "/controllaLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String login(ModelMap map, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass) {
         map.put("nomeUtente", nu);
         map.put("password", pass);

@@ -1,5 +1,6 @@
 package biglietteria;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -17,7 +18,7 @@ public class CRUD {
     }
     
     /* Method to CREATE an activity in the database */
-    public Integer addAttivita(String titolo, float tariffa) {
+    public Integer addAttivita(String titolo, BigDecimal tariffa) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer attivitaID = null;
@@ -64,7 +65,7 @@ public class CRUD {
     }
     
     /* Method to UPDATE activity for an employee */
-    public void updateAttivita(Integer AttivitaID, String titolo, float tariffa) {
+    public void updateAttivita(Integer AttivitaID, String titolo, BigDecimal tariffa) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -159,6 +160,30 @@ public class CRUD {
         }
     }
     
+    public String getPwdCliente(String nu) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            List cliente = session.createSQLQuery("select * FROM Clienti").addEntity(Clienti.class).list();
+            for (Iterator iterator = cliente.iterator(); iterator.hasNext();) {
+                Clienti c = (Clienti) iterator.next();
+                if(c.getUsername().equals(nu)){
+                    return c.getPswd();
+                }
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
     /* Method to UPDATE client for an employee */
     public void updateCliente(Integer ClienteID,String username,String pass, String nome, String cognome, String email) {
         Session session = factory.openSession();
@@ -241,7 +266,7 @@ public class CRUD {
                 Biglietti b = (Biglietti) iterator.next();
                 System.out.print("Codice: " + b.getCodice());
                 System.out.print("Username: " + b.getUsername());
-                System.out.print("Attivita: " + b.getAttivita());
+                System.out.print("Attivita: " + b.getCodiceAtt());
                 
             }
             tx.commit();
@@ -256,7 +281,7 @@ public class CRUD {
     }
     
     /* Method to UPDATE tickets for an visitator */
-    public void updateBiglietto(Integer BigliettiID,int Codice,Date DataValidita,String Username) {
+    public void updateBiglietto(Integer BigliettiID,int Codice,Date DataValidita,Clienti cliente) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -264,7 +289,7 @@ public class CRUD {
             Biglietti biglietto
                     = (Biglietti) session.get(Biglietti.class, BigliettiID);
             biglietto.setDataValidita(DataValidita);
-            biglietto.setUsername(Username);          
+            biglietto.setUsername(cliente);          
            
             session.update(biglietto);
             tx.commit();
@@ -300,7 +325,7 @@ public class CRUD {
     /*****************************************************************************/
     
      /* Method to CREATE a category in the database */
-    public Integer addCategorie(String TipoDoc, float percSconto, String Descrizione){
+    public Integer addCategorie(String TipoDoc, long percSconto, String Descrizione){
         Session session = factory.openSession();
         Transaction tx = null;
         Integer categoriaID = null;
@@ -352,7 +377,7 @@ public class CRUD {
     }
     
     /* Method to UPDATE activity for an employee */
-    public void updateCategorie(Integer categoriaID, int Codice,String TipoDoc,float percSconto,String Descrizione) {
+    public void updateCategorie(Integer categoriaID, int Codice,String TipoDoc,long percSconto,String Descrizione) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -398,7 +423,7 @@ public class CRUD {
     
  /***********************************************************************************/
      /* Method to CREATE a service in the database */
-    public Integer addServizi(String Descrizione, float prezzo){
+    public Integer addServizi(String Descrizione, BigDecimal prezzo){
         Session session = factory.openSession();
         Transaction tx = null;
         Integer servizioID = null;
@@ -448,7 +473,7 @@ public class CRUD {
     }
     
     /* Method to UPDATE activity for an employee */
-    public void updateServizi(Integer servizioID, int Codice,String Descrizione,float prezzo) {
+    public void updateServizi(Integer servizioID, int Codice,String Descrizione,BigDecimal prezzo) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {

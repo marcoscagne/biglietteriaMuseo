@@ -6,56 +6,56 @@
 package biglietteria;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Set;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author FSEVERI\scagnellato3082
  */
 @Entity
-@Table(name = "Servizi")
+@Table(name = "Eventi")
 
-public class Servizi implements Serializable {
+public class Eventi implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "Codice")
     private Integer codice;
     @Basic(optional = false)
-    @Column(name = "Descrizione")
-    private String descrizione;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "DataInizio")
+    @Temporal(TemporalType.DATE)
+    private Date dataInizio;
     @Basic(optional = false)
-    @Column(name = "Prezzo")
-    private BigDecimal prezzo;
-    @ManyToMany(mappedBy = "serviziSet")
-    private Set<Biglietti> bigliettiSet;
+    @Column(name = "DataFine")
+    @Temporal(TemporalType.DATE)
+    private Date dataFine;
+    @JoinColumn(name = "Codice", referencedColumnName = "Codice", insertable = false, updatable = false)
+    //@OneToOne(optional = false)
+    private Attivita attivita;
 
-    public Servizi() {
+    public Eventi() {
     }
 
-    public Servizi(Integer codice) {
+    public Eventi(Integer codice) {
         this.codice = codice;
     }
 
-    public Servizi(Integer codice, String descrizione, BigDecimal prezzo) {
+    public Eventi(Integer codice, Date dataInizio, Date dataFine) {
         this.codice = codice;
-        this.descrizione = descrizione;
-        this.prezzo = prezzo;
+        this.dataInizio = dataInizio;
+        this.dataFine = dataFine;
     }
 
     public Integer getCodice() {
@@ -66,29 +66,28 @@ public class Servizi implements Serializable {
         this.codice = codice;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public Date getDataInizio() {
+        return dataInizio;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setDataInizio(Date dataInizio) {
+        this.dataInizio = dataInizio;
     }
 
-    public BigDecimal getPrezzo() {
-        return prezzo;
+    public Date getDataFine() {
+        return dataFine;
     }
 
-    public void setPrezzo(BigDecimal prezzo) {
-        this.prezzo = prezzo;
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
     }
 
-    @XmlTransient
-    public Set<Biglietti> getBigliettiSet() {
-        return bigliettiSet;
+    public Attivita getAttivita() {
+        return attivita;
     }
 
-    public void setBigliettiSet(Set<Biglietti> bigliettiSet) {
-        this.bigliettiSet = bigliettiSet;
+    public void setAttivita(Attivita attivita) {
+        this.attivita = attivita;
     }
 
     @Override
@@ -101,10 +100,10 @@ public class Servizi implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Servizi)) {
+        if (!(object instanceof Eventi)) {
             return false;
         }
-        Servizi other = (Servizi) object;
+        Eventi other = (Eventi) object;
         if ((this.codice == null && other.codice != null) || (this.codice != null && !this.codice.equals(other.codice))) {
             return false;
         }
@@ -113,7 +112,7 @@ public class Servizi implements Serializable {
 
     @Override
     public String toString() {
-        return "biglietteria.Servizi[ codice=" + codice + " ]";
+        return "biglietteria.Eventi[ codice=" + codice + " ]";
     }
     
 }

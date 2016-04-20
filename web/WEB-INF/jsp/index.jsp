@@ -9,6 +9,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
+
+
+
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -37,34 +41,53 @@
                             <li><a href="#">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">				  
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                                <ul id="login-dp" class="dropdown-menu">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                
-                                                <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
-                                                    <div class="form-group">
-                                                        <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
+
+                            <%
+                                //PER CREARE LA SESSIONE - PER LA PAGINA CONTROLLALOGIN
+                                /*session.setAttribute("username", "marco");*/
+                                
+                                String myname = (String) session.getAttribute("username");
+
+                                if (myname == null) {%>
+                                    <li class="dropdown">				  
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                                        <ul id="login-dp" class="dropdown-menu">
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+
+                                                        <form class="form" role="form" method="post" action="./test" accept-charset="UTF-8" id="login-nav">
+                                                            <div class="form-group">
+                                                                <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                                <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                                                <div class="help-block text-right"><a href="">Password dimenticata?</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+                                                            </div>
+                                                        </form>
+
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                        <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                                                        <div class="help-block text-right"><a href="">Password dimenticata?</div>
+                                                    <div class="bottom text-center">
+                                                        Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-                                                    </div>
-                                                </form>
-                                                
-                                            </div>
-                                            <div class="bottom text-center">
-                                                Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
-                                            </div>
-                                        </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </li>
-                                </ul>
+                                <%} else {%>
+                                    <li><a href="#">Logout</a></li>
+                                <%}
+                            %>
+
+
+
+                            
+                            
+                            
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->

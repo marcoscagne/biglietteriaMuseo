@@ -1,106 +1,100 @@
-package biglietteria;
-
-
-import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package biglietteria;
+
+import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
- * @author FSEVERI\sturza2870
+ * @author FSEVERI\scagnellato3082
  */
-@Entity 
-@Table(name="Clienti")  
+@Entity
+@Table(name = "Clienti")
 
 public class Clienti implements Serializable {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Username",length=25)
-    private String Username;
-    
-    @Column(name="Pswd",length=25)
-    private String Pswd;
-    
-    @Column(name="Nome",length=30)
-    private String Nome;
-     
-    @Column(name="Cognome",length=35)
-    private String Cognome;
-    
-    @Column(name="email",length=100)
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "Username")
+    private String username;
+    @Basic(optional = false)
+    @Column(name = "Pswd")
+    private String pswd;
+    @Basic(optional = false)
+    @Column(name = "Nome")
+    private String nome;
+    @Basic(optional = false)
+    @Column(name = "Cognome")
+    private String cognome;
+    @Column(name = "Email")
     private String email;
-    
-    @ManyToOne
-    @JoinColumn(name="CodiceCat")
-      private Categorie categorie;
-    
-    @OneToMany(mappedBy="biglietto")
-    private Set<Biglietti>biglietto;  
-
-    public Set<Biglietti> getBiglietto() {
-        return biglietto;
-    }
-
-    public void setBiglietto(Set<Biglietti> biglietto) {
-        this.biglietto = biglietto;
-    }
-    
-    
-
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+    private Set<Biglietti> bigliettiSet;
+    @JoinColumn(name = "CodiceCat", referencedColumnName = "Codice")
+    @ManyToOne(optional = false)
+    private Categorie codiceCat;
 
     public Clienti() {
     }
 
-    public String getUsername() {
-        return Username;
+    public Clienti(String username) {
+        this.username = username;
     }
 
-    
-    public void setUsername(String Username) {
-        this.Username = Username;
+    public Clienti(String username, String pswd, String nome, String cognome) {
+        this.username = username;
+        this.pswd = pswd;
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPswd() {
-        return Pswd;
+        return pswd;
     }
 
-    public void setPswd(String Pswd) {
-        this.Pswd = Pswd;
+    public void setPswd(String pswd) {
+        this.pswd = pswd;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCognome() {
-        return Cognome;
+        return cognome;
     }
 
-    public void setCognome(String Cognome) {
-        this.Cognome = Cognome;
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
     public String getEmail() {
@@ -110,8 +104,47 @@ public class Clienti implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-   
-    
+
+    @XmlTransient
+    public Set<Biglietti> getBigliettiSet() {
+        return bigliettiSet;
+    }
+
+    public void setBigliettiSet(Set<Biglietti> bigliettiSet) {
+        this.bigliettiSet = bigliettiSet;
+    }
+
+    public Categorie getCodiceCat() {
+        return codiceCat;
+    }
+
+    public void setCodiceCat(Categorie codiceCat) {
+        this.codiceCat = codiceCat;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (username != null ? username.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Clienti)) {
+            return false;
+        }
+        Clienti other = (Clienti) object;
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "biglietteria.Clienti[ username=" + username + " ]";
+    }
     
 }
