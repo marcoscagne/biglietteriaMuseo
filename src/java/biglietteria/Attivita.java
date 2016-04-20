@@ -38,6 +38,10 @@ public class Attivita implements Serializable {
      
     @OneToMany(mappedBy="biglietto") 
     private Set<Biglietti>biglietto;
+
+    public Set<Biglietti> getBiglietto() {
+        return biglietto;
+    }
       
     
 
