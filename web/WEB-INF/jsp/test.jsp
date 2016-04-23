@@ -26,9 +26,11 @@
             CRUD c = new CRUD(HibernateUtil.getSessionFactory());
             String nu=(String)request.getAttribute("nomeUtente");
             String p=(String)request.getAttribute("password");
-            if(c.getPwdCliente(nu).equals(p)){
+            String pa=c.getPwdCliente(nu);
+            
+            if(pa!=null && pa.equals(p)){
                 session.setAttribute("username",request.getAttribute("nomeUtente"));
-        %><jsp:forward page="index.jsp"/><%
+                response.sendRedirect("./");
             }else{
                 out.print("*** NOME UTENTE O PASSWORD ERRATI!! ***");
             }

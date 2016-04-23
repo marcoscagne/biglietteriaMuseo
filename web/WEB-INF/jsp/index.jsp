@@ -43,9 +43,7 @@
                         <ul class="nav navbar-nav navbar-right">
 
                             <%
-                                //PER CREARE LA SESSIONE - PER LA PAGINA CONTROLLALOGIN
-                                /*session.setAttribute("username", "marco");*/
-                                
+                                                               
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {%>
@@ -79,7 +77,7 @@
                                         </ul>
                                     </li>
                                 <%} else {%>
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="./logout">Logout</a></li>
                                 <%}
                             %>
 

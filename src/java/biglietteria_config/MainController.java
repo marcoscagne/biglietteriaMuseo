@@ -43,5 +43,11 @@ public class MainController {
         map.put("password", pass);
         return "test";
     }
+    
+    @RequestMapping(value = "/logout")
+    public String logout(ModelMap map) {
+        return "logout";
+    }
+    
 
 }
