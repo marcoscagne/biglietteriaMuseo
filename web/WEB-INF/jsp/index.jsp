@@ -10,9 +10,6 @@
     </head>
     <body>
 
-
-
-
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -61,7 +58,7 @@
                                                             <div class="form-group">
                                                                 <label class="sr-only" for="exampleInputPassword2">Password</label>
                                                                 <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                                                                <div class="help-block text-right"><a href="">Password dimenticata?</div>
+                                                                <!--<div class="help-block text-right"><a href="">Password dimenticata?</a></div>-->
                                                             </div>
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn btn-primary btn-block">Accedi</button>
@@ -83,7 +80,7 @@
 
 
 
-                            
+                             
                             
                             
                         </ul>
@@ -95,6 +92,7 @@
         <div class="title-div">
             <h1 class="title">National Museum</h1>
         </div>
+        <p style="color:red"><b>${msg}</b></p>
         <div id="news" align="center">
             <div class="row">
                 <div class="col-md-4">

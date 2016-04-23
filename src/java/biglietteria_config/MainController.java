@@ -27,8 +27,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/")
-    public String index(ModelMap map) {
-        //map.put("eventi",);
+    public String index(ModelMap map, @RequestParam(value = "m", required = false) String msg) {
+        map.put("msg",msg);
         return "index";
     }
 
