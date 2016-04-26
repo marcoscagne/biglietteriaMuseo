@@ -54,5 +54,9 @@ public class MainController {
         return "logout";
     }
     
+    @RequestMapping(value = "/dettaglio")
+    public String dettaglio(ModelMap map) {
+        return "dettaglio-attivita";
+    }
 
 }
