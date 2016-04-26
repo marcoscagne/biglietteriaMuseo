@@ -51,7 +51,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
 
-                                                        <form class="form" role="form" method="post" action="./test" accept-charset="UTF-8" id="login-nav">
+                                                        <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
                                                             <div class="form-group">
                                                                 <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
                                                             </div>
@@ -95,6 +95,20 @@
         <p style="color:red"><b>${msg}</b></p>
         <div id="news" align="center">
             <div class="row">
+                
+                <c:forEach items="${attivita}" var="att">
+                    <p>${att.titolo}</p>
+                    <div class="col-md-4">
+                        <div class="img" align="left">
+                            <img src="${att.immagine}" width="100%">
+                            <span class="img-title">${att.titolo}</span>
+                            <div class="img-description">
+                                ${att.tariffaOrdinaria}
+                            </div>
+                        </div>
+                    </div>                    
+                </c:forEach>
+                            
                 <div class="col-md-4">
                     <div class="img" align="left">
                         <img src="./resources/img/carousel/1.jpg" width="100%">

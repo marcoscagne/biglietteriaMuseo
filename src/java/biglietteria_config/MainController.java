@@ -6,6 +6,7 @@ package biglietteria_config;
  * and open the template in the editor.
  */
 import biglietteria.Attivita;
+import biglietteria.CRUD;
 import biglietteria.Clienti;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
     public MainController() {
-        Attivita a = new Attivita();
+        
     }
 
     @RequestMapping(value = "/")
     public String index(ModelMap map, @RequestParam(value = "m", required = false) String msg) {
         map.put("msg",msg);
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("attivita",c.listAttivita());
+        System.out.println("##############################################################"+c.listAttivita());
+        
         return "index";
     }
 
@@ -37,11 +42,11 @@ public class MainController {
         return "registrazione";
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "/controllaLogin", method = RequestMethod.POST)
     public String login(ModelMap map, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass) {
         map.put("nomeUtente", nu);
         map.put("password", pass);
-        return "test";
+        return "controllaLogin";
     }
     
     @RequestMapping(value = "/logout")

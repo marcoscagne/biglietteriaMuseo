@@ -1,6 +1,9 @@
 package biglietteria;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -42,16 +45,20 @@ public class CRUD {
     
     /* Method to
      READ all the activities */
-    public void listAttivita() {
+    public ArrayList listAttivita() {
         Session session = factory.openSession();
+        ArrayList <Attivita> att = new ArrayList<Attivita>();
+        att=null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List attivita = session.createQuery("FROM Attivita").list();
+            List attivita = session.createSQLQuery("select * FROM Attivita").addEntity(Attivita.class).list();
             for (Iterator iterator = attivita.iterator(); iterator.hasNext();) {
                 Attivita a = (Attivita) iterator.next();
-                System.out.print("Titolo: " + a.getTitolo());
-                System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
+                att.add(new Attivita(a.getTitolo(),a.getTariffaOrdinaria(),a.getImmagine(),new Base(1,new Date("21/06/2016"))));
+                //System.out.print("Titolo: " + a.getTitolo());
+                //System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
+                
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -62,6 +69,7 @@ public class CRUD {
         } finally {
             session.close();
         }
+        return att;
     }
     
     /* Method to UPDATE activity for an employee */

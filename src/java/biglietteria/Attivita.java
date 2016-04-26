@@ -67,6 +67,14 @@ public class Attivita implements Serializable {
         this.tariffaOrdinaria = tariffaOrdinaria;
         this.immagine = immagine;
     }
+    
+    public Attivita(String titolo, BigDecimal tariffaOrdinaria, String immagine, Base base) {
+        this.codice = codice;
+        this.titolo = titolo;
+        this.tariffaOrdinaria = tariffaOrdinaria;
+        this.immagine = immagine;
+        this.base=base;
+    }
 
     public Integer getCodice() {
         return codice;
