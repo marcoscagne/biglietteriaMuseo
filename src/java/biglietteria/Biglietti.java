@@ -28,10 +28,22 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\scagnellato3082
  */
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name = "listBiglietti",
+                    query = "from Biglietti"
+            )
+        }
+)
+
 @Entity
 @Table(name = "Biglietti")
 
+
+
 public class Biglietti implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -130,5 +142,5 @@ public class Biglietti implements Serializable {
     public String toString() {
         return "biglietteria.Biglietti[ codice=" + codice + " ]";
     }
-    
+
 }

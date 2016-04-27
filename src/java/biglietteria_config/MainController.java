@@ -8,6 +8,7 @@ package biglietteria_config;
 import biglietteria.Attivita;
 import CRUD.CRUD;
 import biglietteria.Clienti;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -31,9 +32,8 @@ public class MainController {
     public String index(ModelMap map, @RequestParam(value = "m", required = false) String msg) {
         map.put("msg",msg);
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
-        map.put("attivita",c.listAttivita());
-        System.out.println("##############################################################"+c.listAttivita());
-        
+        System.out.println("*******************************************************************************"+c.listBiglietti().toString());
+        map.put("biglietti",c.listBiglietti());
         return "index";
     }
 
@@ -52,6 +52,16 @@ public class MainController {
     @RequestMapping(value = "/logout")
     public String logout(ModelMap map) {
         return "logout";
+    }
+    
+    @RequestMapping(value = "/attivita")
+    public String lista(ModelMap map) {
+        return "lista-attivita";
+    }
+    
+    @RequestMapping(value = "/compra")
+    public String compra(ModelMap map) {
+        return "compra";
     }
     
     @RequestMapping(value = "/dettaglio")

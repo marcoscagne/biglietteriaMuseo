@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SessionFactory;
@@ -23,9 +24,9 @@ public class CRUD {
     private static SessionFactory factory;
 
     public CRUD(SessionFactory factory) {
-        CRUD.factory=factory;
+        CRUD.factory = factory;
     }
-    
+
     /* Method to CREATE an activity in the database */
     public Integer addAttivita(String titolo, BigDecimal tariffa) {
         Session session = factory.openSession();
@@ -48,23 +49,22 @@ public class CRUD {
         }
         return attivitaID;
     }
-    
+
     /* Method to
      READ all the activities */
     public ArrayList listAttivita() {
         Session session = factory.openSession();
-        ArrayList <Attivita> att = new ArrayList<Attivita>();
-        att=null;
+        ArrayList<Attivita> att = new ArrayList<Attivita>();
+        att = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             List attivita = session.createSQLQuery("select * FROM Attivita").addEntity(Attivita.class).list();
             for (Iterator iterator = attivita.iterator(); iterator.hasNext();) {
                 Attivita a = (Attivita) iterator.next();
-                att.add(new Attivita(a.getTitolo(),a.getTariffaOrdinaria(),a.getImmagine(),new Base(1,new Date("21/06/2016"))));
-                //System.out.print("Titolo: " + a.getTitolo());
-                //System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
-                
+                System.out.print("Titolo: " + a.getTitolo());
+                System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
+
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -77,7 +77,7 @@ public class CRUD {
         }
         return att;
     }
-    
+
     /* Method to UPDATE activity for an employee */
     public void updateAttivita(Integer AttivitaID, String titolo, BigDecimal tariffa) {
         Session session = factory.openSession();
@@ -99,7 +99,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to DELETE an activity from the records */
     public void deleteAttivita(Integer AttivitaID) {
         Session session = factory.openSession();
@@ -119,11 +119,12 @@ public class CRUD {
             session.close();
         }
     }
-    
-    /*********************************************************************************************/
-    
+
+    /**
+     * ******************************************************************************************
+     */
     /* Method to CREATE an client in the database */
-    public Integer addCliente(String username, String pass, String nome, String cognome, String email){
+    public Integer addCliente(String username, String pass, String nome, String cognome, String email) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer clienteID = null;
@@ -147,7 +148,7 @@ public class CRUD {
         }
         return clienteID;
     }
-    
+
     /* Method to
      READ all the client */
     public void listClienti() {
@@ -173,7 +174,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     public String getPwdCliente(String nu) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -182,7 +183,7 @@ public class CRUD {
             List cliente = session.createSQLQuery("select * FROM Clienti").addEntity(Clienti.class).list();
             for (Iterator iterator = cliente.iterator(); iterator.hasNext();) {
                 Clienti c = (Clienti) iterator.next();
-                if(c.getUsername().equals(nu)){
+                if (c.getUsername().equals(nu)) {
                     return c.getPswd();
                 }
             }
@@ -197,9 +198,9 @@ public class CRUD {
         }
         return null;
     }
-    
+
     /* Method to UPDATE client for an employee */
-    public void updateCliente(Integer ClienteID,String username,String pass, String nome, String cognome, String email) {
+    public void updateCliente(Integer ClienteID, String username, String pass, String nome, String cognome, String email) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -222,7 +223,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to DELETE a client from the records */
     public void deleteCliente(Integer ClienteID) {
         Session session = factory.openSession();
@@ -242,11 +243,12 @@ public class CRUD {
             session.close();
         }
     }
-    
-    /*********************************************************************************************/
-    
+
+    /**
+     * ******************************************************************************************
+     */
     /* Method to CREATE a ticket in the database */
-    public Integer addBiglietto(Date dataValidita, String username, Attivita attivita){
+    public Integer addBiglietto(Date dataValidita, String username, Attivita attivita) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer bigliettoID = null;
@@ -267,23 +269,26 @@ public class CRUD {
         }
         return bigliettoID;
     }
-    
+
     /* Method to
      READ all the tickets */
-    public void listBiglietti() {
+    public List<Biglietti> listBiglietti() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List biglietto = session.createQuery("FROM Biglietti").list();
-            for (Iterator iterator = biglietto.iterator(); iterator.hasNext();) {
-                Biglietti b = (Biglietti) iterator.next();
-                System.out.print("Codice: " + b.getCodice());
-                System.out.print("Username: " + b.getUsername());
-                System.out.print("Attivita: " + b.getCodiceAtt());
+            /*List biglietto = session.createQuery("FROM Biglietti").list();
+             for (Iterator iterator = biglietto.iterator(); iterator.hasNext();) {
+             Biglietti b = (Biglietti) iterator.next();
+             System.out.print("Codice: " + b.getCodice());
+             System.out.print("Username: " + b.getUsername());
+             System.out.print("Attivita: " + b.getCodiceAtt());
                 
-            }
+             }*/
+            Query query = session.getNamedQuery("listBiglietti");
+            List<Biglietti> result = query.list();
             tx.commit();
+            return result;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -292,10 +297,11 @@ public class CRUD {
         } finally {
             session.close();
         }
+        return null;
     }
-    
+
     /* Method to UPDATE tickets for an visitator */
-    public void updateBiglietto(Integer BigliettiID,int Codice,Date DataValidita,Clienti cliente) {
+    public void updateBiglietto(Integer BigliettiID, int Codice, Date DataValidita, Clienti cliente) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -303,8 +309,8 @@ public class CRUD {
             Biglietti biglietto
                     = (Biglietti) session.get(Biglietti.class, BigliettiID);
             biglietto.setDataValidita(DataValidita);
-            biglietto.setUsername(cliente);          
-           
+            biglietto.setUsername(cliente);
+
             session.update(biglietto);
             tx.commit();
         } catch (HibernateException e) {
@@ -316,7 +322,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to DELETE a tickets from the records */
     public void deleteBiglietto(Integer BigliettiID) {
         Session session = factory.openSession();
@@ -336,10 +342,13 @@ public class CRUD {
             session.close();
         }
     }
-    /*****************************************************************************/
-    
-     /* Method to CREATE a category in the database */
-    public Integer addCategorie(String TipoDoc, long percSconto, String Descrizione){
+
+    /**
+     * **************************************************************************
+     */
+
+    /* Method to CREATE a category in the database */
+    public Integer addCategorie(String TipoDoc, long percSconto, String Descrizione) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer categoriaID = null;
@@ -349,7 +358,7 @@ public class CRUD {
             categoria.setTipoDoc(TipoDoc);
             categoria.setPercSconto(percSconto);
             categoria.setDescrizione(Descrizione);
-            
+
             categoriaID = (Integer) session.save(categoria);
             tx.commit();
         } catch (HibernateException e) {
@@ -362,7 +371,7 @@ public class CRUD {
         }
         return categoriaID;
     }
-    
+
     /* Method to
      READ all the tickets */
     public void listCategorie() {
@@ -377,7 +386,7 @@ public class CRUD {
                 System.out.print("TipoDoc: " + c.getTipoDoc());
                 System.out.print("PercSconto: " + c.getPercSconto());
                 System.out.print("Descrizione: " + c.getDescrizione());
-                
+
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -389,9 +398,9 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to UPDATE activity for an employee */
-    public void updateCategorie(Integer categoriaID, int Codice,String TipoDoc,long percSconto,String Descrizione) {
+    public void updateCategorie(Integer categoriaID, int Codice, String TipoDoc, long percSconto, String Descrizione) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
@@ -399,9 +408,9 @@ public class CRUD {
             Categorie categoria
                     = (Categorie) session.get(Categorie.class, categoriaID);
             categoria.setTipoDoc(TipoDoc);
-            categoria.setPercSconto(percSconto);          
+            categoria.setPercSconto(percSconto);
             categoria.setDescrizione(Descrizione);
-            
+
             session.update(categoria);
             tx.commit();
         } catch (HibernateException e) {
@@ -413,7 +422,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to DELETE an activity from the records */
     public void deleteCategoria(Integer categoriaID) {
         Session session = factory.openSession();
@@ -433,11 +442,12 @@ public class CRUD {
             session.close();
         }
     }
-    
-    
- /***********************************************************************************/
-     /* Method to CREATE a service in the database */
-    public Integer addServizi(String Descrizione, BigDecimal prezzo){
+
+    /**
+     * ********************************************************************************
+     */
+    /* Method to CREATE a service in the database */
+    public Integer addServizi(String Descrizione, BigDecimal prezzo) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer servizioID = null;
@@ -446,7 +456,7 @@ public class CRUD {
             Servizi servizio = new Servizi();
             servizio.setPrezzo(prezzo);
             servizio.setDescrizione(Descrizione);
-            
+
             servizioID = (Integer) session.save(servizio);
             tx.commit();
         } catch (HibernateException e) {
@@ -459,7 +469,7 @@ public class CRUD {
         }
         return servizioID;
     }
-    
+
     /* Method to
      READ all the services */
     public void listServizi() {
@@ -470,10 +480,10 @@ public class CRUD {
             List categoria = session.createQuery("FROM Servizi").list();
             for (Iterator iterator = categoria.iterator(); iterator.hasNext();) {
                 Servizi s = (Servizi) iterator.next();
-                System.out.print("Codice: " + s.getCodice());                
+                System.out.print("Codice: " + s.getCodice());
                 System.out.print("Descrizione: " + s.getDescrizione());
-                System.out.print("Prezzo: " + s.getPrezzo()); 
-                
+                System.out.print("Prezzo: " + s.getPrezzo());
+
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -485,18 +495,18 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to UPDATE activity for an employee */
-    public void updateServizi(Integer servizioID, int Codice,String Descrizione,BigDecimal prezzo) {
+    public void updateServizi(Integer servizioID, int Codice, String Descrizione, BigDecimal prezzo) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             Servizi servizio
                     = (Servizi) session.get(Servizi.class, servizioID);
-            servizio.setPrezzo(prezzo);          
+            servizio.setPrezzo(prezzo);
             servizio.setDescrizione(Descrizione);
-            
+
             session.update(servizio);
             tx.commit();
         } catch (HibernateException e) {
@@ -508,7 +518,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to DELETE an activity from the records */
     public void deleteServizi(Integer servizioID) {
         Session session = factory.openSession();

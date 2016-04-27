@@ -37,33 +37,43 @@
                             <li><a href="#">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">  
+                            <%
+                                String myname = (String) session.getAttribute("username");
+
+                                if (myname == null) {%>
+                            <li class="dropdown">				  
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
                                 <ul id="login-dp" class="dropdown-menu">
                                     <li>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+
+                                                <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Indirizzo Email" required>
+                                                        <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                                        <div class="help-block text-right"><a href="">Password dimenticata?</div>
+                                                        <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                                        <!--<div class="help-block text-right"><a href="">Password dimenticata?</a></div>-->
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary btn-block">Accedi</button>
                                                     </div>
                                                 </form>
+
                                             </div>
                                             <div class="bottom text-center">
-                                                Sei nuovo qui? <a href="pages/registrazione/registrazione.jsp"><b>Registrati</b></a>
+                                                Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
                             </li>
+                            <%} else {%>
+                            <li><a href="./logout">Logout</a></li>
+                                <%}
+                                %>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -92,7 +102,7 @@
                             sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
                             h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
                             <div class="buy">
-                                <button type="submit" class="btn btn-primary btn-block">Compra</button>
+                                <a class="btn btn-primary btn-block" href="./compra">Compra</a>
                             </div>
                         </div>
                     </div>

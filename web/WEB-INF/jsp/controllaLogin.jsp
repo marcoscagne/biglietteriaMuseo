@@ -7,7 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.hibernate.SessionFactory"%>
 <%@page import="biglietteria_config.HibernateUtil"%>
-<%@page import="biglietteria.CRUD"%>
+<%@page import="CRUD.CRUD"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
