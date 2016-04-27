@@ -6,7 +6,7 @@ package biglietteria_config;
  * and open the template in the editor.
  */
 import biglietteria.Attivita;
-import biglietteria.CRUD;
+import CRUD.CRUD;
 import biglietteria.Clienti;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

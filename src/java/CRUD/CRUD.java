@@ -1,5 +1,11 @@
-package biglietteria;
+package CRUD;
 
+import biglietteria.Attivita;
+import biglietteria.Base;
+import biglietteria.Biglietti;
+import biglietteria.Categorie;
+import biglietteria.Clienti;
+import biglietteria.Servizi;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
