@@ -61,17 +61,60 @@ public class CRUD {
             tx = session.beginTransaction();
             Query query = session.getNamedQuery("attivitaVicine");
 
-            /*Calendar cal = Calendar.getInstance();
-            int day = cal.get(Calendar.DATE);
-            int month = cal.get(Calendar.MONTH) + 1;
-            int year = cal.get(Calendar.YEAR);*/
             Date d = new Date();
-            
-            //String currentDate = year+"-"+month+"-"+day;
             
             query.setParameter("data", d);
             query.setParameter("tipo", "evento");
-            System.out.println("######################################"+d);
+            List result = query.list();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    /* Method to
+     READ all the activities */
+    public List<Attivita> listTutteAttivita() {
+        Session session = factory.openSession();
+        ArrayList<Attivita> att = new ArrayList<Attivita>();
+        att = null;
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("allActivities");
+
+            Date d = new Date();
+            
+            query.setParameter("data", d);
+            query.setParameter("tipo", "evento");
+            List result = query.list();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    /* Method to
+     READ the activity */
+    public List<Attivita> listAttivitaById(Integer id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("attivitaById");
+            
+            query.setParameter("id", id);
             List result = query.list();
             return result;
         } catch (HibernateException e) {

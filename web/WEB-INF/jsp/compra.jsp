@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html >
     <head>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <meta charset="UTF-8">
-        <title>Sign-Up/Login Form</title>
+        <title>Aggiungi Servizio</title>
         <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"><!-- Optional theme -->
@@ -45,37 +46,9 @@
                             <%                               
                                 String myname = (String) session.getAttribute("username");
 
-                                if (myname == null) {%>
-                                    <li class="dropdown">				  
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                                        <ul id="login-dp" class="dropdown-menu">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-
-                                                        <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
-                                                            <div class="form-group">
-                                                                <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                                <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                                                                <!--<div class="help-block text-right"><a href="">Password dimenticata?</a></div>-->
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
-                                                    <div class="bottom text-center">
-                                                        Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                <%} else {%>
+                                if (myname == null) {
+                                    response.sendRedirect("./?m=DeviEffettuareIlLogin!");
+                                } else {%>
                                     <li><a href="./logout">Logout</a></li>
                                 <%}
                             %>

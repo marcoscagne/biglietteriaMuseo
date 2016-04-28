@@ -7,10 +7,8 @@ package biglietteria;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,22 +29,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @NamedQueries({
     @NamedQuery(
-            name = "attivitaVicine",
-            query = "FROM Attivita WHERE tipo=:tipo and data> :data ORDER BY data"
+        name="attivitaVicine",
+        query="FROM Attivita WHERE tipo=:tipo and data> :data ORDER BY data"
+    ),
+    @NamedQuery(
+        name="allActivities",
+        query="FROM Attivita WHERE ORDER BY data"
+    ),
+    @NamedQuery(
+        name="attivitaById",
+        query="FROM Attivita WHERE codice=:id"
     )
 })
 
 @Table(name = "Attivita")
-/*@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Attivita.findAll", query = "SELECT a FROM Attivita a"),
-    @NamedQuery(name = "Attivita.findByCodice", query = "SELECT a FROM Attivita a WHERE a.codice = :codice"),
-    @NamedQuery(name = "Attivita.findByTipo", query = "SELECT a FROM Attivita a WHERE a.tipo = :tipo"),
-    @NamedQuery(name = "Attivita.findByTitolo", query = "SELECT a FROM Attivita a WHERE a.titolo = :titolo"),
-    @NamedQuery(name = "Attivita.findByTariffaOrdinaria", query = "SELECT a FROM Attivita a WHERE a.tariffaOrdinaria = :tariffaOrdinaria"),
-    @NamedQuery(name = "Attivita.findByImmagine", query = "SELECT a FROM Attivita a WHERE a.immagine = :immagine"),
-    @NamedQuery(name = "Attivita.findByData", query = "SELECT a FROM Attivita a WHERE a.data = :data"),
-    @NamedQuery(name = "Attivita.findByDataFine", query = "SELECT a FROM Attivita a WHERE a.dataFine = :dataFine")})*/
+
 public class Attivita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +57,8 @@ public class Attivita implements Serializable {
     @Basic(optional = false)
     @Column(name = "Titolo")
     private String titolo;
+    @Column(name = "descrizione")
+    private String descrizione;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "TariffaOrdinaria")
@@ -76,8 +73,6 @@ public class Attivita implements Serializable {
     @Column(name = "dataFine")
     @Temporal(TemporalType.DATE)
     private Date dataFine;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceAtt")
-    private Collection<Biglietti> bigliettiCollection;
 
     public Attivita() {
     }
@@ -119,6 +114,14 @@ public class Attivita implements Serializable {
         this.titolo = titolo;
     }
 
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public BigDecimal getTariffaOrdinaria() {
         return tariffaOrdinaria;
     }
@@ -149,15 +152,6 @@ public class Attivita implements Serializable {
 
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
-    }
-
-    @XmlTransient
-    public Collection<Biglietti> getBigliettiCollection() {
-        return bigliettiCollection;
-    }
-
-    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
-        this.bigliettiCollection = bigliettiCollection;
     }
 
     @Override

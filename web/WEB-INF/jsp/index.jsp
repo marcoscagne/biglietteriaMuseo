@@ -1,7 +1,6 @@
 <html>
     <head>
-        <%@ taglib prefix="c" 
-           uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Optional theme -->
@@ -89,20 +88,27 @@
         <p style="color:red"><b>${msg}</b></p>
         <div id="news" align="center">
             <div class="row">
+                
                 <c:forEach items="${attivita}" var="a">
-                <div class="col-lg-4">
-                    <div class="img" align="left">
-                        <img src="./resources/img/carousel/1.jpg" width="100%">
-                        
-                        <span class="img-title">${a.data}</span>
-                        <div class="img-description">
-                            ${a.titolo}
-                            <div class="buy">
-                                <a href="./dettaglio" class="btn btn-primary btn-block">Compra</a>
+                    <div class="col-lg-4">
+                        <div class="img" align="left">
+                            <img src="${a.immagine}" width="100%">
+
+                            <span class="img-title">${a.titolo}</span>
+                            <div class="img-description">
+                                ${a.descrizione}
+                                <br/><br/>
+                                <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
+                                <br/><br/>
+                                <b>Data:</b> ${a.data}
+                                <br/>
+                                <b>Data Fine:</b> ${a.dataFine}
+                                <div class="buy">
+                                    <a href="./dettaglio?id=${a.codice}" class="btn btn-primary btn-block">Dettagli</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </c:forEach>
                 
             </div>
