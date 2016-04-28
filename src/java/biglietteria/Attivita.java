@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     ),
     @NamedQuery(
         name="allActivities",
-        query="FROM Attivita WHERE ORDER BY data"
+        query="FROM Attivita ORDER BY data"
     ),
     @NamedQuery(
         name="attivitaById",

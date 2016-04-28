@@ -96,13 +96,13 @@
 
                             <span class="img-title">${a.titolo}</span>
                             <div class="img-description">
-                                ${a.descrizione}
-                                <br/><br/>
-                                <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
-                                <br/><br/>
-                                <b>Data:</b> ${a.data}
+                                <i style="float:right;">Tipo: ${a.tipo}</i>
                                 <br/>
-                                <b>Data Fine:</b> ${a.dataFine}
+                                <div style="height: 100px; overflow: auto">
+                                    ${a.descrizione}
+                                </div>
+                                <br/>
+                                <b>Data:</b> ${a.data}
                                 <div class="buy">
                                     <a href="./dettaglio?id=${a.codice}" class="btn btn-primary btn-block">Dettagli</a>
                                 </div>

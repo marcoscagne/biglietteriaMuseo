@@ -87,11 +87,6 @@ public class CRUD {
         try {
             tx = session.beginTransaction();
             Query query = session.getNamedQuery("allActivities");
-
-            Date d = new Date();
-            
-            query.setParameter("data", d);
-            query.setParameter("tipo", "evento");
             List result = query.list();
             return result;
         } catch (HibernateException e) {
@@ -514,20 +509,15 @@ public class CRUD {
 
     /* Method to
      READ all the services */
-    public void listServizi() {
+    public List<Servizi> listServizi() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List categoria = session.createQuery("FROM Servizi").list();
-            for (Iterator iterator = categoria.iterator(); iterator.hasNext();) {
-                Servizi s = (Servizi) iterator.next();
-                System.out.print("Codice: " + s.getCodice());
-                System.out.print("Descrizione: " + s.getDescrizione());
-                System.out.print("Prezzo: " + s.getPrezzo());
-
-            }
-            tx.commit();
+            Query query = session.getNamedQuery("servizi");
+            List result = query.list();
+            return result;
+            
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -536,6 +526,7 @@ public class CRUD {
         } finally {
             session.close();
         }
+        return null;
     }
 
     /* Method to UPDATE activity for an employee */

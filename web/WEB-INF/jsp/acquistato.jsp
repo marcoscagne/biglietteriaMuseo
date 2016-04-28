@@ -60,23 +60,9 @@
         <div class="registrazione">  
             <div class="tab-content">
                 <div id="signup">   
-                    <h1>Acquisto di un biglietto</h1>          
-                    <form action="./end" method="post">
-                        <div class="row">
-                            <b>Acquisto del biglietto per il</b><br/>${data}<br/>
-                            <b>+</b>
-                        </div>
-                        <div class="row">
-                            <c:forEach items="${servizi}" var="s">
-                                <input type="hidden" name="data" value="${data}">
-                                <div class="col-lg-4">
-                                    <label><input type="checkbox" name="${s.codice}">${s.descrizione}<br/><i>(+ &euro;${s.prezzo})</i></label>
-                                </div>
-                            </c:forEach>
-                            <br/>
-                            <button type="submit" class="button button-block"/>Conferma</button>
-                        </div>
-                    </form>
+                    <h1>Acquisto avvenuto con successo!</h1>
+                    Riepilogo:<br/>
+                    
                 </div>            
             </div><!-- tab-content -->  
         </div> 

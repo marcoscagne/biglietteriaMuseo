@@ -1,5 +1,6 @@
 <html>
     <head>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Optional theme -->
@@ -32,8 +33,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Attivit&agrave;</a></li>
+                            <li><a href="./">Home<span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="#">Attivit&agrave;</a></li>
                             <li><a href="#">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -81,61 +82,24 @@
         </div>
         <div id="news" style="margin-top: 80px;" align="center">	
             <div class="row">
-                <div class="col-md-6">
-                    <img src="./resources/img/carousel/2.jpg" class="img" width="100%">
-                    <div class="img" align="left">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="continua">
-                                <button type="submit" class="btn btn-primary btn-block">Continua</button>
+                <c:forEach items="${attivita}" var="a">
+                    <div class="col-md-6">
+                        <img src="${a.immagine}" class="img" width="100%">
+                        <div class="img" align="left">
+                            <span class="img-title">${a.titolo}</span>
+                            <div class="img-description">
+                                <div style="height: 100px; overflow: auto">
+                                    ${a.descrizione}
+                                </div>
+                                <div class="continua">
+                                    <a href="./dettaglio?id=${a.codice}" class="btn btn-primary btn-block">Dettagli</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <img src="./resources/img/carousel/2.jpg" class="img" width="100%">
-                    <div class="img" align="left">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="continua">
-                                <button type="submit" class="btn btn-primary btn-block">Continua</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="./resources/img/carousel/2.jpg" class="img" width="100%">
-                    <div class="img" align="left">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="continua">
-                                <button type="submit" class="btn btn-primary btn-block">Continua</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <img src="./resources/img/carousel/2.jpg" class="img" width="100%">
-                    <div class="img" align="left">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="continua">
-                                <button type="submit" class="btn btn-primary btn-block">Continua</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>				
+            				
         </div>
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016

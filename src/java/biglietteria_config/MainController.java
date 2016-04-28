@@ -55,11 +55,17 @@ public class MainController {
     
     @RequestMapping(value = "/attivita")
     public String lista(ModelMap map) {
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("attivita",c.listTutteAttivita());
         return "lista-attivita";
     }
     
-    @RequestMapping(value = "/compra", method = RequestMethod.GET)
-    public String compra(ModelMap map, @RequestParam(value="id",required=false) Integer id) {
+    @RequestMapping(value = "/compra", method = RequestMethod.POST)
+    public String compra(ModelMap map, @RequestParam(value="id",required=true) Integer id, @RequestParam(value="data",required=true) String data) {
+        map.put("id", id);
+        map.put("data", data);
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("servizi",c.listServizi());
         return "compra";
     }
     
@@ -69,5 +75,9 @@ public class MainController {
         map.put("attivitaID",c.listAttivitaById(id));
         return "dettaglio-attivita";
     }
-
+    
+    @RequestMapping(value = "/end", method = RequestMethod.POST)
+    public String end(ModelMap map, @RequestParam(value="data",required=true) String data) {
+        return "acquistato";
+    }
 }

@@ -33,7 +33,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a href="./">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="./attivita">Attivit&agrave;</a></li>
                             <li><a href="#">Gallery</a></li>
                         </ul>
@@ -82,7 +82,9 @@
         </div>
                         
         <c:forEach items="${attivitaID}" var="a">
-            <div id="news" style="margin-top: 80px; width: 80%;" align="center">
+            
+            <c:if test="${a.tipo=='evento'}">
+                <div id="news" style="margin-top: 80px; width: 80%;" align="center">
                 <div class="img" align="left">
                     <div class="row">
                         <div class="col-md-12">
@@ -100,18 +102,70 @@
                                 <b>Data:</b> ${a.data}
                                 <br/>
                                 <b>Data Fine:</b> ${a.dataFine}
-                                <div class="buy">
-                                    <a href="./compra?id=${a.codice}" class="btn btn-primary btn-block">Compra</a>
-                                </div>
+                                <%if(myname!=null){%>
+                                    <div class="buy">
+                                        <button onclick="comprato()" class="btn btn-primary btn-block">Compra</button>
+                                    </div>
+                                <%}else{%>
+                                    <div class="buy">
+                                        <button disabled class="btn btn-primary btn-block">Effettua il login!</button>
+                                    </div>
+                                <%}%>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </c:if>
+            <c:if test="${a.tipo=='base'}">
+                <div id="news" style="margin-top: 80px; width: 80%;" align="center">
+                <div class="img" align="left">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img src="${a.immagine}" width="100%">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="img-title">${a.titolo}</span>
+                            <div class="img-description">
+                                ${a.descrizione}
+                                <br/><br/>
+                                <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
+                                <br/><br/>
+                                <b>Data:</b>
+                                <form action="./compra" method="post">
+                                    <input type="hidden" name="id" value="${a.codice}" class="form-control">
+                                    <div class="input-group date col-md-3" data-provide="datepicker">
+                                        <input type="text" name="data" class="form-control">
+                                        <div class="input-group-addon">
+                                            <span class="glyphicon glyphicon-th"></span>
+                                        </div>
+                                    </div>
+                                    <div class="buy">
+                                        <button type="submit" class="btn btn-primary btn-block">Compra</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </c:if>
+            
         </c:forEach>
                                 
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016
         </div>
+            <script>
+                function comprato(){
+                    alert("Biglietto per l'Evento scelto ACQUISTATO!");
+                    window.location = "./";
+                }
+                
+                $('.datepicker').datepicker();
+            </script>
+                            
     </body>
 </html>
