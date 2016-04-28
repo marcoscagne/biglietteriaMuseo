@@ -89,14 +89,14 @@
         <p style="color:red"><b>${msg}</b></p>
         <div id="news" align="center">
             <div class="row">
-                <c:forEach items="${biglietti}" var="b">
+                <c:forEach items="${attivita}" var="a">
                 <div class="col-lg-4">
                     <div class="img" align="left">
                         <img src="./resources/img/carousel/1.jpg" width="100%">
                         
-                        <span class="img-title">${b.dataValidita}</span>
+                        <span class="img-title">${a.data}</span>
                         <div class="img-description">
-                            ${b.username}
+                            ${a.titolo}
                             <div class="buy">
                                 <a href="./dettaglio" class="btn btn-primary btn-block">Compra</a>
                             </div>
@@ -104,32 +104,7 @@
                     </div>
                 </div>
                 </c:forEach>
-                <div class="col-lg-4">
-                    <div class="img" align="left">
-                        <img src="./resources/img/carousel/1.jpg" width="100%">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="buy">
-                                <button type="submit" class="btn btn-primary btn-block">Compra</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="img" align="left">
-                        <img src="./resources/img/carousel/1.jpg" width="100%">
-                        <span class="img-title">sdgfsgdsgd</span>
-                        <div class="img-description">
-                            sdgfsgdsg xfg  fgjb jj bj bj njn jn jn jn jn jn jn jn jn jnj n jn jn jn jnlk jn kljb kb khb b kjm k k
-                            h hk hj vjhv jhv jhb jk nbk nj n kj bkj bk kj n mj jhb kbn b b bb bbbbbbb bbbbbbbb bbbbbbb bbbbbbb bbbbbbbb bbbbbb bbbbbbb bbbbbbb j bkj bk jd
-                            <div class="buy">
-                                <button type="submit" class="btn btn-primary btn-block">Compra</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
 

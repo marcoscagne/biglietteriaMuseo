@@ -6,7 +6,7 @@
 package biglietteria;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +27,13 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Categorie")
-
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c"),
+    @NamedQuery(name = "Categorie.findByCodice", query = "SELECT c FROM Categorie c WHERE c.codice = :codice"),
+    @NamedQuery(name = "Categorie.findByTipoDoc", query = "SELECT c FROM Categorie c WHERE c.tipoDoc = :tipoDoc"),
+    @NamedQuery(name = "Categorie.findByPercSconto", query = "SELECT c FROM Categorie c WHERE c.percSconto = :percSconto"),
+    @NamedQuery(name = "Categorie.findByDescrizione", query = "SELECT c FROM Categorie c WHERE c.descrizione = :descrizione")})
 public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,7 +51,7 @@ public class Categorie implements Serializable {
     @Column(name = "Descrizione")
     private String descrizione;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceCat")
-    private Set<Clienti> clientiSet;
+    private Collection<Clienti> clientiCollection;
 
     public Categorie() {
     }
@@ -94,12 +100,12 @@ public class Categorie implements Serializable {
     }
 
     @XmlTransient
-    public Set<Clienti> getClientiSet() {
-        return clientiSet;
+    public Collection<Clienti> getClientiCollection() {
+        return clientiCollection;
     }
 
-    public void setClientiSet(Set<Clienti> clientiSet) {
-        this.clientiSet = clientiSet;
+    public void setClientiCollection(Collection<Clienti> clientiCollection) {
+        this.clientiCollection = clientiCollection;
     }
 
     @Override

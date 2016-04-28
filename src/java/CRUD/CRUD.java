@@ -1,7 +1,6 @@
 package CRUD;
 
 import biglietteria.Attivita;
-import biglietteria.Base;
 import biglietteria.Biglietti;
 import biglietteria.Categorie;
 import biglietteria.Clienti;
@@ -10,6 +9,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -52,21 +52,28 @@ public class CRUD {
 
     /* Method to
      READ all the activities */
-    public ArrayList listAttivita() {
+    public List<Attivita> listAttivita() {
         Session session = factory.openSession();
         ArrayList<Attivita> att = new ArrayList<Attivita>();
         att = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List attivita = session.createSQLQuery("select * FROM Attivita").addEntity(Attivita.class).list();
-            for (Iterator iterator = attivita.iterator(); iterator.hasNext();) {
-                Attivita a = (Attivita) iterator.next();
-                System.out.print("Titolo: " + a.getTitolo());
-                System.out.print("Tariffa Ordinaria: " + a.getTariffaOrdinaria());
+            Query query = session.getNamedQuery("attivitaVicine");
 
-            }
-            tx.commit();
+            /*Calendar cal = Calendar.getInstance();
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH) + 1;
+            int year = cal.get(Calendar.YEAR);*/
+            Date d = new Date();
+            
+            //String currentDate = year+"-"+month+"-"+day;
+            
+            query.setParameter("data", d);
+            query.setParameter("tipo", "evento");
+            System.out.println("######################################"+d);
+            List result = query.list();
+            return result;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -75,7 +82,7 @@ public class CRUD {
         } finally {
             session.close();
         }
-        return att;
+        return null;
     }
 
     /* Method to UPDATE activity for an employee */
@@ -277,15 +284,7 @@ public class CRUD {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            /*List biglietto = session.createQuery("FROM Biglietti").list();
-             for (Iterator iterator = biglietto.iterator(); iterator.hasNext();) {
-             Biglietti b = (Biglietti) iterator.next();
-             System.out.print("Codice: " + b.getCodice());
-             System.out.print("Username: " + b.getUsername());
-             System.out.print("Attivita: " + b.getCodiceAtt());
-                
-             }*/
-            Query query = session.getNamedQuery("listBiglietti");
+            Query query = session.getNamedQuery("allTickets");
             List<Biglietti> result = query.list();
             tx.commit();
             return result;

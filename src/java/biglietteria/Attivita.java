@@ -7,7 +7,8 @@ package biglietteria;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,8 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,8 +30,25 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author FSEVERI\scagnellato3082
  */
 @Entity
-@Table(name = "Attivita")
 
+@NamedQueries({
+    @NamedQuery(
+            name = "attivitaVicine",
+            query = "FROM Attivita WHERE tipo=:tipo and data> :data ORDER BY data"
+    )
+})
+
+@Table(name = "Attivita")
+/*@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Attivita.findAll", query = "SELECT a FROM Attivita a"),
+    @NamedQuery(name = "Attivita.findByCodice", query = "SELECT a FROM Attivita a WHERE a.codice = :codice"),
+    @NamedQuery(name = "Attivita.findByTipo", query = "SELECT a FROM Attivita a WHERE a.tipo = :tipo"),
+    @NamedQuery(name = "Attivita.findByTitolo", query = "SELECT a FROM Attivita a WHERE a.titolo = :titolo"),
+    @NamedQuery(name = "Attivita.findByTariffaOrdinaria", query = "SELECT a FROM Attivita a WHERE a.tariffaOrdinaria = :tariffaOrdinaria"),
+    @NamedQuery(name = "Attivita.findByImmagine", query = "SELECT a FROM Attivita a WHERE a.immagine = :immagine"),
+    @NamedQuery(name = "Attivita.findByData", query = "SELECT a FROM Attivita a WHERE a.data = :data"),
+    @NamedQuery(name = "Attivita.findByDataFine", query = "SELECT a FROM Attivita a WHERE a.dataFine = :dataFine")})*/
 public class Attivita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,6 +56,9 @@ public class Attivita implements Serializable {
     @Basic(optional = false)
     @Column(name = "Codice")
     private Integer codice;
+    @Basic(optional = false)
+    @Column(name = "tipo")
+    private String tipo;
     @Basic(optional = false)
     @Column(name = "Titolo")
     private String titolo;
@@ -47,12 +69,15 @@ public class Attivita implements Serializable {
     @Basic(optional = false)
     @Column(name = "Immagine")
     private String immagine;
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "attivita")
-    private Eventi eventi;
+    @Basic(optional = false)
+    @Column(name = "data")
+    @Temporal(TemporalType.DATE)
+    private Date data;
+    @Column(name = "dataFine")
+    @Temporal(TemporalType.DATE)
+    private Date dataFine;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceAtt")
-    private Set<Biglietti> bigliettiSet;
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "attivita")
-    private Base base;
+    private Collection<Biglietti> bigliettiCollection;
 
     public Attivita() {
     }
@@ -61,19 +86,13 @@ public class Attivita implements Serializable {
         this.codice = codice;
     }
 
-    public Attivita(Integer codice, String titolo, BigDecimal tariffaOrdinaria, String immagine) {
+    public Attivita(Integer codice, String tipo, String titolo, BigDecimal tariffaOrdinaria, String immagine, Date data) {
         this.codice = codice;
+        this.tipo = tipo;
         this.titolo = titolo;
         this.tariffaOrdinaria = tariffaOrdinaria;
         this.immagine = immagine;
-    }
-    
-    public Attivita(String titolo, BigDecimal tariffaOrdinaria, String immagine, Base base) {
-        this.codice = codice;
-        this.titolo = titolo;
-        this.tariffaOrdinaria = tariffaOrdinaria;
-        this.immagine = immagine;
-        this.base=base;
+        this.data = data;
     }
 
     public Integer getCodice() {
@@ -82,6 +101,14 @@ public class Attivita implements Serializable {
 
     public void setCodice(Integer codice) {
         this.codice = codice;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getTitolo() {
@@ -108,29 +135,29 @@ public class Attivita implements Serializable {
         this.immagine = immagine;
     }
 
-    public Eventi getEventi() {
-        return eventi;
+    public Date getData() {
+        return data;
     }
 
-    public void setEventi(Eventi eventi) {
-        this.eventi = eventi;
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public Date getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(Date dataFine) {
+        this.dataFine = dataFine;
     }
 
     @XmlTransient
-    public Set<Biglietti> getBigliettiSet() {
-        return bigliettiSet;
+    public Collection<Biglietti> getBigliettiCollection() {
+        return bigliettiCollection;
     }
 
-    public void setBigliettiSet(Set<Biglietti> bigliettiSet) {
-        this.bigliettiSet = bigliettiSet;
-    }
-
-    public Base getBase() {
-        return base;
-    }
-
-    public void setBase(Base base) {
-        this.base = base;
+    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+        this.bigliettiCollection = bigliettiCollection;
     }
 
     @Override

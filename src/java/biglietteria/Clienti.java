@@ -6,7 +6,7 @@
 package biglietteria;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,7 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Clienti")
-
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Clienti.findAll", query = "SELECT c FROM Clienti c"),
+    @NamedQuery(name = "Clienti.findByUsername", query = "SELECT c FROM Clienti c WHERE c.username = :username"),
+    @NamedQuery(name = "Clienti.findByPswd", query = "SELECT c FROM Clienti c WHERE c.pswd = :pswd"),
+    @NamedQuery(name = "Clienti.findByNome", query = "SELECT c FROM Clienti c WHERE c.nome = :nome"),
+    @NamedQuery(name = "Clienti.findByCognome", query = "SELECT c FROM Clienti c WHERE c.cognome = :cognome"),
+    @NamedQuery(name = "Clienti.findByEmail", query = "SELECT c FROM Clienti c WHERE c.email = :email")})
 public class Clienti implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,7 +53,7 @@ public class Clienti implements Serializable {
     @Column(name = "Email")
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Set<Biglietti> bigliettiSet;
+    private Collection<Biglietti> bigliettiCollection;
     @JoinColumn(name = "CodiceCat", referencedColumnName = "Codice")
     @ManyToOne(optional = false)
     private Categorie codiceCat;
@@ -106,12 +113,12 @@ public class Clienti implements Serializable {
     }
 
     @XmlTransient
-    public Set<Biglietti> getBigliettiSet() {
-        return bigliettiSet;
+    public Collection<Biglietti> getBigliettiCollection() {
+        return bigliettiCollection;
     }
 
-    public void setBigliettiSet(Set<Biglietti> bigliettiSet) {
-        this.bigliettiSet = bigliettiSet;
+    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+        this.bigliettiCollection = bigliettiCollection;
     }
 
     public Categorie getCodiceCat() {

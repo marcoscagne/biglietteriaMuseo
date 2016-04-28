@@ -32,8 +32,7 @@ public class MainController {
     public String index(ModelMap map, @RequestParam(value = "m", required = false) String msg) {
         map.put("msg",msg);
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
-        System.out.println("*******************************************************************************"+c.listBiglietti().toString());
-        map.put("biglietti",c.listBiglietti());
+        map.put("attivita",c.listAttivita());
         return "index";
     }
 

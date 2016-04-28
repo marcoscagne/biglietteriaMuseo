@@ -7,7 +7,8 @@ package biglietteria;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,22 +29,21 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author FSEVERI\scagnellato3082
  */
-@NamedQueries(
-        {
-            @NamedQuery(
-                    name = "listBiglietti",
-                    query = "from Biglietti"
-            )
-        }
-)
-
 @Entity
 @Table(name = "Biglietti")
 
-
-
+@NamedQueries({
+    @NamedQuery(
+            name = "allTickets",
+            query = "FROM Biglietti "
+    )
+})
+/*@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
+    @NamedQuery(name = "Biglietti.findByCodice", query = "SELECT b FROM Biglietti b WHERE b.codice = :codice"),
+    @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita")})*/
 public class Biglietti implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -57,7 +57,7 @@ public class Biglietti implements Serializable {
         @JoinColumn(name = "CodiceBiglietto", referencedColumnName = "Codice")}, inverseJoinColumns = {
         @JoinColumn(name = "CodiceServizio", referencedColumnName = "Codice")})
     @ManyToMany
-    private Set<Servizi> serviziSet;
+    private Collection<Servizi> serviziCollection;
     @JoinColumn(name = "Username", referencedColumnName = "Username")
     @ManyToOne(optional = false)
     private Clienti username;
@@ -94,12 +94,12 @@ public class Biglietti implements Serializable {
     }
 
     @XmlTransient
-    public Set<Servizi> getServiziSet() {
-        return serviziSet;
+    public Collection<Servizi> getServiziCollection() {
+        return serviziCollection;
     }
 
-    public void setServiziSet(Set<Servizi> serviziSet) {
-        this.serviziSet = serviziSet;
+    public void setServiziCollection(Collection<Servizi> serviziCollection) {
+        this.serviziCollection = serviziCollection;
     }
 
     public Clienti getUsername() {
@@ -142,5 +142,5 @@ public class Biglietti implements Serializable {
     public String toString() {
         return "biglietteria.Biglietti[ codice=" + codice + " ]";
     }
-
+    
 }

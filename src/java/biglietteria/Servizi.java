@@ -7,7 +7,7 @@ package biglietteria;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +27,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Servizi")
-
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Servizi.findAll", query = "SELECT s FROM Servizi s"),
+    @NamedQuery(name = "Servizi.findByCodice", query = "SELECT s FROM Servizi s WHERE s.codice = :codice"),
+    @NamedQuery(name = "Servizi.findByDescrizione", query = "SELECT s FROM Servizi s WHERE s.descrizione = :descrizione"),
+    @NamedQuery(name = "Servizi.findByPrezzo", query = "SELECT s FROM Servizi s WHERE s.prezzo = :prezzo")})
 public class Servizi implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,8 +47,8 @@ public class Servizi implements Serializable {
     @Basic(optional = false)
     @Column(name = "Prezzo")
     private BigDecimal prezzo;
-    @ManyToMany(mappedBy = "serviziSet")
-    private Set<Biglietti> bigliettiSet;
+    @ManyToMany(mappedBy = "serviziCollection")
+    private Collection<Biglietti> bigliettiCollection;
 
     public Servizi() {
     }
@@ -83,12 +88,12 @@ public class Servizi implements Serializable {
     }
 
     @XmlTransient
-    public Set<Biglietti> getBigliettiSet() {
-        return bigliettiSet;
+    public Collection<Biglietti> getBigliettiCollection() {
+        return bigliettiCollection;
     }
 
-    public void setBigliettiSet(Set<Biglietti> bigliettiSet) {
-        this.bigliettiSet = bigliettiSet;
+    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+        this.bigliettiCollection = bigliettiCollection;
     }
 
     @Override
