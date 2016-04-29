@@ -219,6 +219,31 @@ public class CRUD {
             session.close();
         }
     }
+    
+    /* Method to
+     READ the client */
+    public List<Clienti> cliente(String nome) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            
+            Query query = session.getNamedQuery("cliente");
+            query.setParameter("nome", nome);
+            
+            List result = query.list();
+            return result;
+            
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 
     public String getPwdCliente(String nu) {
         Session session = factory.openSession();
@@ -337,6 +362,29 @@ public class CRUD {
         return null;
     }
 
+    /* Method to
+     READ tickets of an user*/
+    public List<Biglietti> bigliettiByName(String nome) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("ticketsByName");
+            query.setParameter("name", nome);
+            List<Biglietti> result = query.list();
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
     /* Method to UPDATE tickets for an visitator */
     public void updateBiglietto(Integer BigliettiID, int Codice, Date DataValidita, Clienti cliente) {
         Session session = factory.openSession();

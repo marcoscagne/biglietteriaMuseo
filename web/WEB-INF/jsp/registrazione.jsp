@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/form.css">
     </head>
-    <body background="./resources/img/background-form.jpg">
+    <body background="./resources/img/background-form.jpg" style="background-attachment: fixed;">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -40,35 +40,6 @@
                             <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="#">Attivit&agrave;</a></li>
                             <li><a href="#">Gallery</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">				  
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                                <ul id="login-dp" class="dropdown-menu">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                                                    <div class="form-group">
-                                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Indirizzo Email" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                                        <div class="help-block text-right"><a href="">Password dimenticata?</div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="bottom text-center">
-                                                Sei nuovo qui? <a href="pages/registrazione/registrazione.jsp"><b>Registrati</b></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -98,10 +69,10 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="field-wrap">
+                        <div class="field-wrap col-md-6">
                             <input type="text" placeholder="Username" required autocomplete="off"/>
                         </div>		  
-                        <div class="field-wrap">
+                        <div class="field-wrap col-md-6">
                             <input type="password" placeholder="Password" required autocomplete="off"/>
                         </div>   
                         <button type="submit" class="button button-block"/>Registrati</button>       

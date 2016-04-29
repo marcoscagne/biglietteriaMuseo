@@ -26,15 +26,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author FSEVERI\scagnellato3082
  */
 @Entity
-@Table(name = "Clienti")
-@XmlRootElement
+
 @NamedQueries({
-    @NamedQuery(name = "Clienti.findAll", query = "SELECT c FROM Clienti c"),
-    @NamedQuery(name = "Clienti.findByUsername", query = "SELECT c FROM Clienti c WHERE c.username = :username"),
-    @NamedQuery(name = "Clienti.findByPswd", query = "SELECT c FROM Clienti c WHERE c.pswd = :pswd"),
-    @NamedQuery(name = "Clienti.findByNome", query = "SELECT c FROM Clienti c WHERE c.nome = :nome"),
-    @NamedQuery(name = "Clienti.findByCognome", query = "SELECT c FROM Clienti c WHERE c.cognome = :cognome"),
-    @NamedQuery(name = "Clienti.findByEmail", query = "SELECT c FROM Clienti c WHERE c.email = :email")})
+    @NamedQuery(
+            name = "cliente",
+            query = "FROM Clienti WHERE Username= :nome"
+    )
+})
+
+@Table(name = "Clienti")
 public class Clienti implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

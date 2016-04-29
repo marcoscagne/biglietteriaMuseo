@@ -57,6 +57,11 @@ public class MainController {
     
     @RequestMapping(value = "/profilo")
     public String profilo(ModelMap map) {
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("categorie",c.listCategorie());
+        String myname="marco";
+        map.put("biglietti",c.bigliettiByName(myname));
+        map.put("cliente",c.cliente(myname));
         return "profilo";
     }
     

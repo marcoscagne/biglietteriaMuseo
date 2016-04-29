@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "allTickets",
             query = "FROM Biglietti "
+    ),
+    @NamedQuery(
+            name = "ticketsByName",
+            query = "FROM Biglietti where Username= :name"
     )
 })
 /*@XmlRootElement
