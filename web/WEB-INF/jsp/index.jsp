@@ -73,9 +73,18 @@
                                 </ul>
                             </li>
                             <%} else {%>
-                            <li><a href="./logout">Logout</a></li>
-                                <%}
-                                %>
+                                <li class="dropdown">				  
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
+                                    <ul id="login-dp" class="dropdown-menu">
+                                        <li>
+                                            <a href="./profilo">Profilo</a>
+                                            <br>
+                                            <a href="./logout">Logout</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            <%}
+                            %>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -88,7 +97,7 @@
         <p style="color:red"><b>${msg}</b></p>
         <div id="news" align="center">
             <div class="row">
-                
+
                 <c:forEach items="${attivita}" var="a">
                     <div class="col-lg-4">
                         <div class="img" align="left">
@@ -110,7 +119,7 @@
                         </div>
                     </div>
                 </c:forEach>
-                
+
             </div>
         </div>
 

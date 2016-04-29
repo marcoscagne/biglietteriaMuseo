@@ -38,42 +38,51 @@
                             <li><a href="#">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <%                               
+                            <%
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {%>
-                                    <li class="dropdown">				  
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-                                        <ul id="login-dp" class="dropdown-menu">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-md-12">
+                            <li class="dropdown">				  
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-12">
 
-                                                        <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
-                                                            <div class="form-group">
-                                                                <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                                <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                                                                <!--<div class="help-block text-right"><a href="">Password dimenticata?</a></div>-->
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-                                                            </div>
-                                                        </form>
+                                                <form class="form" role="form" method="post" action="./controllaLogin" accept-charset="UTF-8" id="login-nav">
+                                                    <div class="form-group">
+                                                        <input type="text" name="nu" class="form-control" id="exampleInputEmail2" placeholder="Username">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                        <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                                        <!--<div class="help-block text-right"><a href="">Password dimenticata?</a></div>-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-block">Accedi</button>
+                                                    </div>
+                                                </form>
 
-                                                    </div>
-                                                    <div class="bottom text-center">
-                                                        Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                            </div>
+                                            <div class="bottom text-center">
+                                                Sei nuovo qui? <a href="./registrazione"><b>Registrati</b></a>
+                                            </div>
+                                        </div>
                                     </li>
-                                <%} else {%>
-                                    <li><a href="./logout">Logout</a></li>
-                                <%}
+                                </ul>
+                            </li>
+                            <%} else {%>
+                            <li class="dropdown">				  
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <a href="./profilo">Profilo</a>
+                                        <br>
+                                        <a href="./logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <%}
                             %>
                         </ul>
                     </div><!-- /.navbar-collapse -->
@@ -99,7 +108,7 @@
                     </div>
                 </c:forEach>
             </div>
-            				
+
         </div>
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016

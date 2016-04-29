@@ -72,100 +72,109 @@
                                 </ul>
                             </li>
                             <%} else {%>
-                            <li><a href="./logout">Logout</a></li>
-                                <%}
-                                %>
+                            <li class="dropdown">				  
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <a href="./profilo">Profilo</a>
+                                        <br>
+                                        <a href="./logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <%}
+                            %>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
         </div>
-                        
+
         <c:forEach items="${attivitaID}" var="a">
-            
+
             <c:if test="${a.tipo=='evento'}">
                 <div id="news" style="margin-top: 80px; width: 80%;" align="center">
-                <div class="img" align="left">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="${a.immagine}" width="100%">
+                    <div class="img" align="left">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="${a.immagine}" width="100%">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="img-title">${a.titolo}</span>
-                            <div class="img-description">
-                                ${a.descrizione}
-                                <br/><br/>
-                                <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
-                                <br/><br/>
-                                <b>Data:</b> ${a.data}
-                                <br/>
-                                <b>Data Fine:</b> ${a.dataFine}
-                                <%if(myname!=null){%>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="img-title">${a.titolo}</span>
+                                <div class="img-description">
+                                    ${a.descrizione}
+                                    <br/><br/>
+                                    <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
+                                    <br/><br/>
+                                    <b>Data:</b> ${a.data}
+                                    <br/>
+                                    <b>Data Fine:</b> ${a.dataFine}
+                                    <%if (myname != null) {%>
                                     <div class="buy">
                                         <button onclick="comprato()" class="btn btn-primary btn-block">Compra</button>
                                     </div>
-                                <%}else{%>
+                                    <%} else {%>
                                     <div class="buy">
                                         <button disabled class="btn btn-primary btn-block">Effettua il login!</button>
                                     </div>
-                                <%}%>
+                                    <%}%>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </c:if>
             <c:if test="${a.tipo=='base'}">
                 <div id="news" style="margin-top: 80px; width: 80%;" align="center">
-                <div class="img" align="left">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="${a.immagine}" width="100%">
+                    <div class="img" align="left">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img src="${a.immagine}" width="100%">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="img-title">${a.titolo}</span>
-                            <div class="img-description">
-                                ${a.descrizione}
-                                <br/><br/>
-                                <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
-                                <br/><br/>
-                                <b>Data:</b>
-                                <form action="./compra" method="post">
-                                    <input type="hidden" name="id" value="${a.codice}" class="form-control">
-                                    <div class="input-group date col-md-3" data-provide="datepicker">
-                                        <input type="text" name="data" class="form-control">
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="img-title">${a.titolo}</span>
+                                <div class="img-description">
+                                    ${a.descrizione}
+                                    <br/><br/>
+                                    <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
+                                    <br/><br/>
+                                    <b>Data:</b>
+                                    <form action="./compra" method="post">
+                                        <input type="hidden" name="id" value="${a.codice}" class="form-control">
+                                        <div class="input-group date col-md-3" data-provide="datepicker">
+                                            <input type="text" name="data" class="form-control">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-th"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="buy">
-                                        <button type="submit" class="btn btn-primary btn-block">Compra</button>
-                                    </div>
-                                </form>
+                                        <div class="buy">
+                                            <button type="submit" class="btn btn-primary btn-block">Compra</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </c:if>
-            
+
         </c:forEach>
-                                
+
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016
         </div>
-            <script>
-                function comprato(){
-                    alert("Biglietto per l'Evento scelto ACQUISTATO!");
-                    window.location = "./";
-                }
-                
-                $('.datepicker').datepicker();
-            </script>
-                            
+        <script>
+            function comprato() {
+                alert("Biglietto per l'Evento scelto ACQUISTATO!");
+                window.location = "./";
+            }
+
+            $('.datepicker').datepicker();
+        </script>
+
     </body>
 </html>

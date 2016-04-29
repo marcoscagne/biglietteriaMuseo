@@ -43,14 +43,23 @@
                             <li><a href="#">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <%                               
+                            <%
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {
                                     response.sendRedirect("./?m=DeviEffettuareIlLogin!");
                                 } else {%>
-                                    <li><a href="./logout">Logout</a></li>
-                                <%}
+                            <li class="dropdown">				  
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <a href="./profilo">Profilo</a>
+                                        <br>
+                                        <a href="./logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <%}
                             %>
                         </ul>
                     </div><!-- /.navbar-collapse -->

@@ -38,6 +38,8 @@ public class MainController {
 
     @RequestMapping(value = "/registrazione")
     public String registrazione(ModelMap map) {
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("categorie",c.listCategorie());
         return "registrazione";
     }
 
@@ -51,6 +53,11 @@ public class MainController {
     @RequestMapping(value = "/logout")
     public String logout(ModelMap map) {
         return "logout";
+    }
+    
+    @RequestMapping(value = "/profilo")
+    public String profilo(ModelMap map) {
+        return "profilo";
     }
     
     @RequestMapping(value = "/attivita")

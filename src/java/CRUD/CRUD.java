@@ -411,21 +411,14 @@ public class CRUD {
 
     /* Method to
      READ all the tickets */
-    public void listCategorie() {
+    public List<Categorie> listCategorie() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List categoria = session.createQuery("FROM Categorie").list();
-            for (Iterator iterator = categoria.iterator(); iterator.hasNext();) {
-                Categorie c = (Categorie) iterator.next();
-                System.out.print("Codice: " + c.getCodice());
-                System.out.print("TipoDoc: " + c.getTipoDoc());
-                System.out.print("PercSconto: " + c.getPercSconto());
-                System.out.print("Descrizione: " + c.getDescrizione());
-
-            }
-            tx.commit();
+            Query query = session.getNamedQuery("categorie");
+            List<Categorie> result = query.list();
+            return result;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -434,6 +427,7 @@ public class CRUD {
         } finally {
             session.close();
         }
+        return null;
     }
 
     /* Method to UPDATE activity for an employee */
