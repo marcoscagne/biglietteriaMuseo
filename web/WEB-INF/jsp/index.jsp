@@ -36,7 +36,7 @@
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="./attivita">Attivit&agrave;</a></li>
-                            <li><a href="#">Gallery</a></li>
+                            <li><a href="./gallery">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <%

@@ -55,6 +55,11 @@ public class MainController {
         return "logout";
     }
     
+    @RequestMapping(value = "/gallery")
+    public String galleria(ModelMap map) {
+        return "gallery";
+    }
+    
     @RequestMapping(value = "/profilo")
     public String profilo(ModelMap map) {
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
