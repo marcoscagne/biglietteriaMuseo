@@ -17,18 +17,18 @@
             /* custom fonts */
             @font-face {
                 font-family: 'eurof55-webfont';
-                src: url('.resources/fonts/eurof55-webfont.eot');
-                src: local('☺'), url('.resources/fonts/eurof55-webfont.woff') format('woff'), url('.resources/fonts/eurof55-webfont.ttf') format('truetype'), url('.resources/fonts/eurof55-webfont.svg#webfont8xigBfG2') format('svg');
+                src: url('./resources/fonts/eurof55-webfont.eot');
+                src: local('☺'), url('./resources/fonts/eurof55-webfont.woff') format('woff'), url('./resources/fonts/eurof55-webfont.ttf') format('truetype'), url('./resources/fonts/eurof55-webfont.svg#webfont8xigBfG2') format('svg');
             }
             @font-face {
                 font-family: 'eurof35-webfont';
-                src: url('.resources/fonts/eurof35-webfont.eot');
-                src: local('☺'), url('.resources/fonts/eurof35-webfont.woff') format('woff'), url('.resources/fonts/eurof35-webfont.ttf') format('truetype'), url('.resources/fonts/eurof35-webfont.svg#webfont8xigBfG2') format('svg');
+                src: url('./resources/fonts/eurof35-webfont.eot');
+                src: local('☺'), url('./resources/fonts/eurof35-webfont.woff') format('woff'), url('./resources/fonts/eurof35-webfont.ttf') format('truetype'), url('./resources/fonts/eurof35-webfont.svg#webfont8xigBfG2') format('svg');
             }
             @font-face {
                 font-family: 'graublauweb-webfont';
-                src: url('.resources/fonts/graublauweb-webfont.eot');
-                src: local('☺'), url('.resources/fonts/graublauweb-webfont.woff') format('woff'), url('.resources/fonts/graublauweb-webfont.ttf') format('truetype'), url('.resources/fonts/graublauweb-webfont.svg#webfont8xigBfG2') format('svg');
+                src: url('./resources/fonts/graublauweb-webfont.eot');
+                src: local('☺'), url('./resources/fonts/graublauweb-webfont.woff') format('woff'), url('./resources/fonts/graublauweb-webfont.ttf') format('truetype'), url('./resources/fonts/graublauweb-webfont.svg#webfont8xigBfG2') format('svg');
             }
             .clear{clear:both;}
             a:link,a:visited,a:hover{color:#ddd;}
@@ -38,7 +38,7 @@
             #preloader{position:absolute; z-index:2; width:140px; padding:20px; top:20px; left:50px; background:#000; color:#666; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif; font-size:16px; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
             #preloader img{margin-right:20px;}
             #toolbar{display:inline-block; padding:4px 15px; margin:20px 15px; background:#262626 url(sw_btn_bg.png) repeat-x; -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif; font-size:12px; color:#fff; cursor:pointer;}
-            #outer_container{position:relative; margin:0; width:700px; padding:0 100px 0 0; z-index:2; background:url(empty.gif);} /* fucking IE needs a background value to understand hover area */
+            #outer_container{position:relative; margin:0; width:700px; padding:0 100px 0 0; z-index:2; background:url(./resources/img/imgsG/empty.gif);} /* fucking IE needs a background value to understand hover area */
             #customScrollBox{position:relative; overflow:hidden; background:url(sw_l_bg.png) repeat-y;}
             #customScrollBox .container{position:relative; width:585px; top:0; float:left;}
             #customScrollBox .content{clear:both;}
@@ -63,11 +63,12 @@
         </style>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-        <script type="text/javascript" src=".resources/js/jquery.easing.1.3.js"></script>
-        <script type="text/javascript" src=".resources/js/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" src="./resources/js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="./resources/js/jquery.mousewheel.min.js"></script>
     </head>
 
     <body>
+        <button class="btn">ciao</button>
         <div id="outer_container">
             <div id="customScrollBox">
 
