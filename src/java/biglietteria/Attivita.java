@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(
         name="attivitaVicine",
-        query="FROM Attivita WHERE tipo=:tipo and data> :data ORDER BY data"
+        query="FROM Attivita WHERE tipo=:tipo and data>:data ORDER BY data"
     ),
     @NamedQuery(
         name="allActivities",

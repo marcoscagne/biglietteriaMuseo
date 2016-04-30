@@ -65,6 +65,7 @@ public class CRUD {
             
             query.setParameter("data", d);
             query.setParameter("tipo", "evento");
+            query.setMaxResults(3);
             List result = query.list();
             return result;
         } catch (HibernateException e) {
