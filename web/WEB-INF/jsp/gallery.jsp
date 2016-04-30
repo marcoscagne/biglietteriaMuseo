@@ -37,9 +37,9 @@
             #bgimg{display:none; cursor:pointer; -ms-interpolation-mode: bicubic;} /* special IE fix for resized images */
             #preloader{position:absolute; z-index:2; width:140px; padding:20px; top:20px; left:50px; background:#000; color:#666; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif; font-size:16px; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
             #preloader img{margin-right:20px;}
-            #toolbar{display:inline-block; padding:4px 15px; margin:20px 15px; background:#262626 url(sw_btn_bg.png) repeat-x; -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif; font-size:12px; color:#fff; cursor:pointer;}
+            #toolbar{display:inline-block; padding:4px 15px; margin:20px 15px; background:#262626 url(./resources/img/imgsG/sw_btn_bg.png) repeat-x; -moz-border-radius:8px; -khtml-border-radius:8px; -webkit-border-radius:8px; border-radius:8px; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif; font-size:12px; color:#fff; cursor:pointer;}
             #outer_container{position:relative; margin:0; width:700px; padding:0 100px 0 0; z-index:2; background:url(./resources/img/imgsG/empty.gif);} /* fucking IE needs a background value to understand hover area */
-            #customScrollBox{position:relative; overflow:hidden; background:url(sw_l_bg.png) repeat-y;}
+            #customScrollBox{position:relative; overflow:hidden; background:url(./resources/img/imgsG/sw_l_bg.png) repeat-y;}
             #customScrollBox .container{position:relative; width:585px; top:0; float:left;}
             #customScrollBox .content{clear:both;}
             #customScrollBox .content h1{padding:5px; margin:10px; color:#fff; font-family:eurof55-webfont, Helvetica, Arial, sans-serif; font-size:48px;}
@@ -52,11 +52,11 @@
             .s24{font-size:24px;}
             #customScrollBox a.thumb_link{position:relative; margin:0 0 1px 1px; display:block; float:left;}
             #customScrollBox img{border:none;}
-            #customScrollBox a.thumb_link .selected{position:absolute; top:0; left:0; width:145px; height:91px; background:url(sw_thumb_selected.png) no-repeat; display:none;}
-            #dragger_container{position:relative; width:30px; height:580px; float:left; margin:10px 0 0 0; background:url(sw_dragger_bg.png) repeat-y center;}
-            #dragger{position:absolute; width:30px; height:59px; background:url(round_custom_scrollbar_bg.png) no-repeat center center; cursor:pointer;}
-            #arrow_indicator{position:absolute; z-index:1; width:50px; padding:10px; top:50%; margin-top:-25px; left:20px; background:url(sw_transparent_black_bg.png); -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; display:none;}
-            #nextimage_tip{position:fixed; z-index:1; padding:0 20px; line-height:40px; color:#fff; height:40px; top:50%; margin-top:-20px; right:20px; background:url(sw_transparent_black_bg.png); -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; display:none; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif;}
+            #customScrollBox a.thumb_link .selected{position:absolute; top:0; left:0; width:145px; height:91px; background:url(./resources/img/imgsG/sw_thumb_selected.png) no-repeat; display:none;}
+            #dragger_container{position:relative; width:30px; height:580px; float:left; margin:10px 0 0 0; background:url(./resources/img/imgsG/sw_dragger_bg.png) repeat-y center;}
+            #dragger{position:absolute; width:30px; height:59px; background:url(./resources/img/imgsG/round_custom_scrollbar_bg.png) no-repeat center center; cursor:pointer;}
+            #arrow_indicator{position:absolute; z-index:1; width:50px; padding:10px; top:50%; margin-top:-25px; left:20px; background:url(./resources/img/imgsG/sw_transparent_black_bg.png); -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; display:none;}
+            #nextimage_tip{position:fixed; z-index:1; padding:0 20px; line-height:40px; color:#fff; height:40px; top:50%; margin-top:-20px; right:20px; background:url(./resources/img/imgsG/sw_transparent_black_bg.png); -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; display:none; font-family:graublauweb-webfont, Helvetica, Arial, sans-serif;}
             .with_border{border:1px solid #000;}
             .with_shadow{-moz-box-shadow:0 0 40px #000; -webkit-box-shadow:0 0 40px #000; box-shadow:0 0 40px #000;}
             -->
