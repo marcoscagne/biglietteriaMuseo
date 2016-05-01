@@ -1,6 +1,7 @@
 <html>
     <head>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <title>National Museum</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <!-- Optional theme -->
@@ -77,7 +78,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
                                     <ul id="login-dp" class="dropdown-menu">
                                         <li>
-                                            <a href="./profilo">Profilo</a>
+                                            <a href="./profilo?nu=<%=myname%>">Profilo</a>
                                             <br>
                                             <a href="./logout">Logout</a>
                                         </li>
@@ -94,7 +95,10 @@
         <div class="title-div">
             <h1 class="title">National Museum</h1>
         </div>
+        
         <p style="color:red"><b>${msg}</b></p>
+        
+        
         <div id="news" align="center">
             <div class="row">
 

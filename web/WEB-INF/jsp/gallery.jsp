@@ -68,13 +68,16 @@
     </head>
 
     <body>
-        <button class="btn">ciao</button>
         <div id="outer_container">
             <div id="customScrollBox">
 
                 <div class="container">
                     <div class="content">
+                        
+                        <a href="./">Torna alla HOME</a>
+                        
                         <h1>National<span class="lightgrey">Museum</span> <br /><span class="light"><span class="grey"><span class="s36"> Galleroide dei museix disponoibilidi </span></span></span></h1>
+                        
                         <p></p>
                         <div id="toolbar"></div><div class="clear"></div>
                         <a href="./resources/img/imgsG/1.jpg" class="thumb_link"><span class="selected"></span><img src="./resources/img/imgsG/1.jpg" width="145" class="thumb" /></a>

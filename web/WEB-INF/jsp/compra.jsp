@@ -40,14 +40,14 @@
                         <ul class="nav navbar-nav">
                             <li><a href="./">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="./attivita">Attivit&agrave;</a></li>
-                            <li><a href="#">Gallery</a></li>
+                            <li><a href="./gallery">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <%
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {
-                                    response.sendRedirect("./?m=DeviEffettuareIlLogin!");
+                                    response.sendRedirect("./?m=Devi effettuare il Login!");
                                 } else {%>
                             <li class="dropdown">				  
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
@@ -75,11 +75,14 @@
                             <b>Acquisto del biglietto per il</b><br/>${data}<br/>
                             <b>+</b>
                         </div>
+                        <c:forEach items="${attivita}" var="a">
+                            <input type="hidden" name="costo" value="${a.tariffaOrdinaria}">
+                        </c:forEach>
+                        <input type="hidden" name="data" value="${data}">
                         <div class="row">
                             <c:forEach items="${servizi}" var="s">
-                                <input type="hidden" name="data" value="${data}">
                                 <div class="col-lg-4">
-                                    <label><input type="checkbox" name="${s.codice}">${s.descrizione}<br/><i>(+ &euro;${s.prezzo})</i></label>
+                                    <label><input type="checkbox" onchange="cambio(${s.codice})" id="${s.codice}">${s.descrizione}<br/><i>(+ &euro;${s.prezzo})</i></label>
                                 </div>
                             </c:forEach>
                             <br/>
@@ -93,5 +96,26 @@
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016
         </div>
+
+        <script>
+            serviziScelti = [];
+            var i = 0;
+            function cambio(id) {
+
+                if ($("#" + id).prop('checked')) {
+                    serviziScelti[i] = id;
+                    i = i + 1;
+                } else {
+                    var a = serviziScelti.indexOf(id);
+                    if (a != -1) {
+                        serviziScelti.splice(a, 1);
+                    }
+                }
+            }
+            
+            function invia(){
+                
+            }
+        </script>
     </body>
 </html>

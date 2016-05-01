@@ -17,21 +17,28 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>controllaLogin</title>
     </head>
-    <body>
+    <body>        
+        <h1>Hello World!</h1>
+        ${cliente.nome}
+        ${cliente.cognome}
+        ${cliente.email}
+        ${cliente.codiceCat.codice}
         
-        <%
+        
+        
+        <%--
             CRUD c = new CRUD(HibernateUtil.getSessionFactory());
             String nu=(String)request.getAttribute("nomeUtente");
             String p=(String)request.getAttribute("password");
             String pa=c.getPwdCliente(nu);
             
-            if(pa!=null && pa.equals(p)){
-                session.setAttribute("username",request.getAttribute("nomeUtente"));
-                response.sendRedirect("./");
+            if(true){
+                
+                response.sendRedirect("./?m=registrazioneAvvenutaConSuccesso!EffettuaIlLogin!");
             }else{
-                response.sendRedirect("./?m=NomeUtente o Password Errati!");
+                response.sendRedirect("./?m=erroreNellaRegistrazione!");
             }
-        %>
+        --%>
         
     </body>
 </html>

@@ -38,8 +38,8 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Attivit&agrave;</a></li>
-                            <li><a href="#">Gallery</a></li>
+                            <li><a href="./attivita">Attivit&agrave;</a></li>
+                            <li><a href="./gallery">Gallery</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -52,28 +52,28 @@
                     <form action="#" method="post">   	  
                         <div class="top-row">
                             <div class="field-wrap">
-                                <input type="text" placeholder="Nome" required autocomplete="off" />
+                                <input name="nome" type="text" placeholder="Nome" required autocomplete="off" />
                             </div>    
                             <div class="field-wrap">
-                                <input type="text" placeholder="Cognome" required autocomplete="off"/>
+                                <input name="cognome" type="text" placeholder="Cognome" required autocomplete="off"/>
                             </div>
                         </div>	  
                         <div class="field-wrap">
-                            <input type="email" placeholder="E-mail" required autocomplete="off"/>
+                            <input name="email" type="email" placeholder="E-mail" required autocomplete="off"/>
                         </div>  
                         <div class="field-wrap">
-                            <select>
+                            <select name="cat">
                                 <option value="" disabled>Categoria</option>
                                 <c:forEach items="${categorie}" var="c">
-                                    <option value="${c.codice}">${c.descrizione}</option>
+                                    <option value="${c.codice}">${c.descrizione} (-${c.percSconto}%)</option>
                                 </c:forEach>
                             </select>
                         </div>
                         <div class="field-wrap col-md-6">
-                            <input type="text" placeholder="Username" required autocomplete="off"/>
+                            <input name="nu" type="text" placeholder="Username" required autocomplete="off"/>
                         </div>		  
                         <div class="field-wrap col-md-6">
-                            <input type="password" placeholder="Password" required autocomplete="off"/>
+                            <input name="pass" type="password" placeholder="Password" required autocomplete="off"/>
                         </div>   
                         <button type="submit" class="button button-block"/>Registrati</button>       
                     </form>

@@ -31,7 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "cliente",
             query = "FROM Clienti WHERE Username= :nome"
-    )
+    )/*,
+    @NamedQuery(
+            name = "addCliente",
+            query = "INSERT INTO Clienti (Username,Pswd,Nome,Cognome,Email,CodiceCat)"
+    )*/
 })
 
 @Table(name = "Clienti")
@@ -63,6 +67,15 @@ public class Clienti implements Serializable {
 
     public Clienti(String username) {
         this.username = username;
+    }
+
+    public Clienti(String username, String pswd, String nome, String cognome, String email, Categorie codiceCat) {
+        this.username = username;
+        this.pswd = pswd;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.codiceCat = codiceCat;
     }
 
     public Clienti(String username, String pswd, String nome, String cognome) {

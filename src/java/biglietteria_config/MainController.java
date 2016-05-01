@@ -5,14 +5,11 @@ package biglietteria_config;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import biglietteria.Attivita;
 import CRUD.CRUD;
-import biglietteria.Clienti;
-import java.util.List;
+import biglietteria.*;
+import java.math.BigDecimal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +47,16 @@ public class MainController {
         return "controllaLogin";
     }
     
+    @RequestMapping(value = "/confermaRegistrazione", method = RequestMethod.POST)
+    public String confReg(ModelMap map, @RequestParam(value = "nome", required = true) String nome, @RequestParam(value = "cognome", required = true) String cognome, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass, @RequestParam(value = "cat", required = true) Integer cat) {
+        Categorie categ=new Categorie(cat);
+        Clienti cl =  new Clienti(nu,pass,nome,cognome,email,categ);
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        c.addCliente(cl);
+        //map.put("cliente",cl);
+        return "index";
+    }
+    
     @RequestMapping(value = "/logout")
     public String logout(ModelMap map) {
         return "logout";
@@ -60,13 +67,12 @@ public class MainController {
         return "gallery";
     }
     
-    @RequestMapping(value = "/profilo")
-    public String profilo(ModelMap map) {
+    @RequestMapping(value = "/profilo", method = RequestMethod.GET)
+    public String profilo(ModelMap map, @RequestParam(value="nu",required=true) String nu) {
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
         map.put("categorie",c.listCategorie());
-        String myname="marco";
-        map.put("biglietti",c.bigliettiByName(myname));
-        map.put("cliente",c.cliente(myname));
+        map.put("biglietti",c.bigliettiByName(nu));
+        map.put("cliente",c.cliente(nu));
         return "profilo";
     }
     
@@ -82,6 +88,7 @@ public class MainController {
         map.put("id", id);
         map.put("data", data);
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        map.put("attivita",c.listAttivitaById(id));
         map.put("servizi",c.listServizi());
         return "compra";
     }
@@ -94,7 +101,9 @@ public class MainController {
     }
     
     @RequestMapping(value = "/end", method = RequestMethod.POST)
-    public String end(ModelMap map, @RequestParam(value="data",required=true) String data) {
+    public String end(ModelMap map, @RequestParam(value="data",required=true) String data, @RequestParam(value="costo",required=true) BigDecimal costo) {
+        map.put("data",data);
+        map.put("costo",costo);
         return "acquistato";
     }
 }

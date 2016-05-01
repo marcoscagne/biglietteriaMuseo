@@ -6,10 +6,9 @@ import biglietteria.Categorie;
 import biglietteria.Clienti;
 import biglietteria.Servizi;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -60,9 +59,7 @@ public class CRUD {
         try {
             tx = session.beginTransaction();
             Query query = session.getNamedQuery("attivitaVicine");
-
             Date d = new Date();
-            
             query.setParameter("data", d);
             query.setParameter("tipo", "evento");
             query.setMaxResults(3);
@@ -80,6 +77,7 @@ public class CRUD {
     }
     /* Method to
      READ all the activities */
+
     public List<Attivita> listTutteAttivita() {
         Session session = factory.openSession();
         ArrayList<Attivita> att = new ArrayList<Attivita>();
@@ -100,7 +98,7 @@ public class CRUD {
         }
         return null;
     }
-    
+
     /* Method to
      READ the activity */
     public List<Attivita> listAttivitaById(Integer id) {
@@ -109,7 +107,7 @@ public class CRUD {
         try {
             tx = session.beginTransaction();
             Query query = session.getNamedQuery("attivitaById");
-            
+
             query.setParameter("id", id);
             List result = query.list();
             return result;
@@ -170,20 +168,23 @@ public class CRUD {
      * ******************************************************************************************
      */
     /* Method to CREATE an client in the database */
-    public Integer addCliente(String username, String pass, String nome, String cognome, String email) {
+    public Integer addCliente(Clienti c) {
         Session session = factory.openSession();
         Transaction tx = null;
         Integer clienteID = null;
         try {
             tx = session.beginTransaction();
-            Clienti cliente = new Clienti();
-            cliente.setUsername(username);
-            cliente.setPswd(pass);
-            cliente.setNome(nome);
-            cliente.setCognome(cognome);
-            cliente.setEmail(email);
-            clienteID = (Integer) session.save(cliente);
-            tx.commit();
+
+            Query query = session.createSQLQuery("INSERT INTO Clienti (Username,Pswd,Nome,Cognome,Email,CodiceCat) VALUES (?,?,?,?,?,?))");
+            
+            query.setParameter(1, c.getUsername());
+            query.setParameter(2, c.getPswd());
+            query.setParameter(3, c.getNome());
+            query.setParameter(4, c.getCognome());
+            query.setParameter(5, c.getEmail());
+            query.setParameter(6, c.getCodiceCat());
+            query.executeUpdate();
+
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -220,7 +221,7 @@ public class CRUD {
             session.close();
         }
     }
-    
+
     /* Method to
      READ the client */
     public List<Clienti> cliente(String nome) {
@@ -228,13 +229,13 @@ public class CRUD {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            
+
             Query query = session.getNamedQuery("cliente");
             query.setParameter("nome", nome);
-            
+
             List result = query.list();
             return result;
-            
+
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -385,7 +386,7 @@ public class CRUD {
         }
         return null;
     }
-    
+
     /* Method to UPDATE tickets for an visitator */
     public void updateBiglietto(Integer BigliettiID, int Codice, Date DataValidita, Clienti cliente) {
         Session session = factory.openSession();
@@ -560,7 +561,7 @@ public class CRUD {
             Query query = session.getNamedQuery("servizi");
             List result = query.list();
             return result;
-            
+
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
