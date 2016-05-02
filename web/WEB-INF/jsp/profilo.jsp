@@ -61,20 +61,20 @@
                 <div id="signup">   
                     <h1>Profilo</h1>
                     <c:forEach items="${cliente}" var="cl">
-                        <form action="#" method="post" onsubmit="return testpass(this)">   	  
+                        <form action="./modificaProfilo" method="post" onsubmit="return testpass(this)">   	  
                             <div class="top-row">
                                 <div class="field-wrap">
-                                    <input type="text" placeholder="Nome" value="${cl.nome}" required autocomplete="off" />
+                                    <input type="text" name="nome" placeholder="Nome" value="${cl.nome}" required autocomplete="off" />
                                 </div>    
                                 <div class="field-wrap">
-                                    <input type="text" placeholder="Cognome" value="${cl.cognome}" required autocomplete="off"/>
+                                    <input type="text" name="cognome" placeholder="Cognome" value="${cl.cognome}" required autocomplete="off"/>
                                 </div>
                             </div>	  
                             <div class="field-wrap">
-                                <input type="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
+                                <input type="email" name="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
                             </div>  
                             <div class="field-wrap">
-                                <select>
+                                <select name="cat">
                                     <option value="" disabled>Categoria</option>
                                     <c:forEach items="${categorie}" var="c">
                                         <c:set var="categoriaUser" scope="session" value="${cl.codiceCat.codice}"/>
@@ -84,10 +84,10 @@
                                 </select>
                             </div>
                             <div class="field-wrap">
-                                <input type="text" placeholder="Username" value="${cl.username}" required autocomplete="off"/>
+                                <input type="text" name="nu" placeholder="Username" value="${cl.username}" required autocomplete="off"/>
                             </div>		  
                             <div class="field-wrap">
-                                <input type="password" id="pass" placeholder="Password" required autocomplete="off"/>
+                                <input type="password" name="pass" id="pass" placeholder="Password" required autocomplete="off"/>
                             </div>
                             <div class="field-wrap">
                                 <input type="password" id="confPass" placeholder="Conferma Password" autocomplete="off"/>

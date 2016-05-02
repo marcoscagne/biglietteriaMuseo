@@ -31,11 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "cliente",
             query = "FROM Clienti WHERE Username= :nome"
-    )/*,
-    @NamedQuery(
-            name = "addCliente",
-            query = "INSERT INTO Clienti (Username,Pswd,Nome,Cognome,Email,CodiceCat)"
-    )*/
+    )
 })
 
 @Table(name = "Clienti")

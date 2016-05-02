@@ -64,6 +64,10 @@
                     Riepilogo:<br/>
                     ${costo}&euro;
                     ${data}
+                    <%String servizi = (String) session.getAttribute("serviziScelti");%>
+                    <script>
+                        alert("<%=servizi%>");
+                    </script>
                     <div id="out">
                     </div>
                 </div>
@@ -75,8 +79,7 @@
         </div>
         
         <script>
-            alert(serviziScelti+"-*");
-            document.getElementById("out").innerHTML = serviziScelti;
+            
         </script>
         
     </body>

@@ -86,7 +86,7 @@
                                 </div>
                             </c:forEach>
                             <br/>
-                            <button type="submit" class="button button-block"/>Conferma</button>
+                            <button onclick="invia()" type="submit" class="button button-block"/>Conferma</button>
                         </div>
                     </form>
                 </div>            
@@ -98,10 +98,9 @@
         </div>
 
         <script>
-            serviziScelti = [];
+            var serviziScelti = [];
             var i = 0;
             function cambio(id) {
-
                 if ($("#" + id).prop('checked')) {
                     serviziScelti[i] = id;
                     i = i + 1;
@@ -116,6 +115,7 @@
             function invia(){
                 
             }
+            
         </script>
     </body>
 </html>

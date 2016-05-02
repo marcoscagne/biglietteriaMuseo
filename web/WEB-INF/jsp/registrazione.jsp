@@ -37,7 +37,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="./">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a href="./">Home<span class="sr-only">(current)</span></a></li>
                             <li><a href="./attivita">Attivit&agrave;</a></li>
                             <li><a href="./gallery">Gallery</a></li>
                         </ul>
@@ -49,7 +49,7 @@
             <div class="tab-content">
                 <div id="signup">   
                     <h1>Registrazione</h1>          
-                    <form action="#" method="post">   	  
+                    <form action="./confermaRegistrazione" method="post">   	  
                         <div class="top-row">
                             <div class="field-wrap">
                                 <input name="nome" type="text" placeholder="Nome" required autocomplete="off" />

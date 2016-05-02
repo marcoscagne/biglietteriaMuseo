@@ -49,11 +49,33 @@ public class MainController {
     
     @RequestMapping(value = "/confermaRegistrazione", method = RequestMethod.POST)
     public String confReg(ModelMap map, @RequestParam(value = "nome", required = true) String nome, @RequestParam(value = "cognome", required = true) String cognome, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass, @RequestParam(value = "cat", required = true) Integer cat) {
+        String msg="";
         Categorie categ=new Categorie(cat);
         Clienti cl =  new Clienti(nu,pass,nome,cognome,email,categ);
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
-        c.addCliente(cl);
-        //map.put("cliente",cl);
+        boolean stato = c.saveCliente(cl);
+        if(stato)
+            msg="Registrazione avvenuta con successo! Effettua il login!";
+        else
+            msg="Il nome utente scelto esiste gia!";
+        map.put("msg",msg);
+        map.put("attivita",c.listAttivita());
+        return "index";
+    }
+    
+    @RequestMapping(value = "/modificaProfilo", method = RequestMethod.POST)
+    public String modificaProfilo(ModelMap map, @RequestParam(value = "nome", required = true) String nome, @RequestParam(value = "cognome", required = true) String cognome, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "nu", required = true) String nu, @RequestParam(value = "pass", required = true) String pass, @RequestParam(value = "cat", required = true) Integer cat) {
+        String msg="";
+        Categorie categ=new Categorie(cat);
+        Clienti cl =  new Clienti(nu,pass,nome,cognome,email,categ);
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        boolean stato = c.updateCliente(cl);
+        if(stato)
+            msg="Aggiornamento profilo avvenuto con successo!";
+        else
+            msg="Errore nell'aggiornamento del profilo!";
+        map.put("msg",msg);
+        map.put("attivita",c.listAttivita());
         return "index";
     }
     

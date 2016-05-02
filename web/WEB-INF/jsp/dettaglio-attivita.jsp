@@ -146,7 +146,7 @@
                                     <form action="./compra" method="post">
                                         <input type="hidden" name="id" value="${a.codice}" class="form-control">
                                         <div class="input-group date col-md-3" data-provide="datepicker">
-                                            <input type="text" name="data" class="form-control">
+                                            <input type="text" name="data" class="form-control datepicker">
                                             <div class="input-group-addon">
                                                 <span class="glyphicon glyphicon-th"></span>
                                             </div>

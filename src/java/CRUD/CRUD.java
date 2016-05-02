@@ -168,23 +168,20 @@ public class CRUD {
      * ******************************************************************************************
      */
     /* Method to CREATE an client in the database */
-    public Integer addCliente(Clienti c) {
+    public boolean saveCliente(Clienti c) {
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer clienteID = null;
         try {
-            tx = session.beginTransaction();
-
-            Query query = session.createSQLQuery("INSERT INTO Clienti (Username,Pswd,Nome,Cognome,Email,CodiceCat) VALUES (?,?,?,?,?,?))");
+            Query query = session.getNamedQuery("cliente");
+            query.setParameter("nome", c.getUsername());
+            List result = query.list();
+            if(result!=null){
+                session.beginTransaction();
+                session.saveOrUpdate(c);
+                session.getTransaction().commit();
+                return true;
+            }
             
-            query.setParameter(1, c.getUsername());
-            query.setParameter(2, c.getPswd());
-            query.setParameter(3, c.getNome());
-            query.setParameter(4, c.getCognome());
-            query.setParameter(5, c.getEmail());
-            query.setParameter(6, c.getCodiceCat());
-            query.executeUpdate();
-
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -193,7 +190,7 @@ public class CRUD {
         } finally {
             session.close();
         }
-        return clienteID;
+        return false;
     }
 
     /* Method to
@@ -271,21 +268,15 @@ public class CRUD {
         return null;
     }
 
-    /* Method to UPDATE client for an employee */
-    public void updateCliente(Integer ClienteID, String username, String pass, String nome, String cognome, String email) {
+    /* Method to UPDATE client */
+    public boolean updateCliente(Clienti c) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
-            tx = session.beginTransaction();
-            Clienti cliente
-                    = (Clienti) session.get(Clienti.class, ClienteID);
-            cliente.setUsername(username);
-            cliente.setPswd(pass);
-            cliente.setNome(nome);
-            cliente.setCognome(cognome);
-            cliente.setEmail(email);
-            session.update(cliente);
-            tx.commit();
+            session.beginTransaction();
+            session.saveOrUpdate(c);
+            session.getTransaction().commit();
+            return true;
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -294,6 +285,7 @@ public class CRUD {
         } finally {
             session.close();
         }
+        return false;
     }
 
     /* Method to DELETE a client from the records */
