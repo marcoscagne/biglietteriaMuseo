@@ -1,5 +1,11 @@
 <html>
     <head>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="./resources/js/bootstrap.min.js"></script>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -10,12 +16,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body style="background:url(./resources/img/background-activities.jpg) fixed white">
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="./resources/js/bootstrap.min.js"></script>
         <div align="center" />
         <div id="menu">
             <nav class="navbar navbar-inverse">
@@ -89,10 +89,10 @@
             </nav>
         </div>
         <div id="news" style="margin-top: 80px;" align="center">	
-            <div class="row">
+            <div class="row attivita">
                 <c:forEach items="${attivita}" var="a">
                     <div class="col-md-6">
-                        <img src="${a.immagine}" class="img" width="100%">
+                        <img src="${a.immagine}" width="100%">
                         <div class="img" align="left">
                             <span class="img-title">${a.titolo}</span>
                             <div class="img-description">
