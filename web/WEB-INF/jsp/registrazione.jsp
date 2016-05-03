@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html >
     <head>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="./resources/js/bootstrap.min.js"></script>
         <meta charset="UTF-8">
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <title>Registrazione</title>
@@ -14,12 +20,6 @@
         <link rel="stylesheet" href="./resources/css/form.css">
     </head>
     <body background="./resources/img/background-form.jpg" style="background-attachment: fixed;">
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="./resources/js/bootstrap.min.js"></script>
         <div align="center" />
         <div id="menu">
             <nav class="navbar navbar-inverse">
