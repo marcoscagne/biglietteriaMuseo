@@ -90,10 +90,10 @@
             </nav>
         </div>
         <div id="news" style="margin-top: 80px;" align="center">	
-            <div class="row">
+            <div class="row attivita">
                 <c:forEach items="${attivita}" var="a">
                     <div class="col-md-6">
-                        <img src="${a.immagine}" class="img" width="100%">
+                        <img src="${a.immagine}" width="100%">
                         <div class="img" align="left">
                             <span class="img-title">${a.titolo}</span>
                             <div class="img-description">
