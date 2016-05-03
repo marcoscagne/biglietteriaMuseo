@@ -88,6 +88,19 @@ textarea {
   width: 100%;
 }
 
+.listino{
+  width: 100%; 
+}
+
+.listino td{
+    border: 1px solid darkgrey;
+    margin: auto;
+}
+
+.cat{
+    width: 100%;
+}
+
 .forgot {
   margin-top: -20px;
   text-align: right;

@@ -74,7 +74,7 @@
                                 <input type="email" name="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
                             </div>  
                             <div class="field-wrap">
-                                <select name="cat">
+                                <select name="cat" class="cat">
                                     <option value="" disabled>Categoria</option>
                                     <c:forEach items="${categorie}" var="c">
                                         <c:set var="categoriaUser" scope="session" value="${cl.codiceCat.codice}"/>
@@ -98,7 +98,12 @@
                 </div>
                     <br/><hr style="border-top: 1px solid black"><br/>
                     <h1>Biglietti Acquistati</h1>
-                    <table class="listino">
+                    <table class="listino" align="center">
+                        <tr>
+                            <td><b>Evento</b></td>
+                            <td><b>Data</b></td>
+                            <td><b>Prezzo</b></td>
+                        </tr>
                     <c:forEach items="${biglietti}" var="b">
                             <tr>
                                 <td>${b.codiceAtt.titolo}</td>
