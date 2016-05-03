@@ -8,11 +8,17 @@ package biglietteria_config;
 import CRUD.CRUD;
 import biglietteria.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  *
@@ -115,6 +121,11 @@ public class MainController {
         return "compra";
     }
     
+    public static HttpSession session() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest().getSession(true); // true == allow create
+    }
+    
     @RequestMapping(value = "/dettaglio", method = RequestMethod.GET)
     public String dettaglio(ModelMap map, @RequestParam(value="id",required=false) Integer id) {
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
@@ -123,9 +134,21 @@ public class MainController {
     }
     
     @RequestMapping(value = "/end", method = RequestMethod.POST)
-    public String end(ModelMap map, @RequestParam(value="data",required=true) String data, @RequestParam(value="costo",required=true) BigDecimal costo) {
+    public String end(ModelMap map, @RequestParam(value="data",required=true) String data, @RequestParam(value="user",required=true) String user, @RequestParam(value="costo",required=true) BigDecimal costo) {
         map.put("data",data);
         map.put("costo",costo);
+        CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+        Clienti cl = c.cliente(user).get(0);
+        Categorie cat = c.categoria(cl.getCodiceCat().getCodice());
+        map.put("sconto",cat.getPercSconto());
         return "acquistato";
+    }
+    
+    @RequestMapping(value = "/salvaCarrello", method = RequestMethod.GET)
+    @ResponseBody
+    public String salvaCarrello(@RequestParam(value="servizi[]") Integer[] servizi) {
+        HttpSession sess  = this.session();
+        sess.setAttribute("servizi", servizi); 
+      return "put in cart!";
     }
 }

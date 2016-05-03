@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="biglietteria.Servizi"%>
+<%@page import="biglietteria.Servizi"%>
+<%@page import="biglietteria_config.HibernateUtil"%>
+<%@page import="CRUD.CRUD"%>
+<%@page import="org.hibernate.Query"%>
 <!DOCTYPE html>
 <html >
     <head>
@@ -33,7 +39,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">National Museum</a>
+                        <a class="navbar-brand" href="./">National Museum</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,13 +67,22 @@
             <div class="tab-content">
                 <div id="signup">   
                     <h1>Acquisto avvenuto con successo!</h1>
-                    Riepilogo:<br/>
-                    ${costo}&euro;
+                    <h3>Riepilogo:</h3><hr style="border-top: 1px solid black"><br/>
+                    ${costo}&euro; - ${sconto}
+                    <br/>
                     ${data}
-                    <%String servizi = (String) session.getAttribute("serviziScelti");%>
-                    <script>
-                        alert("<%=servizi%>");
-                    </script>
+                    </br><br/>
+                    <h4><b>Servizi Scelti</b></h4>
+                    <% Integer[] servizi = (Integer[]) session.getAttribute("servizi");%>
+                    
+                    <%
+                        for (Integer s : servizi){
+                            CRUD c = new CRUD (HibernateUtil.getSessionFactory());
+                            Servizi servizio = c.servizio(s);
+                            out.print(servizio.getDescrizione());
+                            out.print("<br/>");
+                        }
+                    %>
                     <div id="out">
                     </div>
                 </div>

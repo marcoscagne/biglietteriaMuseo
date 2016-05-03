@@ -33,7 +33,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">National Museum</a>
+                        <a class="navbar-brand" href="./">National Museum</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,11 +52,10 @@
                             <li class="dropdown">				  
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
                                 <ul id="login-dp" class="dropdown-menu">
-                                    <li>
-                                        <a href="./profilo">Profilo</a>
-                                        <br>
-                                        <a href="./logout">Logout</a>
-                                    </li>
+                                        <li style="padding-bottom: 10px;">
+                                            <button onclick="location.href='./profilo?nu=<%=myname%>';" class="btn btn-primary btn-block">Profilo</button>
+                                            <button onclick="location.href='./logout';" class="btn btn-primary btn-block">Logout</button>
+                                        </li>
                                 </ul>
                             </li>
                             <%}
@@ -78,6 +77,7 @@
                         <c:forEach items="${attivita}" var="a">
                             <input type="hidden" name="costo" value="${a.tariffaOrdinaria}">
                         </c:forEach>
+                        <input type="hidden" name="user" value="<%=myname%>">
                         <input type="hidden" name="data" value="${data}">
                         <div class="row">
                             <c:forEach items="${servizi}" var="s">
@@ -110,10 +110,18 @@
                         serviziScelti.splice(a, 1);
                     }
                 }
+                 
             }
             
+            
+            
             function invia(){
-                
+                var serv = "";
+                for(i=0;i<serviziScelti.length;i++)
+                    serv += "servizi[]="+serviziScelti[i]+"&";
+                $.get("./salvaCarrello?"+serv,  function (data){
+                        
+                });
             }
             
         </script>

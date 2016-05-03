@@ -471,6 +471,26 @@ public class CRUD {
         }
         return null;
     }
+    
+    public Categorie categoria(Integer id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("categoriaById");
+            query.setParameter("id", id);
+            Categorie result = (Categorie) query.list().get(0);
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 
     /* Method to UPDATE activity for an employee */
     public void updateCategorie(Integer categoriaID, int Codice, String TipoDoc, long percSconto, String Descrizione) {
@@ -541,6 +561,28 @@ public class CRUD {
             session.close();
         }
         return servizioID;
+    }
+    
+    /* Method to
+     READ all the services */
+    public Servizi servizio(Integer id) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("serviziById");
+            query.setParameter("id", id);
+            Servizi result = (Servizi) query.list().get(0);
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
     /* Method to
