@@ -98,7 +98,7 @@
                 </div>
                     <br/><hr style="border-top: 1px solid black"><br/>
                     <h1>Biglietti Acquistati</h1>
-                    <table border="1px solid black">
+                    <table class="listino">
                     <c:forEach items="${biglietti}" var="b">
                             <tr>
                                 <td>${b.codiceAtt.titolo}</td>
