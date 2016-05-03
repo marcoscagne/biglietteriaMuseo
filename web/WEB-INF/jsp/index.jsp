@@ -77,10 +77,9 @@
                                 <li class="dropdown">				  
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
                                     <ul id="login-dp" class="dropdown-menu">
-                                        <li>
-                                            <a href="./profilo?nu=<%=myname%>">Profilo</a>
-                                            <br>
-                                            <a href="./logout">Logout</a>
+                                        <li style="padding-bottom: 10px;">
+                                            <button onclick="location.href='./profilo?nu=<%=myname%>';" class="btn btn-primary btn-block">Profilo</button>
+                                            <button onclick="location.href='./logout';" class="btn btn-primary btn-block">Logout</button>
                                         </li>
                                     </ul>
                                 </li>
