@@ -56,11 +56,19 @@
                 <div id="signup">   
                     <h1>Acquisto avvenuto con successo!</h1>
                     <h3>Riepilogo:</h3><hr style="border-top: 1px solid black"><br/>
-                    <table><tr><th style="width:150px">Costo Biglietto</th><th style="width:150px">Sconto</th><th style="width:150px">Data Ingresso</th><th style="width:150px">Servizi Aggiunti</th></tr><tr><td>${costo}&euro;</td><td>${sconto}%</td>
+                    <table>
+                        <tr>
+                            <th style="width:150px">Costo Biglietto</th>
+                            <th style="width:150px">Sconto</th>
+                            <th style="width:150px">Data Ingresso</th>
+                            <th style="width:150px">Servizi Aggiunti</th>
+                        </tr>
+                        <tr>
+                            <td>${costo}&euro;</td>
+                            <td>${sconto}%</td>
                             <td>${data}</td>
                             <td>
-                                
-                                    <%
+                                <%
                                     int id=(Integer)request.getAttribute("idAtt");
                                     if(id==1){
                                         Integer[] servizi = (Integer[]) session.getAttribute("servizi");
@@ -73,8 +81,7 @@
                                     }else{
                                         out.print("Nessun servizio disponibile per questo evento.");
                                     }
-                                    %>
-                                
+                                %>
                             </td>
                         </tr>
                     </table>

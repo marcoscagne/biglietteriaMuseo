@@ -104,6 +104,19 @@
                 <div class="tab-content">
                     <div id="signup">   
                         <h1>Administrator</h1>
+                        <hr style="border-top: 1px solid black">
+                        <h5><b>Titoli e Date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.</b></h5>
+                        <c:forEach items="${attivitaQuery1}" var="a">
+                            ${a.data} | ${a.titolo} <br/>
+                        </c:forEach>
+                        
+                        <hr style="border-top: 1px solid black">
+                        <h5><b>Numero biglietti emessi per una determinata esposizione.</b></h5>
+                            ${nBiglietti} <b><i><--SBAGLIATO</i></b>
+                        
+                        <hr style="border-top: 1px solid black">
+                        <h5><b>Ricavato della vendita dei biglietti di una determinata esposizione.</b></h5>
+                            ${ricavato} &euro;
                         
                     </div>
                 </div>

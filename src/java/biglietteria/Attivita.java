@@ -39,6 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(
         name="attivitaById",
         query="FROM Attivita WHERE codice=:id"
+    ),
+    @NamedQuery(
+        name="query1",
+        query="FROM Attivita WHERE data> :dataI and data< :dataF"
     )
 })
 

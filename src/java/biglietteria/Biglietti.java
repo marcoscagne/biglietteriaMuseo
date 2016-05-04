@@ -22,7 +22,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -40,13 +39,17 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "ticketsByName",
             query = "FROM Biglietti where Username= :name"
+    ),
+    @NamedQuery(
+            name = "query2",
+            query = "SELECT count(*) FROM Attivita a, Biglietti b WHERE b.codiceAtt=a.codice and b.codiceAtt= :codAtt"
+    ),
+    @NamedQuery(
+            name = "query3",
+            query = "SELECT sum(a.tariffaOrdinaria) FROM Attivita a, Biglietti b WHERE b.codiceAtt=a.codice and a.codice= :codAtt GROUP BY b.codiceAtt,a.titolo"
     )
 })
-/*@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Biglietti.findAll", query = "SELECT b FROM Biglietti b"),
-    @NamedQuery(name = "Biglietti.findByCodice", query = "SELECT b FROM Biglietti b WHERE b.codice = :codice"),
-    @NamedQuery(name = "Biglietti.findByDataValidita", query = "SELECT b FROM Biglietti b WHERE b.dataValidita = :dataValidita")})*/
+
 public class Biglietti implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
@@ -24,6 +25,84 @@ public class CRUD {
 
     public CRUD(SessionFactory factory) {
         CRUD.factory = factory;
+    }
+    
+    //titoli e le date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.
+    public List<Attivita> query1(int anno) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            Query query = session.getNamedQuery("query1");
+            Calendar calI = Calendar.getInstance();
+            calI.set(Calendar.YEAR, anno);
+            calI.set(Calendar.MONTH, 1);
+            calI.set(Calendar.DAY_OF_MONTH, 1);
+            Date dataI = calI.getTime();
+            
+            Calendar calF = Calendar.getInstance();
+            calF.set(Calendar.YEAR, anno);
+            calF.set(Calendar.MONTH, 12);
+            calF.set(Calendar.DAY_OF_MONTH, 31);
+            Date dataF = calF.getTime();
+            
+            
+            query.setParameter("dataI", dataI);
+            query.setParameter("dataF", dataF);
+
+            List result = query.list();
+            return result;
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    //titoli e le date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.
+    public int query2(Integer codAtt) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            Query query = session.getNamedQuery("query2");
+            query.setParameter("codAtt", codAtt);
+            int result = (int) query.list().get(0);
+            return result;
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return -1;
+    }
+    
+    //il ricavato della vendita dei biglietti di una determinata esposizione
+    public BigDecimal query3(Integer codAtt) {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            Query query = session.getNamedQuery("query3");
+            query.setParameter("codAtt", codAtt);
+            BigDecimal result = (BigDecimal) query.list().get(0);
+            return result;
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
     /* Method to CREATE an activity in the database */
@@ -175,13 +254,13 @@ public class CRUD {
             Query query = session.getNamedQuery("cliente");
             query.setParameter("nome", c.getUsername());
             List result = query.list();
-            if(result!=null){
+            if (result != null) {
                 session.beginTransaction();
                 session.saveOrUpdate(c);
                 session.getTransaction().commit();
                 return true;
             }
-            
+
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -320,7 +399,7 @@ public class CRUD {
             session.saveOrUpdate(b);
             session.getTransaction().commit();
             //return true;
-            
+
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -469,7 +548,7 @@ public class CRUD {
         }
         return null;
     }
-    
+
     public Categorie categoria(Integer id) {
         Session session = factory.openSession();
         Transaction tx = null;
@@ -560,7 +639,7 @@ public class CRUD {
         }
         return servizioID;
     }
-    
+
     /* Method to
      READ all the services */
     public Servizi servizio(Integer id) {

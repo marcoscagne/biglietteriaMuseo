@@ -140,14 +140,20 @@
                                     <form action="./compra" method="post">
                                         <input type="hidden" name="id" value="${a.codice}" class="form-control">
                                         <div class="input-group date col-md-3" data-provide="datepicker">
-                                            <input type="text" name="data" class="form-control datepicker">
+                                            <input type="text" required name="data" class="form-control datepicker">
                                             <div class="input-group-addon">
                                                 <span class="glyphicon glyphicon-th"></span>
                                             </div>
                                         </div>
+                                        <%if (myname != null) {%>
                                         <div class="buy">
                                             <button type="submit" class="btn btn-primary btn-block">Compra</button>
                                         </div>
+                                        <%} else {%>
+                                        <div class="buy">
+                                            <button disabled class="btn btn-primary btn-block">Effettua il login!</button>
+                                        </div>
+                                        <%}%>
                                     </form>
                                 </div>
                             </div>
