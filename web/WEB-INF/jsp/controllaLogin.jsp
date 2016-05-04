@@ -29,7 +29,7 @@
                 session.setAttribute("username",request.getAttribute("nomeUtente"));
                 response.sendRedirect("./");
             }else{
-                response.sendRedirect("./?m=NomeUtente o Password Errati!");
+                response.sendRedirect("./?m=NomeUtenteoPasswordErrati!");
             }
         %>
         

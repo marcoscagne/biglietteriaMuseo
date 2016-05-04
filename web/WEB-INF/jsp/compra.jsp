@@ -47,7 +47,7 @@
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {
-                                    response.sendRedirect("./?m=Devi effettuare il Login!");
+                                    response.sendRedirect("./?m=DevieffettuareilLogin!");
                                 } else {%>
                             <li class="dropdown">				  
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
@@ -112,8 +112,6 @@
                 }
                  
             }
-            
-            
             
             function invia(){
                 var serv = "";

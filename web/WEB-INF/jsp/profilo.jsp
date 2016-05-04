@@ -56,46 +56,47 @@
                 </div><!-- /.container-fluid -->
             </nav>
         </div>
-        <div class="registrazione">  
-            <div class="tab-content">
-                <div id="signup">   
-                    <h1>Profilo</h1>
-                    <c:forEach items="${cliente}" var="cl">
-                        <form action="./modificaProfilo" method="post" onsubmit="return testpass(this)">   	  
-                            <div class="top-row">
+        <div class="registrazione">
+            <%if(!myname.equals("root")){%>
+                <div class="tab-content">
+                    <div id="signup">   
+                        <h1>Profilo</h1>
+                        <c:forEach items="${cliente}" var="cl">
+                            <form action="./modificaProfilo" method="post" onsubmit="return testpass(this)">   	  
+                                <div class="top-row">
+                                    <div class="field-wrap">
+                                        <input type="text" name="nome" placeholder="Nome" value="${cl.nome}" required autocomplete="off" />
+                                    </div>    
+                                    <div class="field-wrap">
+                                        <input type="text" name="cognome" placeholder="Cognome" value="${cl.cognome}" required autocomplete="off"/>
+                                    </div>
+                                </div>	  
                                 <div class="field-wrap">
-                                    <input type="text" name="nome" placeholder="Nome" value="${cl.nome}" required autocomplete="off" />
-                                </div>    
+                                    <input type="email" name="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
+                                </div>  
                                 <div class="field-wrap">
-                                    <input type="text" name="cognome" placeholder="Cognome" value="${cl.cognome}" required autocomplete="off"/>
+                                    <select name="cat" class="cat">
+                                        <option value="" disabled>Categoria</option>
+                                        <c:forEach items="${categorie}" var="c">
+                                            <c:set var="categoriaUser" scope="session" value="${cl.codiceCat.codice}"/>
+                                            <c:set var="categ" scope="session" value="${c.codice}"/>
+                                            <option <c:if test="${categoriaUser.equals(categ)}"><c:out value="selected"/></c:if> value="${c.codice}">${c.descrizione}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
-                            </div>	  
-                            <div class="field-wrap">
-                                <input type="email" name="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
-                            </div>  
-                            <div class="field-wrap">
-                                <select name="cat" class="cat">
-                                    <option value="" disabled>Categoria</option>
-                                    <c:forEach items="${categorie}" var="c">
-                                        <c:set var="categoriaUser" scope="session" value="${cl.codiceCat.codice}"/>
-                                        <c:set var="categ" scope="session" value="${c.codice}"/>
-                                        <option <c:if test="${categoriaUser.equals(categ)}"><c:out value="selected"/></c:if> value="${c.codice}">${c.descrizione}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="field-wrap">
-                                <input type="text" name="nu" placeholder="Username" value="${cl.username}" required autocomplete="off"/>
-                            </div>		  
-                            <div class="field-wrap">
-                                <input type="password" name="pass" id="pass" placeholder="Password" required autocomplete="off"/>
-                            </div>
-                            <div class="field-wrap">
-                                <input type="password" id="confPass" placeholder="Conferma Password" autocomplete="off"/>
-                            </div>
-                            <button type="submit" class="button button-block"/> conferma Modifica Dati Profilo</button>       
-                        </form>
-                    </c:forEach>
-                </div>
+                                <div class="field-wrap">
+                                    <input type="text" name="nu" placeholder="Username" value="${cl.username}" required autocomplete="off"/>
+                                </div>		  
+                                <div class="field-wrap">
+                                    <input type="password" name="pass" id="pass" placeholder="Password" required autocomplete="off"/>
+                                </div>
+                                <div class="field-wrap">
+                                    <input type="password" id="confPass" placeholder="Conferma Password" autocomplete="off"/>
+                                </div>
+                                <button type="submit" class="button button-block"/> conferma Modifica Dati Profilo</button>       
+                            </form>
+                        </c:forEach>
+                    </div>
                     <br/><hr style="border-top: 1px solid black"><br/>
                     <h1>Biglietti Acquistati</h1>
                     <table class="listino" align="center">
@@ -112,7 +113,15 @@
                             </tr>
                     </c:forEach>
                     </table>
-            </div><!-- tab-content -->  
+                </div><!-- tab-content -->
+            <%}else{%>
+                <div class="tab-content">
+                    <div id="signup">   
+                        <h1>Administrator</h1>
+                        
+                    </div>
+                </div>
+            <%}%>
         </div> 
         <!-- /form -->  
         <div id="footer">

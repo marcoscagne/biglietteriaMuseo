@@ -69,7 +69,7 @@
                 <div id="signup">   
                     <h1>Acquisto avvenuto con successo!</h1>
                     <h3>Riepilogo:</h3><hr style="border-top: 1px solid black"><br/>
-                    ${costo}&euro; - ${sconto}
+                    ${costo}&euro; - ${sconto}%
                     <br/>
                     ${data}
                     </br><br/>
@@ -81,6 +81,7 @@
                             CRUD c = new CRUD (HibernateUtil.getSessionFactory());
                             Servizi servizio = c.servizio(s);
                             out.print(servizio.getDescrizione());
+                            out.print(servizio.getPrezzo()+"&euro;");
                             out.print("<br/>");
                         }
                     %>
