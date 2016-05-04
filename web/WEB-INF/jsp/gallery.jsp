@@ -68,14 +68,12 @@
     </head>
 
     <body>
+        <div style="position: fixed; top: 25px; width: 100%; z-index: 2;" align="center"><a href="./">Torna alla HOME</a></div>
         <div id="outer_container">
             <div id="customScrollBox">
 
                 <div class="container">
                     <div class="content">
-                        
-                        <a href="./">Torna alla HOME</a>
-                        
                         <h1>National<span class="lightgrey">Museum</span> <br /><span class="light"><span class="grey"><span class="s36"> Galleroide dei museix disponoibilidi </span></span></span></h1>
                         
                         <p></p>
