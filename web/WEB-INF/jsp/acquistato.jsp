@@ -56,24 +56,27 @@
                 <div id="signup">   
                     <h1>Acquisto avvenuto con successo!</h1>
                     <h3>Riepilogo:</h3><hr style="border-top: 1px solid black"><br/>
-                    ${costo}&euro; - ${sconto}%
-                    <br/>
-                    ${data}
+                    <table><tr><th style="width:150px">Costo Biglietto</th><th style="width:150px">Sconto</th><th style="width:150px">Data Ingresso</th><th style="width:150px">Servizi Aggiunti</th></tr><tr><td>${costo}&euro;</td><td>${sconto}%</td>
+                            <td>${data}</td>
+                            <td>
+                                <% Integer[] servizi = (Integer[]) session.getAttribute("servizi");%>
+                                <%for (Integer s : servizi){
+                                    //out.print("<tr>");
+                                    CRUD c = new CRUD (HibernateUtil.getSessionFactory());
+                                    Servizi servizio = c.servizio(s);
+                                    out.print(servizio.getDescrizione());
+                                    //out.print(servizio.getPrezzo()+"&euro;");
+                                    out.print("<br/>");
+                                    //out.print("<tr>");
+                                }%>
+                                
+                            </td>
+                        </tr>
+                    </table>
                     </br><br/>
-                    <h4><b>Servizi Scelti</b></h4>
-                    <% Integer[] servizi = (Integer[]) session.getAttribute("servizi");%>
+                    <h4><b>Totale</b></h4>
                     
-                    <%
-                        for (Integer s : servizi){
-                            CRUD c = new CRUD (HibernateUtil.getSessionFactory());
-                            Servizi servizio = c.servizio(s);
-                            out.print(servizio.getDescrizione());
-                            out.print(servizio.getPrezzo()+"&euro;");
-                            out.print("<br/>");
-                        }
-                    %>
-                    <div id="out">
-                    </div>
+                    
                 </div>
             </div><!-- tab-content -->  
         </div> 
