@@ -76,6 +76,7 @@
                         </div>
                         <c:forEach items="${attivita}" var="a">
                             <input type="hidden" name="costo" value="${a.tariffaOrdinaria}">
+                            <input type="hidden" name="idAtt" value="${a.codice}">
                         </c:forEach>
                         <input type="hidden" name="user" value="<%=myname%>">
                         <input type="hidden" name="data" value="${data}">

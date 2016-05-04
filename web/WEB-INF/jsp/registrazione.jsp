@@ -59,7 +59,7 @@
                             </div>
                         </div>	  
                         <div class="field-wrap">
-                            <input name="email" type="email" placeholder="E-mail" required autocomplete="off"/>
+                            <input name="email" type="email" placeholder="E-mail" autocomplete="off"/>
                         </div>  
                         <div class="field-wrap">
                             <select name="cat" class="cat">

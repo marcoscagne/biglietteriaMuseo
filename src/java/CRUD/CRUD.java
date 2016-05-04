@@ -312,17 +312,15 @@ public class CRUD {
      * ******************************************************************************************
      */
     /* Method to CREATE a ticket in the database */
-    public Integer addBiglietto(Date dataValidita, String username, Attivita attivita) {
+    public void addBiglietto(Biglietti b) {
         Session session = factory.openSession();
         Transaction tx = null;
-        Integer bigliettoID = null;
         try {
-            tx = session.beginTransaction();
-            Biglietti biglietto = new Biglietti();
-            biglietto.setDataValidita(dataValidita);
-            //biglietto.setAttivita(attivita);
-            bigliettoID = (Integer) session.save(biglietto);
-            tx.commit();
+            session.beginTransaction();
+            session.saveOrUpdate(b);
+            session.getTransaction().commit();
+            //return true;
+            
         } catch (HibernateException e) {
             if (tx != null) {
                 tx.rollback();
@@ -331,7 +329,7 @@ public class CRUD {
         } finally {
             session.close();
         }
-        return bigliettoID;
+        //return false;
     }
 
     /* Method to

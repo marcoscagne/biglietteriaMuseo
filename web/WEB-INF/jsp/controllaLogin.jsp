@@ -27,7 +27,7 @@
             
             if(pa!=null && pa.equals(p)){
                 session.setAttribute("username",request.getAttribute("nomeUtente"));
-                response.sendRedirect("./");
+                response.sendRedirect("./profilo?nu="+nu);
             }else{
                 response.sendRedirect("./?m=NomeUtenteoPasswordErrati!");
             }

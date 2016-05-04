@@ -81,6 +81,12 @@ public class Biglietti implements Serializable {
         this.dataValidita = dataValidita;
     }
 
+    public Biglietti(Date dataValidita, Clienti username, Attivita codiceAtt) {
+        this.dataValidita = dataValidita;
+        this.username = username;
+        this.codiceAtt = codiceAtt;
+    }
+
     public Integer getCodice() {
         return codice;
     }

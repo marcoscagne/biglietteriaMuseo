@@ -50,15 +50,15 @@
                             <li><a href="./gallery">Gallery</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <%                               
+                            <%
                                 String myname = (String) session.getAttribute("username");
 
                                 if (myname == null) {
                                     response.sendRedirect("./?m=DeviEffettuareIlLogin!");
                                 } else {%>
-                                    <li><a href="./logout">Logout</a></li>
+                            <li><a href="./logout">Logout</a></li>
                                 <%}
-                            %>
+                                %>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -72,24 +72,29 @@
                     <table><tr><th style="width:150px">Costo Biglietto</th><th style="width:150px">Sconto</th><th style="width:150px">Data Ingresso</th><th style="width:150px">Servizi Aggiunti</th></tr><tr><td>${costo}&euro;</td><td>${sconto}%</td>
                             <td>${data}</td>
                             <td>
-                                <% Integer[] servizi = (Integer[]) session.getAttribute("servizi");%>
-                                <%for (Integer s : servizi){
-                                    //out.print("<tr>");
-                                    CRUD c = new CRUD (HibernateUtil.getSessionFactory());
-                                    Servizi servizio = c.servizio(s);
-                                    out.print(servizio.getDescrizione());
-                                    //out.print(servizio.getPrezzo()+"&euro;");
-                                    out.print("<br/>");
-                                    //out.print("<tr>");
-                                }%>
+                                
+                                    <%
+                                    int id=(Integer)request.getAttribute("idAtt");
+                                    if(id==1){
+                                        Integer[] servizi = (Integer[]) session.getAttribute("servizi");
+                                        for (Integer s : servizi) {
+                                            CRUD c = new CRUD(HibernateUtil.getSessionFactory());
+                                            Servizi servizio = c.servizio(s);
+                                            out.print(servizio.getDescrizione());
+                                            out.print("<br/>");
+                                        }
+                                    }else{
+                                        out.print("Nessun servizio disponibile per questo evento.");
+                                    }
+                                    %>
                                 
                             </td>
                         </tr>
                     </table>
                     </br><br/>
                     <h4><b>Totale</b></h4>
-                    
-                    
+
+
                 </div>
             </div><!-- tab-content -->  
         </div> 
@@ -97,10 +102,10 @@
         <div id="footer">
             Copyright<sup>&copy;</sup> Musei Belli 2016
         </div>
-        
+
         <script>
-            
+
         </script>
-        
+
     </body>
 </html>

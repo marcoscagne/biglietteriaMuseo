@@ -102,24 +102,30 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <span class="img-title">${a.titolo}</span>
-                                <div class="img-description">
-                                    ${a.descrizione}
-                                    <br/><br/>
-                                    <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
-                                    <br/><br/>
-                                    <b>Data:</b> ${a.data}
-                                    <br/>
-                                    <b>Data Fine:</b> ${a.dataFine}
-                                    <%if (myname != null) {%>
-                                    <div class="buy">
-                                        <button onclick="comprato()" class="btn btn-primary btn-block">Compra</button>
+                                <form action="./end" method="post">
+                                    <div class="img-description">
+                                        ${a.descrizione}
+                                        <br/><br/>
+                                        <b>Costo Ingresso:</b> &euro;${a.tariffaOrdinaria}
+                                        <input type="hidden" name="costo" value="${a.tariffaOrdinaria}">
+                                        <input type="hidden" name="user" value="<%=myname%>">
+                                        <input type="hidden" name="idAtt" value="${a.codice}">
+                                        <br/><br/>
+                                        <b>Data:</b> ${a.data}
+                                        <input type="hidden" name="data" value="${a.data}">
+                                        <br/>
+                                        <b>Data Fine:</b> ${a.dataFine}
+                                        <%if (myname != null) {%>
+                                        <div class="buy">
+                                            <button type="submit" class="btn btn-primary btn-block">Compra</button>
+                                        </div>
+                                        <%} else {%>
+                                        <div class="buy">
+                                            <button disabled class="btn btn-primary btn-block">Effettua il login!</button>
+                                        </div>
+                                        <%}%>
                                     </div>
-                                    <%} else {%>
-                                    <div class="buy">
-                                        <button disabled class="btn btn-primary btn-block">Effettua il login!</button>
-                                    </div>
-                                    <%}%>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -174,7 +180,9 @@
                 alert("Il biglietto per l'evento scelto è stato ACQUISTATO!");
                 window.location = "./";
             }
-            $('.datepicker').datepicker();
+            $('.datepicker').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
         </script>
 
     </body>
