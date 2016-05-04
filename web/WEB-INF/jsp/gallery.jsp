@@ -68,7 +68,7 @@
     </head>
 
     <body>
-        <div style="position: fixed; top: 25px; width: 100%; z-index: 2;" align="center"><a href="./">Torna alla HOME</a></div>
+        <div style="position: fixed; top: 25px; width: 100%; z-index: 2;" align="center"><button onclick="location.href='./';" style="background: black; color: white; border: 1px solid white; padding: 5px; cursor:pointer;">Torna alla home</button></div>
         <div id="outer_container">
             <div id="customScrollBox">
 
@@ -123,7 +123,7 @@
             </div>
         </div>
         <div id="bg">
-            <img src="./resources/img/imgsG/jpg1.jpg" id="bgimg" />
+            <img src="./resources/img/imgsG/1.jpg" id="bgimg" />
             <div id="preloader"><img src="./resources/img/imgsG/ajax-loader_dark.gif" width="32" height="32" align="absmiddle" />LOADING...</div>
             <div id="arrow_indicator"><img src="./resources/img/imgsG/sw_arrow_indicator.png" width="50" height="50"  /></div>
             <div id="nextimage_tip">Click for next image</div>

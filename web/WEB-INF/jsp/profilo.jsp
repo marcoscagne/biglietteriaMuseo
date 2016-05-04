@@ -3,7 +3,6 @@
     <head>
         <%@include file="header.jsp"%>
         <title>Il tuo profilo</title>
-        <link rel="stylesheet" href="./resources/css/normalize.css">
         <link rel="stylesheet" href="./resources/css/style.css">
         <link rel="stylesheet" href="./resources/css/form.css">
     </head>
