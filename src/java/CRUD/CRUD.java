@@ -398,6 +398,7 @@ public class CRUD {
             session.beginTransaction();
             session.saveOrUpdate(b);
             session.getTransaction().commit();
+            System.out.println("******************************************");
             //return true;
 
         } catch (HibernateException e) {

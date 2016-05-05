@@ -8,6 +8,7 @@ package biglietteria_config;
 import CRUD.CRUD;
 import biglietteria.*;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -151,23 +152,29 @@ public class MainController {
     }
 
     @RequestMapping(value = "/end", method = RequestMethod.POST)
-    public String end(ModelMap map, @RequestParam(value = "data", required = true) String data, @RequestParam(value = "user", required = true) String user, @RequestParam(value = "costo", required = true) BigDecimal costo, @RequestParam(value = "idAtt", required = true) Integer idAtt) {
+    public String end(ModelMap map, @RequestParam(value = "data", required = true) String /*=Date??!?*/ dataN, @RequestParam(value = "user", required = true) String user, @RequestParam(value = "costo", required = true) BigDecimal costo, @RequestParam(value = "idAtt", required = true) Integer idAtt) {
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
 
 
             Clienti cl = c.cliente(user).get(0);
             Attivita att = c.listAttivitaById(idAtt).get(0);
 
-            System.out.println("##################################################### "+data);
-
+            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+            Date startDate;
+            try {
+                startDate = df.parse(dataN);
+                Biglietti newB = new Biglietti(startDate, cl, att);
+                c.addBiglietto(newB);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             
-            /*Biglietti newB = new Biglietti(date, cl, att);
-            c.addBiglietto(newB);*/
+            
 
 
         Categorie cat = c.categoria(cl.getCodiceCat().getCodice());
 
-        map.put("data", data);
+        map.put("data", dataN);
         map.put("costo", costo);
         map.put("sconto", cat.getPercSconto());
         map.put("idAtt", idAtt);
