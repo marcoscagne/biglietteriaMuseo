@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -159,18 +158,17 @@ public class MainController {
             Clienti cl = c.cliente(user).get(0);
             Attivita att = c.listAttivitaById(idAtt).get(0);
 
-            DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date startDate;
             try {
                 startDate = df.parse(dataN);
                 Biglietti newB = new Biglietti(startDate, cl, att);
+                //System.out.println("############################# "+newB.toString());
                 c.addBiglietto(newB);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             
-            
-
 
         Categorie cat = c.categoria(cl.getCodiceCat().getCodice());
 
