@@ -64,20 +64,24 @@
                             <th style="width:150px">Servizi Aggiunti</th>
                         </tr>
                         <tr>
-                            <td>${costo}&euro;</td>
-                            <td>${sconto}%</td>
+                            <td><span id="costo">${costo}</span>&euro;</td>
+                            <td><span id="sconto">${sconto}</span>%</td>
                             <td>${data}</td>
                             <td>
                                 <%
                                     int id=(Integer)request.getAttribute("idAtt");
                                     if(id==1){
                                         Integer[] servizi = (Integer[]) session.getAttribute("servizi");
+                                        int i=0;
                                         for (Integer s : servizi) {
+                                            i++;
                                             CRUD c = new CRUD(HibernateUtil.getSessionFactory());
                                             Servizi servizio = c.servizio(s);
                                             out.print(servizio.getDescrizione());
+                                            out.print(" -> <span id='servizio"+i+"'>"+servizio.getPrezzo()+"</span>");
                                             out.print("<br/>");
                                         }
+                                        out.print("<div id='nServizi'>"+i+"</div> <--Numero servizi, da cancellare!!");
                                     }else{
                                         out.print("Nessun servizio disponibile per questo evento.");
                                     }
@@ -87,7 +91,9 @@
                     </table>
                     </br><br/>
                     <h4><b>Totale</b></h4>
-
+                    <div id="outTotale">
+                        <%--Qui verrà stampato il totale della visita (euro)--%>
+                    </div>
 
                 </div>
             </div><!-- tab-content -->  
@@ -98,7 +104,19 @@
         </div>
 
         <script>
-
+            var costo=$("#costo").text();
+            var sconto=$("#sconto").text();
+            var nServizi=$("#nServizi").text();
+            var costoServizi=0;
+            var costoScontato=costo-(costo*sconto/100);
+            
+            for(var i=1;i<=nServizi;i++){
+                costoServizi=costoServizi+($("#servizio"+i).text());
+            }
+            
+            var costoTotale=costoServizi+costoScontato;
+            
+            $("#outTotale").html(costoTotale);
         </script>
 
     </body>

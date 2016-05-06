@@ -89,13 +89,13 @@
                         <tr>
                             <td><b>Evento</b></td>
                             <td><b>Data</b></td>
-                            <td><b>Prezzo</b></td>
+                            <!--<td><b>Prezzo</b></td>-->
                         </tr>
                     <c:forEach items="${biglietti}" var="b">
                             <tr>
                                 <td>${b.codiceAtt.titolo}</td>
-                                <td>${b.codiceAtt.data}</td>
-                                <td>&euro; ${b.codiceAtt.tariffaOrdinaria}</td>
+                                <td>${b.dataValidita}</td>
+                                <!--<td>&euro; $-{b.codiceAtt.tariffaOrdinaria}</td>-->
                             </tr>
                     </c:forEach>
                     </table>
