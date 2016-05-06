@@ -47,6 +47,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(
             name = "query3",
             query = "SELECT sum(a.tariffaOrdinaria) FROM Attivita a, Biglietti b WHERE b.codiceAtt=a.codice and a.codice= :codAtt GROUP BY b.codiceAtt,a.titolo"
+    ),
+    @NamedQuery(
+            name = "getMaxCodice",
+            query = "SELECT max(b.codice) FROM Biglietti b"
     )
 })
 
@@ -84,7 +88,8 @@ public class Biglietti implements Serializable {
         this.dataValidita = dataValidita;
     }
 
-    public Biglietti(Date dataValidita, Clienti username, Attivita codiceAtt) {
+    public Biglietti(Integer codice, Date dataValidita, Clienti username, Attivita codiceAtt) {
+        this.codice=codice;
         this.dataValidita = dataValidita;
         this.username = username;
         this.codiceAtt = codiceAtt;

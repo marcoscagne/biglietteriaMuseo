@@ -162,8 +162,8 @@ public class MainController {
             Date startDate;
             try {
                 startDate = df.parse(dataN);
-                Biglietti newB = new Biglietti(startDate, cl, att);
-                //System.out.println("############################# "+newB.toString());
+                int i=c.getMaxCodBiglietti();
+                Biglietti newB = new Biglietti(i+1, startDate, cl, att);
                 c.addBiglietto(newB);
             } catch (ParseException e) {
                 e.printStackTrace();

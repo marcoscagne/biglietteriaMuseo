@@ -433,6 +433,26 @@ public class CRUD {
         }
         return null;
     }
+    
+    public Integer getMaxCodBiglietti() {
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            Query query = session.getNamedQuery("getMaxCodice");
+            Integer result = (Integer) query.list().get(0);
+            tx.commit();
+            return result;
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return null;
+    }
 
     /* Method to
      READ tickets of an user*/
