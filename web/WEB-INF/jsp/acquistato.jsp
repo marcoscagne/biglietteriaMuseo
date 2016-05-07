@@ -78,10 +78,10 @@
                                             CRUD c = new CRUD(HibernateUtil.getSessionFactory());
                                             Servizi servizio = c.servizio(s);
                                             out.print(servizio.getDescrizione());
-                                            out.print(" -> <span id='servizio"+i+"'>"+servizio.getPrezzo()+"</span>");
+                                            out.print("<span style='display:none;' id='servizio"+i+"'>"+servizio.getPrezzo()+"</span>");
                                             out.print("<br/>");
                                         }
-                                        out.print("<div id='nServizi'>"+i+"</div> <--Numero servizi, da cancellare!!");
+                                        out.print("<div id='nServizi' style='display:none'>"+i+"</div>");
                                     }else{
                                         out.print("Nessun servizio disponibile per questo evento.");
                                     }
@@ -109,14 +109,13 @@
             var nServizi=$("#nServizi").text();
             var costoServizi=0;
             var costoScontato=costo-(costo*sconto/100);
-            
             for(var i=1;i<=nServizi;i++){
-                costoServizi=costoServizi+($("#servizio"+i).text());
+                costoServizi=costoServizi+(parseInt($("#servizio"+i).text()));
             }
             
             var costoTotale=costoServizi+costoScontato;
             
-            $("#outTotale").html(costoTotale);
+            $("#outTotale").html(costoTotale+" &euro;");
         </script>
 
     </body>
