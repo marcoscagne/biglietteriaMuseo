@@ -23,10 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\scagnellato3082
+ * @author Marco
  */
 @Entity
-
+@Table(name = "categorie")
 @NamedQueries({
     @NamedQuery(
         name="categorie",
@@ -37,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
         query="FROM Categorie WHERE Codice= :id"
     )
 })
-
-@Table(name = "Categorie")
-
 public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,7 +54,7 @@ public class Categorie implements Serializable {
     @Column(name = "Descrizione")
     private String descrizione;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceCat")
-    private Collection<Clienti> clientiCollection;
+    private Collection<Biglietti> bigliettiCollection;
 
     public Categorie() {
     }
@@ -106,12 +103,12 @@ public class Categorie implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Clienti> getClientiCollection() {
-        return clientiCollection;
+    public Collection<Biglietti> getBigliettiCollection() {
+        return bigliettiCollection;
     }
 
-    public void setClientiCollection(Collection<Clienti> clientiCollection) {
-        this.clientiCollection = clientiCollection;
+    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+        this.bigliettiCollection = bigliettiCollection;
     }
 
     @Override

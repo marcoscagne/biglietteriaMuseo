@@ -48,14 +48,7 @@
                         <div class="field-wrap">
                             <input name="email" type="email" placeholder="E-mail" autocomplete="off"/>
                         </div>  
-                        <div class="field-wrap">
-                            <select name="cat" class="cat">
-                                <option value="" disabled>Categoria</option>
-                                <c:forEach items="${categorie}" var="c">
-                                    <option value="${c.codice}">${c.descrizione} (-${c.percSconto}%)</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        
                         <div class="field-wrap">
                             <input name="nu" type="text" placeholder="Username" required autocomplete="off"/>
                         </div>		  

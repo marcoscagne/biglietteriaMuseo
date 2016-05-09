@@ -65,9 +65,9 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%=myname%></b> <span class="caret"></span></a>
                                 <ul id="login-dp" class="dropdown-menu">
                                     <li style="padding-bottom: 10px;">
-                                            <button onclick="location.href='./profilo?nu=<%=myname%>';" class="btn btn-primary btn-block">Profilo</button>
-                                            <button onclick="location.href='./logout';" class="btn btn-primary btn-block">Logout</button>
-                                        </li>
+                                        <button onclick="location.href = './profilo?nu=<%=myname%>';" class="btn btn-primary btn-block">Profilo</button>
+                                        <button onclick="location.href = './logout';" class="btn btn-primary btn-block">Logout</button>
+                                    </li>
                                 </ul>
                             </li>
                             <%}
@@ -91,7 +91,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <span class="img-title">${a.titolo}</span>
-                                <form action="./end" method="post">
+                                <form action="./comprato" method="post">
                                     <div class="img-description">
                                         ${a.descrizione}
                                         <br/><br/>
@@ -104,6 +104,15 @@
                                         <input type="hidden" name="data" value="${a.data}">
                                         <br/>
                                         <b>Data Fine:</b> ${a.dataFine}
+                                        
+                                        <div class="input-group date col-md-3">
+                                            <select name="cat">
+                                                <c:forEach items="${categorie}" var="c">
+                                                    <option value="${c.codice}">${c.descrizione} (- ${c.percSconto}%)</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        
                                         <%if (myname != null) {%>
                                         <div class="buy">
                                             <button type="submit" class="btn btn-primary btn-block">Compra</button>
@@ -145,6 +154,15 @@
                                                 <span class="glyphicon glyphicon-th"></span>
                                             </div>
                                         </div>
+                                        
+                                        <div class="input-group date col-md-3">
+                                            <select name="cat">
+                                                <c:forEach items="${categorie}" var="c">
+                                                    <option value="${c.codice}">${c.descrizione} (- ${c.percSconto}%)</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        
                                         <%if (myname != null) {%>
                                         <div class="buy">
                                             <button type="submit" class="btn btn-primary btn-block">Compra</button>
@@ -171,13 +189,13 @@
         <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
         <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
         <script>
-            function comprato() {
-                alert("Il biglietto per l'evento scelto è stato ACQUISTATO!");
-                window.location = "./";
-            }
-            $('.datepicker').datepicker({
-                dateFormat: "yy-mm-dd"
-            });
+                                                function comprato() {
+                                                    alert("Il biglietto per l'evento scelto è stato ACQUISTATO!");
+                                                    window.location = "./";
+                                                }
+                                                $('.datepicker').datepicker({
+                                                    dateFormat: "yy-mm-dd"
+                                                });
         </script>
 
     </body>

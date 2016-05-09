@@ -94,7 +94,7 @@
                     <div id="outTotale">
                         <%--Qui verrà stampato il totale della visita (euro)--%>
                     </div>
-
+                    <p><a href="./">Torna alla Home</a></p>
                 </div>
             </div><!-- tab-content -->  
         </div> 

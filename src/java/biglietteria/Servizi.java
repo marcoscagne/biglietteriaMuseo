@@ -23,9 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\scagnellato3082
+ * @author Marco
  */
 @Entity
+@Table(name = "servizi")
 
 @NamedQueries({
     @NamedQuery(
@@ -37,8 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
         query="FROM Servizi WHERE Codice= :id"
     )
 })
-
-@Table(name = "Servizi")
 public class Servizi implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

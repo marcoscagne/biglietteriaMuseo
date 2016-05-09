@@ -6,12 +6,12 @@
 package biglietteria;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Collection;
-
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,15 +22,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\scagnellato3082
+ * @author Marco
  */
 @Entity
-@Table(name = "Biglietti")
-
+@Table(name = "biglietti")
 @NamedQueries({
     @NamedQuery(
             name = "allTickets",
@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     ),
     @NamedQuery(
             name = "query2",
-            query = "SELECT count(*) FROM Attivita a, Biglietti b WHERE b.codiceAtt=a.codice and b.codiceAtt= :codAtt"
+            query = "SELECT count(*) FROM Attivita a, Biglietti b WHERE b.codiceAtt=a.codice and b.codiceAtt=1"
     ),
     @NamedQuery(
             name = "query3",
@@ -53,10 +53,9 @@ import javax.xml.bind.annotation.XmlTransient;
             query = "SELECT max(b.codice) FROM Biglietti b"
     )
 })
-
 public class Biglietti implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue
     @Basic(optional = false)
     @Column(name = "Codice")
     private Integer codice;
@@ -64,11 +63,14 @@ public class Biglietti implements Serializable {
     @Column(name = "DataValidita")
     @Temporal(TemporalType.DATE)
     private Date dataValidita;
-    @JoinTable(name = "Bigl_Serv", joinColumns = {
+    @JoinTable(name = "bigl_serv", joinColumns = {
         @JoinColumn(name = "CodiceBiglietto", referencedColumnName = "Codice")}, inverseJoinColumns = {
         @JoinColumn(name = "CodiceServizio", referencedColumnName = "Codice")})
     @ManyToMany
     private Collection<Servizi> serviziCollection;
+    @JoinColumn(name = "CodiceCat", referencedColumnName = "Codice")
+    @ManyToOne(optional = false)
+    private Categorie codiceCat;
     @JoinColumn(name = "Username", referencedColumnName = "Username")
     @ManyToOne(optional = false)
     private Clienti username;
@@ -88,13 +90,14 @@ public class Biglietti implements Serializable {
         this.dataValidita = dataValidita;
     }
 
-    public Biglietti(Integer codice, Date dataValidita, Clienti username, Attivita codiceAtt) {
+    public Biglietti(Date dataValidita, Clienti username, Attivita codiceAtt, Categorie cat) {
         this.codice=codice;
         this.dataValidita = dataValidita;
         this.username = username;
         this.codiceAtt = codiceAtt;
+        this.codiceCat=cat;
     }
-
+    
     public Integer getCodice() {
         return codice;
     }
@@ -118,6 +121,14 @@ public class Biglietti implements Serializable {
 
     public void setServiziCollection(Collection<Servizi> serviziCollection) {
         this.serviziCollection = serviziCollection;
+    }
+
+    public Categorie getCodiceCat() {
+        return codiceCat;
+    }
+
+    public void setCodiceCat(Categorie codiceCat) {
+        this.codiceCat = codiceCat;
     }
 
     public Clienti getUsername() {

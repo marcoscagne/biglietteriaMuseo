@@ -60,16 +60,7 @@
                                 <div class="field-wrap">
                                     <input type="email" name="email" placeholder="E-mail" value="${cl.email}" required autocomplete="off"/>
                                 </div>  
-                                <div class="field-wrap">
-                                    <select name="cat" class="cat">
-                                        <option value="" disabled>Categoria</option>
-                                        <c:forEach items="${categorie}" var="c">
-                                            <c:set var="categoriaUser" scope="session" value="${cl.codiceCat.codice}"/>
-                                            <c:set var="categ" scope="session" value="${c.codice}"/>
-                                            <option <c:if test="${categoriaUser.equals(categ)}"><c:out value="selected"/></c:if> value="${c.codice}">${c.descrizione}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
+                               
                                 <div class="field-wrap">
                                     <input type="text" name="nu" placeholder="Username" value="${cl.username}" required autocomplete="off"/>
                                 </div>		  
@@ -105,18 +96,18 @@
                     <div id="signup">   
                         <h1>Administrator</h1>
                         <hr style="border-top: 1px solid black">
-                        <h5><b>Titoli e Date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.</b></h5>
+                        <h5><i><b>Titoli e Date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.</b></i></h5>
                         <c:forEach items="${attivitaQuery1}" var="a">
                             ${a.data} | ${a.titolo} <br/>
                         </c:forEach>
                         
                         <hr style="border-top: 1px solid black">
-                        <h5><b>Numero biglietti emessi per una determinata esposizione.</b></h5>
-                            ${nBiglietti} <b><i><--SBAGLIATO</i></b>
+                        <h5><i><b>Numero biglietti emessi per una determinata esposizione.</b></i></h5>
+                        <b>Biglietto Normale:</b> venduti ${nBiglietti} biglietti.
                         
                         <hr style="border-top: 1px solid black">
-                        <h5><b>Ricavato della vendita dei biglietti di una determinata esposizione.</b></h5>
-                            ${ricavato} &euro;
+                        <h5><i><b>Ricavato della vendita dei biglietti di una determinata esposizione.</b></i></h5>
+                        <b>Biglietto Normale:</b> ricavati ${ricavato} &euro;
                         
                     </div>
                 </div>

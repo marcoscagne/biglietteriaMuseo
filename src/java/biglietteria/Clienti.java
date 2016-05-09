@@ -12,8 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,18 +21,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\scagnellato3082
+ * @author Marco
  */
 @Entity
-
+@Table(name = "clienti")
 @NamedQueries({
     @NamedQuery(
             name = "cliente",
             query = "FROM Clienti WHERE Username= :nome"
     )
 })
-
-@Table(name = "Clienti")
 public class Clienti implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,9 +50,6 @@ public class Clienti implements Serializable {
     private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private Collection<Biglietti> bigliettiCollection;
-    @JoinColumn(name = "CodiceCat", referencedColumnName = "Codice")
-    @ManyToOne(optional = false)
-    private Categorie codiceCat;
 
     public Clienti() {
     }
@@ -65,20 +58,19 @@ public class Clienti implements Serializable {
         this.username = username;
     }
 
-    public Clienti(String username, String pswd, String nome, String cognome, String email, Categorie codiceCat) {
-        this.username = username;
-        this.pswd = pswd;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.codiceCat = codiceCat;
-    }
-
     public Clienti(String username, String pswd, String nome, String cognome) {
         this.username = username;
         this.pswd = pswd;
         this.nome = nome;
         this.cognome = cognome;
+    }
+    
+    public Clienti(String username, String pswd, String nome, String cognome, String email) {
+        this.username = username;
+        this.pswd = pswd;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -128,14 +120,6 @@ public class Clienti implements Serializable {
 
     public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
         this.bigliettiCollection = bigliettiCollection;
-    }
-
-    public Categorie getCodiceCat() {
-        return codiceCat;
-    }
-
-    public void setCodiceCat(Categorie codiceCat) {
-        this.codiceCat = codiceCat;
     }
 
     @Override

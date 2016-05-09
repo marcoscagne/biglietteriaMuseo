@@ -56,7 +56,7 @@
             <div class="tab-content">
                 <div id="signup">   
                     <h1>Acquisto di un biglietto</h1>          
-                    <form action="./end" method="post">
+                    <form action="./comprato" method="post">
                         <div class="row">
                             <b>Acquisto del biglietto per il</b><br/>${data}<br/>
                             <b>+</b>
@@ -67,6 +67,7 @@
                         </c:forEach>
                         <input type="hidden" name="user" value="<%=myname%>">
                         <input type="hidden" name="data" value="${data}">
+                        <input type="hidden" name="cat" value="${categoria.percSconto}">
                         <div class="row">
                             <c:forEach items="${servizi}" var="s">
                                 <div class="col-lg-4">

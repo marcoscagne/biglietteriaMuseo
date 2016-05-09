@@ -7,8 +7,10 @@ package biglietteria;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +18,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author FSEVERI\scagnellato3082
+ * @author Marco
  */
 @Entity
-
+@Table(name = "attivita")
 @NamedQueries({
     @NamedQuery(
         name="attivitaVicine",
@@ -45,9 +49,6 @@ import javax.xml.bind.annotation.XmlRootElement;
         query="FROM Attivita WHERE data> :dataI and data< :dataF"
     )
 })
-
-@Table(name = "Attivita")
-
 public class Attivita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,6 +78,8 @@ public class Attivita implements Serializable {
     @Column(name = "dataFine")
     @Temporal(TemporalType.DATE)
     private Date dataFine;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codiceAtt")
+    private Collection<Biglietti> bigliettiCollection;
 
     public Attivita() {
     }
@@ -156,6 +159,15 @@ public class Attivita implements Serializable {
 
     public void setDataFine(Date dataFine) {
         this.dataFine = dataFine;
+    }
+
+    @XmlTransient
+    public Collection<Biglietti> getBigliettiCollection() {
+        return bigliettiCollection;
+    }
+
+    public void setBigliettiCollection(Collection<Biglietti> bigliettiCollection) {
+        this.bigliettiCollection = bigliettiCollection;
     }
 
     @Override

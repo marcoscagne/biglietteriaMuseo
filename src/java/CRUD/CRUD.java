@@ -6,8 +6,6 @@ import biglietteria.Categorie;
 import biglietteria.Clienti;
 import biglietteria.Servizi;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +24,7 @@ public class CRUD {
     public CRUD(SessionFactory factory) {
         CRUD.factory = factory;
     }
-    
+
     //titoli e le date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.
     public List<Attivita> query1(int anno) {
         Session session = factory.openSession();
@@ -38,14 +36,13 @@ public class CRUD {
             calI.set(Calendar.MONTH, 1);
             calI.set(Calendar.DAY_OF_MONTH, 1);
             Date dataI = calI.getTime();
-            
+
             Calendar calF = Calendar.getInstance();
             calF.set(Calendar.YEAR, anno);
             calF.set(Calendar.MONTH, 12);
             calF.set(Calendar.DAY_OF_MONTH, 31);
             Date dataF = calF.getTime();
-            
-            
+
             query.setParameter("dataI", dataI);
             query.setParameter("dataF", dataF);
 
@@ -62,7 +59,7 @@ public class CRUD {
         }
         return null;
     }
-    
+
     //titoli e le date delle esposizioni tematiche che si sono tenute nel periodo 1 gennaio - 31 dicembre di un determinato anno.
     public int query2(Integer codAtt) {
         Session session = factory.openSession();
@@ -83,7 +80,7 @@ public class CRUD {
         }
         return -1;
     }
-    
+
     //il ricavato della vendita dei biglietti di una determinata esposizione
     public BigDecimal query3(Integer codAtt) {
         Session session = factory.openSession();
@@ -103,29 +100,6 @@ public class CRUD {
             session.close();
         }
         return null;
-    }
-
-    /* Method to CREATE an activity in the database */
-    public Integer addAttivita(String titolo, BigDecimal tariffa) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        Integer attivitaID = null;
-        try {
-            tx = session.beginTransaction();
-            Attivita attivita = new Attivita();
-            attivita.setTitolo(titolo);
-            attivita.setTariffaOrdinaria(tariffa);
-            attivitaID = (Integer) session.save(attivita);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return attivitaID;
     }
 
     /* Method to
@@ -199,48 +173,6 @@ public class CRUD {
             session.close();
         }
         return null;
-    }
-
-    /* Method to UPDATE activity for an employee */
-    public void updateAttivita(Integer AttivitaID, String titolo, BigDecimal tariffa) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Attivita attivita
-                    = (Attivita) session.get(Attivita.class, AttivitaID);
-            attivita.setTitolo(titolo);
-            attivita.setTariffaOrdinaria(tariffa);
-            session.update(attivita);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /* Method to DELETE an activity from the records */
-    public void deleteAttivita(Integer AttivitaID) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Attivita attivita
-                    = (Attivita) session.get(Attivita.class, AttivitaID);
-            session.delete(attivita);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
     }
 
     /**
@@ -367,26 +299,6 @@ public class CRUD {
         return false;
     }
 
-    /* Method to DELETE a client from the records */
-    public void deleteCliente(Integer ClienteID) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Clienti cliente
-                    = (Clienti) session.get(Clienti.class, ClienteID);
-            session.delete(cliente);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
     /**
      * ******************************************************************************************
      */
@@ -432,26 +344,6 @@ public class CRUD {
         }
         return null;
     }
-    
-    public Integer getMaxCodBiglietti() {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Query query = session.getNamedQuery("getMaxCodice");
-            Integer result = (Integer) query.list().get(0);
-            tx.commit();
-            return result;
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return null;
-    }
 
     /* Method to
      READ tickets of an user*/
@@ -476,77 +368,9 @@ public class CRUD {
         return null;
     }
 
-    /* Method to UPDATE tickets for an visitator */
-    public void updateBiglietto(Integer BigliettiID, int Codice, Date DataValidita, Clienti cliente) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Biglietti biglietto
-                    = (Biglietti) session.get(Biglietti.class, BigliettiID);
-            biglietto.setDataValidita(DataValidita);
-            biglietto.setUsername(cliente);
-
-            session.update(biglietto);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /* Method to DELETE a tickets from the records */
-    public void deleteBiglietto(Integer BigliettiID) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Biglietti biglietto
-                    = (Biglietti) session.get(Biglietti.class, BigliettiID);
-            session.delete(biglietto);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
     /**
      * **************************************************************************
      */
-
-    /* Method to CREATE a category in the database */
-    public Integer addCategorie(String TipoDoc, long percSconto, String Descrizione) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        Integer categoriaID = null;
-        try {
-            tx = session.beginTransaction();
-            Categorie categoria = new Categorie();
-            categoria.setTipoDoc(TipoDoc);
-            categoria.setPercSconto(percSconto);
-            categoria.setDescrizione(Descrizione);
-
-            categoriaID = (Integer) session.save(categoria);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return categoriaID;
-    }
 
     /* Method to
      READ all the tickets */
@@ -589,76 +413,9 @@ public class CRUD {
         return null;
     }
 
-    /* Method to UPDATE activity for an employee */
-    public void updateCategorie(Integer categoriaID, int Codice, String TipoDoc, long percSconto, String Descrizione) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Categorie categoria
-                    = (Categorie) session.get(Categorie.class, categoriaID);
-            categoria.setTipoDoc(TipoDoc);
-            categoria.setPercSconto(percSconto);
-            categoria.setDescrizione(Descrizione);
-
-            session.update(categoria);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /* Method to DELETE an activity from the records */
-    public void deleteCategoria(Integer categoriaID) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Categorie categoria
-                    = (Categorie) session.get(Categorie.class, categoriaID);
-            session.delete(categoria);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
     /**
      * ********************************************************************************
      */
-    /* Method to CREATE a service in the database */
-    public Integer addServizi(String Descrizione, BigDecimal prezzo) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        Integer servizioID = null;
-        try {
-            tx = session.beginTransaction();
-            Servizi servizio = new Servizi();
-            servizio.setPrezzo(prezzo);
-            servizio.setDescrizione(Descrizione);
-
-            servizioID = (Integer) session.save(servizio);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return servizioID;
-    }
 
     /* Method to
      READ all the services */
@@ -702,48 +459,5 @@ public class CRUD {
             session.close();
         }
         return null;
-    }
-
-    /* Method to UPDATE activity for an employee */
-    public void updateServizi(Integer servizioID, int Codice, String Descrizione, BigDecimal prezzo) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Servizi servizio
-                    = (Servizi) session.get(Servizi.class, servizioID);
-            servizio.setPrezzo(prezzo);
-            servizio.setDescrizione(Descrizione);
-
-            session.update(servizio);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /* Method to DELETE an activity from the records */
-    public void deleteServizi(Integer servizioID) {
-        Session session = factory.openSession();
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            Servizi servizio
-                    = (Servizi) session.get(Servizi.class, servizioID);
-            session.delete(servizio);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
     }
 }
