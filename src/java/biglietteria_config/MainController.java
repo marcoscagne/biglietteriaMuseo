@@ -124,7 +124,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/compra", method = RequestMethod.POST)
-    public String compra(ModelMap map, @RequestParam(value = "id", required = true) Integer id, @RequestParam(value = "data", required = true) String data, @RequestParam(value = "cat", required = true) int cat) {
+    public String compra(ModelMap map, @RequestParam(value = "id", required = true) Integer id, @RequestParam(value = "data", required = true) String data, @RequestParam(value = "cat", required = true) Integer cat) {
         map.put("id", id);
         map.put("data", data);
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
@@ -148,7 +148,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/comprato", method = RequestMethod.POST)
-    public String end(ModelMap map, @RequestParam(value = "data", required = true) String dataN, @RequestParam(value = "user", required = true) String user, @RequestParam(value = "costo", required = true) BigDecimal costo, @RequestParam(value = "idAtt", required = true) Integer idAtt, @RequestParam(value = "cat", required = true) int cat) {
+    public String end(ModelMap map, @RequestParam(value = "data", required = true) String dataN, @RequestParam(value = "user", required = true) String user, @RequestParam(value = "costo", required = true) BigDecimal costo, @RequestParam(value = "idAtt", required = true) Integer idAtt, @RequestParam(value = "cat", required = true) Integer cat) {
         CRUD c = new CRUD(HibernateUtil.getSessionFactory());
         Clienti cl = c.cliente(user).get(0);
         Attivita att = c.listAttivitaById(idAtt).get(0);
@@ -157,10 +157,8 @@ public class MainController {
         Date startDate;
         try {
             startDate = df.parse(dataN);
-            //int i=c.getMaxCodBiglietti();
             Biglietti newB;
-            //if(i==null)newB = new Biglietti(1, startDate, cl, att, categ);
-            /*else*/ newB = new Biglietti(startDate, cl, att, categ);
+            newB = new Biglietti(startDate, cl, att, categ);
             c.addBiglietto(newB);
         } catch (ParseException e) {
             e.printStackTrace();

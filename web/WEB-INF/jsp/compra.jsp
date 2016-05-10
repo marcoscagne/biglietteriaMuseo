@@ -67,7 +67,7 @@
                         </c:forEach>
                         <input type="hidden" name="user" value="<%=myname%>">
                         <input type="hidden" name="data" value="${data}">
-                        <input type="hidden" name="cat" value="${categoria.percSconto}">
+                        <input type="hidden" name="cat" value="${categoria.codice}">
                         <div class="row">
                             <c:forEach items="${servizi}" var="s">
                                 <div class="col-lg-4">

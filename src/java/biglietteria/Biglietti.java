@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Marco
  */
 @Entity
-@Table(name = "biglietti")
+@Table(name = "Biglietti")
 @NamedQueries({
     @NamedQuery(
             name = "allTickets",
